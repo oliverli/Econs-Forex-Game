@@ -1,0 +1,278 @@
+/*--------ICOMOON---------*/
+@font-face {
+    font-family: 'icomoon';
+    src:url('fonts/icomoon.eot?bjywsl');
+    src:url('fonts/icomoon.eot?#iefixbjywsl') format('embedded-opentype'),
+        url('fonts/icomoon.woff?bjywsl') format('woff'),
+        url('fonts/icomoon.ttf?bjywsl') format('truetype'),
+        url('fonts/icomoon.svg?bjywsl#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    font-family: 'icomoon';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-list:before {
+    content: "\e600";
+}
+
+.icon-search:before {
+    content: "\e601";
+}
+
+/*--------GLOBALS---------*/
+@font-face{
+    font-family: "Questrial";
+    src: url(fonts/Questrial-Regular.otf);	
+}
+
+html{
+    width:100%;
+    height:100%;
+    padding:0;	
+    margin:0;
+    font-family:"Questrial","Calibri","Arial",Sans-Serif;
+    color:#EEE;
+    background:#066;
+    overflow-x:hidden;
+}
+
+*, input[type="button"],input[type="submit"],input[type="reset"]{
+    font-family:"Questrial","Calibri","Arial",Sans-Serif;	
+}
+
+body{
+    width:100%;
+    height:100%;
+    padding:0;
+    margin:0;
+    text-align: center;
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-family:"Museo500","Calibri","Arial",Sans-Serif;
+}
+
+.light{
+    font-family:"Museo300","Calibri","Arial",Sans-Serif;
+}
+
+.border-underline{
+    border-bottom:1px solid #EEE;
+}
+
+.underline{
+    text-decoration:underline;   
+}
+
+.text-center{
+    text-align:center;
+}
+
+.hidden:not(.scrollArea){
+    display:none;
+}
+
+img{
+    border:0px;
+    outline:none;	
+}
+
+a{
+    transition:all 0.3s ease;
+    color:#FF8F19;
+    text-decoration:none;
+    font-size:110%;
+}
+
+a:hover{
+    color:#FFD269;
+}
+
+b, strong{
+    font-family:"Museo700","Calibri","Arial",Sans-Serif;   
+}
+
+label{
+    cursor:pointer;
+}
+
+.hr-divider{
+    height:0px;
+    border-top:1px #CCC dotted;
+    width:100%;
+    clear:both;
+    /*box-shadow:0px 0px 20px 1px #EEE;   */
+}
+
+.hr-divider.pad{   
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.hr-divider.pad-top{   
+    margin-top:10px;
+}
+
+.hr-divider.pad-bottom{   
+    margin-bottom:10px;
+}
+
+.btn{
+    overflow: hidden;
+    cursor: pointer;
+    background:rgb(141,211,107);
+    color:rgba(0,30,30,0.8);
+    display:inline-block;
+
+    text-align:center;
+    padding-left:0;
+    padding-right:0;
+
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.btn:hover{
+    background: #f58500;
+    color:white;
+}
+
+.btn:active {
+    background: #f58500;
+    color:white;
+    top: 2px;
+}
+
+.disableSelect{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.enableSelect{
+    -webkit-touch-callout: text;
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;       
+}
+
+/*------MENU-----*/
+#menu{
+    width:100%;
+}
+
+#menu div{
+    display: inline-block;   
+}
+
+#menu-btns{
+    width:100%;
+}
+
+#menu-btns .btn{
+    margin-top:1.5%;
+    margin-bottom:1.5%;
+    height:25px;
+    max-height:2%;
+    padding:3%;
+    margin-left:3%;
+    position:relative;
+}
+
+#menu-btns .btn:last-child{
+    margin-right:3%;
+}
+
+#side-menu{
+}
+
+#side-menu .btn{
+    margin-top:1.5%;
+    margin-bottom:1.5%;
+    padding:3%;
+    position:relative;
+}
+
+#side-menu .btn span{
+    position:absolute;
+    top:0; bottom:0; left:0; right:0;
+    height: 4vmin;
+    margin:auto;
+}
+.btn.split{
+    font-size:5.5vmin;
+    padding: 1%;
+}
+.btn.split2{
+    font-size:4vmin;
+    width:38.5%;
+}
+
+.btn.split3{
+    font-size:3.5vmin;
+    width:23%;    
+}
+
+.menu-btns .btn span{
+    position:absolute;
+    top:0; bottom:0; left:0; right:0;
+    height: 4vmin;
+    margin:auto;
+}
+
+#output{
+    width:94%;
+    margin-left:3%;
+    font-size:5vmin;
+    text-align:center;
+}
+
+#output .tableBox{
+    display:inline-block;
+    background:rgb(141,211,107);
+    color:rgba(0,30,30,0.8);
+
+    font-size:4vmin;
+
+    padding:2%;
+    margin:1%;
+    margin-top:0;
+    margin-bottom:2%;
+    border:#003B3B 4px solid;
+
+    max-width:200px;
+    width:40%;
+}
+#output .tableBox span{
+    marign-top:2px;
+    margin-bottom:2px;
+    display:block;
+}
+
+.ahoot{
+    font-size:30vw;
+    width:100%;
+    position: fixed;
+    color:rgba(141,211,107,0.1);
+    top:35%;
+    cursor:default;
+}

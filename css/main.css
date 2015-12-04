@@ -1,0 +1,100 @@
+/*
+table, th, td {
+    border: 0px solid black;
+    border-collapse: collapse;
+    padding:5% 0;
+}
+.red
+{
+    border-bottom-color:#C00;
+    border-top-color:#C00;
+    border-width:2px 0px 2px;
+}
+th, td {
+    padding: 5px;
+    text-align:center;
+}
+#goRight
+{
+    float:right;
+}
+#goLeft
+{
+    float:left;
+}
+html {
+    background-color: #E7E7E7;
+    background-image: url("../img/page-background.png");
+}
+
+a:visited, a:link
+{ 
+    color: #0000EE;
+}
+
+body {
+    width: 1000px;
+    background-color: #E7E7E7;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    font-family: "Frutiger",Arial,sans-serif;
+    color: #100F0F;
+    margin: 0px auto !important;
+    font-size: 14px;
+    line-height: 20px;
+}
+.page-module {
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 8px;
+    padding-bottom: 30px;
+    background-color: #FFF;
+    border-bottom: 2px solid #CAC7C1;
+}
+.table-bordered{
+    border-top: 0px none;
+    border-bottom: 1px dotted #CFCECE;
+    border-left: 1px solid #F2F1F1;
+    border-right: 1px solid #F2F1F1;
+    padding: 1% 0;
+    display: table-cell;
+    vertical-align:middle;
+}
+h1, h2
+{
+    text-align:center;
+}
+.noborder {
+    border: none;
+}
+hr{
+    border: 0;
+    height: 2px;
+    background-image: -webkit-linear-gradient(left, rgba(204,0,0,1), rgba(204,0,0,1), rgba(204,0,0,1));
+    background-image:    -moz-linear-gradient(left, rgba(204,0,0,1), rgba(204,0,0,1), rgba(204,0,0,1));
+    background-image:     -ms-linear-gradient(left, rgba(204,0,0,1), rgba(204,0,0,1), rgba(204,0,0,1));
+    background-image:      -o-linear-gradient(left, rgba(204,0,0,1), rgba(204,0,0,1), rgba(204,0,0,1));
+}*/
+
+/* LOGIN PAGE */
+
+#login-card {
+    width: 42%;
+    padding: 40px;
+    margin: 10% auto 0;
+}
+
+#login-card #Logo { margin-bottom: 20px; }
+
+#login-card i.material-icons { line-height: 1.5; } /* <i> was line-height:1 in material, not for us. */
+
+#login-card form .row .input-field.col {
+    padding: 0px;
+}
+#login-card #Submit { margin:40px -0.75rem 0; }
+#login-card #Submit button {
+    width: 100%;
+    height: 50px;
+}
