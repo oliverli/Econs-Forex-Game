@@ -30,12 +30,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Forex Trading Simulator - Dashboard</title>
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <link rel="stylesheet" type="text/css" href="../css/main.css" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css" media="screen,projection" />
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-        <link href="./css/main.css" rel="stylesheet" />
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <link href="../css/main.css" rel="stylesheet" />
         <script>
             $(document).ready(function ()
             {
@@ -53,45 +53,53 @@
                 echo $remarks;
         ?>
     </head>
-    <body>
-        <div class="page-module">
-            <div style="width:100%;">
-                <div id="goRight"><p><a href="./">Home</a> <a href="./history/">History</a> <a href="./leaderboard/">Leaderboards</a> <?php if(isTeacher()) echo "<a href=\"../admin/\">Admin Console</a>"; ?> <a href="./changepassword/">Change Password</a> <a href="./logout/">Logout</a></p></div>
-                <div id="goLeft">
-                    <?php
-                        $userkey = intval($_SESSION["userkey"]);
-                        if($userkey <= 0)
-                            return;
-                        $query = "SELECT name, networth FROM users WHERE userkey=$userkey LIMIT 1";
-                        $result = $db->query($query) or die();
-                        $totalvalue = 0;
-                        if($row = $result->fetch_assoc())
+    <body class="indigo lighten-5">
+        <nav>
+            <div id="nav-wrapper" class="indigo row">
+                <div class="col left">Forex Trading Simulator</div>
+                <ul id="nav-mobile" class="col right hide-on-small-and-down">
+                    <li><a href="./">Home</a></li> 
+                    <li><a href="./history/">History</a></li>
+                    <li><a href="./leaderboard/">Leaderboards</a></li> <?php if(isTeacher()) echo "<li><a href=\"../admin/\">Admin Console</a></li>"; ?>
+                    <li><a href="./changepassword/">Change Password</a></li>
+                    <li><a href="./logout/">Logout</a></li>
+                </ul>
+            </div>
+            <!--<div id="goLeft">
+                <?php
+                    $userkey = intval($_SESSION["userkey"]);
+                    if($userkey <= 0)
+                        return;
+                    $query = "SELECT name, networth FROM users WHERE userkey=$userkey LIMIT 1";
+                    $result = $db->query($query) or die();
+                    $totalvalue = 0;
+                    if($row = $result->fetch_assoc())
+                    {
+                        echo "<p>Hello, ".$row["name"].".";
+                        $totalvalue = $row["networth"];
+                    }
+                    if(!$gameEnded)
+                        echo " Your net worth is ".$basecurrabbv.number_format($totalvalue, 2).".</p>";
+                    else
+                    {
+                        echo " The game has ended.</p><p>";
+                        if($totalvalue == 10000000)
                         {
-                            echo "<p>Hello, ".$row["name"].".";
-                            $totalvalue = $row["networth"];
+                            echo " You did not make or lose any money.</p>";
                         }
-                        if(!$gameEnded)
-                            echo " Your net worth is ".$basecurrabbv.number_format($totalvalue, 2).".</p>";
+                        else if($totalvalue > 10000000)
+                        {
+                            echo " You made a profit of ".$basecurrabbv.number_format($totalvalue - 10000000, 2)."!</p>";
+                        }
                         else
                         {
-                            echo " The game has ended.</p><p>";
-                            if($totalvalue == 10000000)
-                            {
-                                echo " You did not make or lose any money.</p>";
-                            }
-                            else if($totalvalue > 10000000)
-                            {
-                                echo " You made a profit of ".$basecurrabbv.number_format($totalvalue - 10000000, 2)."!</p>";
-                            }
-                            else
-                            {
-                                echo " You lost ".$basecurrabbv.number_format(0 - ($totalvalue - 10000000), 2).".</p>";
-                            }
+                            echo " You lost ".$basecurrabbv.number_format(0 - ($totalvalue - 10000000), 2).".</p>";
                         }
-                    ?>
-                </div>
-            </div>
-            <div style="clear:both"></div>
+                    }
+                ?>
+            </div>-->
+        </nav>
+        <div class="container">
             <div id="board" style="">
                 <table style="width:100%">
                     <tr class="red">
