@@ -40,48 +40,51 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Forex Trading Simulator - Change Password</title>
-        <link rel="stylesheet" type="text/css" href="../../css/main.css">
-            <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-            <script>
-                $(document).ready(function ()
+        <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css" media="screen,projection" />
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <script>
+            $(document).ready(function ()
+            {
+                $.ajaxSetup({cache: false});
+                setInterval(function ()
                 {
-                    $.ajaxSetup({cache: false});
-                    setInterval(function ()
-                    {
-                        $("#goLeft").load('../../ajax/headerhandler.php');
-                    }, 30000);
-                });
-                var passwordsMatch = false;
-                function checkpass()
+                    $("#goLeft").load('../../ajax/headerhandler.php');
+                }, 30000);
+            });
+            var passwordsMatch = false;
+            function checkpass()
+            {
+                if(document.getElementById("newpass").value == "" || document.getElementById("conpass").value == "" || document.getElementById("currpass").value == "" || document.getElementById("newpass").value == null || document.getElementById("conpass").value == null || document.getElementById("currpass").value == null)
                 {
-                    if(document.getElementById("newpass").value == "" || document.getElementById("conpass").value == "" || document.getElementById("currpass").value == "" || document.getElementById("newpass").value == null || document.getElementById("conpass").value == null || document.getElementById("currpass").value == null)
-                    {
-                        document.getElementById("checkpassresult").innerHTML = "<p style=\"color:red\">Please fill in all password fields.</p>";
-                        passwordsMatch = false;
-                    }
-                    else if(document.getElementById("newpass").value == document.getElementById("conpass").value)
-                    {
-                        document.getElementById("checkpassresult").innerHTML = "<p style=\"color:green\">Passwords match!</p>";
-                        passwordsMatch = true;
-                        console.log("in");
-                    }
-                    else
-                    {
-                        document.getElementById("checkpassresult").innerHTML = "<p style=\"color:red\">Passwords do not match!</p>";
-                        passwordsMatch = false;
-                        console.log("out");
-                    }
+                    document.getElementById("checkpassresult").innerHTML = "<p style=\"color:red\">Please fill in all password fields.</p>";
+                    passwordsMatch = false;
                 }
-                function submitValidation()
+                else if(document.getElementById("newpass").value == document.getElementById("conpass").value)
                 {
-                    checkpass();
-                    return passwordsMatch;
+                    document.getElementById("checkpassresult").innerHTML = "<p style=\"color:green\">Passwords match!</p>";
+                    passwordsMatch = true;
+                    console.log("in");
                 }
-            </script>
-            <?php
-                if(isset($remarks))
-                    echo $remarks;
-            ?>
+                else
+                {
+                    document.getElementById("checkpassresult").innerHTML = "<p style=\"color:red\">Passwords do not match!</p>";
+                    passwordsMatch = false;
+                    console.log("out");
+                }
+            }
+            function submitValidation()
+            {
+                checkpass();
+                return passwordsMatch;
+            }
+        </script>
+        <?php
+            if(isset($remarks))
+                echo $remarks;
+        ?>
     </head>
     <body>
         <div class="page-module">

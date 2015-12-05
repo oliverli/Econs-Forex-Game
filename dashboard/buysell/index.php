@@ -205,77 +205,80 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Forex Trading Simulator - Currency Transaction</title>
         <link rel="stylesheet" type="text/css" href="../../css/main.css" />
-            <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
-            <script>
-                $(document).ready(function ()
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css" media="screen,projection" />
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <script>
+            $(document).ready(function ()
+            {
+                $.ajaxSetup({cache: false});
+                setInterval(function ()
                 {
-                    $.ajaxSetup({cache: false});
-                    setInterval(function ()
-                    {
-                        $("#news").load('../../ajax/newshandler.php');
-                        $("#goLeft").load('../../ajax/headerhandler.php');
-                    }, 30000);
-                });
-                var buyvalue = <?php echo $buyvalue ?>;
-                var sellvalue = <?php echo $sellvalue ?>;
-                function buychange()
+                    $("#news").load('../../ajax/newshandler.php');
+                    $("#goLeft").load('../../ajax/headerhandler.php');
+                }, 30000);
+            });
+            var buyvalue = <?php echo $buyvalue ?>;
+            var sellvalue = <?php echo $sellvalue ?>;
+            function buychange()
+            {
+                var tmp = document.getElementById("buyamt").value;
+                tmp = tmp.replace(/[^\d\.\-\ ]/g, '');
+                var amt = parseFloat(tmp);
+                amt *= buyvalue;
+                Number.prototype.formatMoney = function (rate)
                 {
-                    var tmp = document.getElementById("buyamt").value;
-                    tmp = tmp.replace(/[^\d\.\-\ ]/g, '');
-                    var amt = parseFloat(tmp);
-                    amt *= buyvalue;
-                    Number.prototype.formatMoney = function (rate)
-                    {
-                        var n = this,
-                                c = isNaN(c = Math.abs(c)) ? 2 : c,
-                                d = d == undefined ? "." : d,
-                                t = t == undefined ? "," : t,
-                                s = n < 0 ? "-" : "",
-                                i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
-                                j = (j = i.length) > 3 ? j % 3 : 0;
-                        return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
-                    };
-                    document.getElementById("buyamt2").innerHTML = (amt).formatMoney(2, '.', ',');
-                }
-                function sellchange()
+                    var n = this,
+                            c = isNaN(c = Math.abs(c)) ? 2 : c,
+                            d = d == undefined ? "." : d,
+                            t = t == undefined ? "," : t,
+                            s = n < 0 ? "-" : "",
+                            i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+                            j = (j = i.length) > 3 ? j % 3 : 0;
+                    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+                };
+                document.getElementById("buyamt2").innerHTML = (amt).formatMoney(2, '.', ',');
+            }
+            function sellchange()
+            {
+                var tmp = document.getElementById("sellamt").value;
+                tmp = tmp.replace(/[^\d\.\-\ ]/g, '');
+                var amt = parseFloat(tmp);
+                amt *= sellvalue;
+                Number.prototype.formatMoney = function (rate)
                 {
-                    var tmp = document.getElementById("sellamt").value;
-                    tmp = tmp.replace(/[^\d\.\-\ ]/g, '');
-                    var amt = parseFloat(tmp);
-                    amt *= sellvalue;
-                    Number.prototype.formatMoney = function (rate)
-                    {
-                        var n = this,
-                                c = isNaN(c = Math.abs(c)) ? 2 : c,
-                                d = d == undefined ? "." : d,
-                                t = t == undefined ? "," : t,
-                                s = n < 0 ? "-" : "",
-                                i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
-                                j = (j = i.length) > 3 ? j % 3 : 0;
-                        return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
-                    };
-                    document.getElementById("sellamt2").innerHTML = (amt).formatMoney(2, '.', ',');
-                }
-                function cleanifyBuy()
-                {
-                    var tmp = document.getElementById("buyamt").value;
-                    tmp = tmp.replace(/[^\d\.\-\ ]/g, '');
-                    document.getElementById("buyamt").value = parseFloat(tmp);
-                    return true;
-                }
-                function cleanifySell()
-                {
-                    var tmp = document.getElementById("sellamt").value;
-                    tmp = tmp.replace(/[^\d\.\-\ ]/g, '');
-                    document.getElementById("sellamt").value = parseFloat(tmp);
-                    return true;
-                }
+                    var n = this,
+                            c = isNaN(c = Math.abs(c)) ? 2 : c,
+                            d = d == undefined ? "." : d,
+                            t = t == undefined ? "," : t,
+                            s = n < 0 ? "-" : "",
+                            i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+                            j = (j = i.length) > 3 ? j % 3 : 0;
+                    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+                };
+                document.getElementById("sellamt2").innerHTML = (amt).formatMoney(2, '.', ',');
+            }
+            function cleanifyBuy()
+            {
+                var tmp = document.getElementById("buyamt").value;
+                tmp = tmp.replace(/[^\d\.\-\ ]/g, '');
+                document.getElementById("buyamt").value = parseFloat(tmp);
+                return true;
+            }
+            function cleanifySell()
+            {
+                var tmp = document.getElementById("sellamt").value;
+                tmp = tmp.replace(/[^\d\.\-\ ]/g, '');
+                document.getElementById("sellamt").value = parseFloat(tmp);
+                return true;
+            }
 <?php
     if(isset($remarks))
         echo $remarks;
 ?>
-            </script>
+        </script>
     </head>
 
     <body>

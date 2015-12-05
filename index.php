@@ -45,20 +45,20 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css" media="screen,projection" />
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-        <link href="css/main.css" rel="stylesheet" />
+        <link href="./css/main.css" rel="stylesheet" />
         <style>
-   /* label focus color */
-    .input-field input[type=text]:focus + label {
-     color:  #3f51b5;
-   }
-   /* label underline focus color */
-   .input-field input[type=text]:focus {
-     border-bottom: 1px solid  #3f51b5;
-   }
-   /* icon prefix focus color */
-   .input-field .prefix.active {
-     color:  #3f51b5;
-   }</style>
+            /* label focus color */
+            .input-field input[type=text]:focus + label {
+                color:  #3f51b5;
+            }
+            /* label underline focus color */
+            .input-field input[type=text]:focus {
+                border-bottom: 1px solid  #3f51b5;
+            }
+            /* icon prefix focus color */
+            .input-field .prefix.active {
+                color:  #3f51b5;
+            }</style>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </head>
 
