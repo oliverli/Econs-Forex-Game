@@ -97,13 +97,17 @@
         $buyvalue = $row["buyvalue"];
         $shortname = $row["shortname"];
         $newamt = round($buyamt * $buyvalue, 2);
-        $query = "UPDATE wallet SET amount=amount+$newamt WHERE currencyid=$currid AND userkey=$userkey";
-        $result = $db->query($query) or die($db->error);
-        $query = "UPDATE wallet SET amount=amount-$buyamt WHERE currencyid=1 AND userkey=$userkey";
-        $result = $db->query($query) or die($db->error);
+        $query = "START TRANSACTION;";
+        $db->query($query) or die($db->error);
+        $query = "UPDATE wallet SET amount=amount+$newamt WHERE currencyid=$currid AND userkey=$userkey;";
+        $db->query($query) or die($db->error);
+        $query = "UPDATE wallet SET amount=amount-$buyamt WHERE currencyid=1 AND userkey=$userkey;";
+        $db->query($query) or die($db->error);
         //transtype: 0 for buy (USD to JPY), 1 for sell (JPY to USD)
-        $query = "INSERT INTO transactions (transtype, userkey, currencyid, amount, rate, receiveamt, time) VALUES (0, $userkey, $currid, $buyamt, $buyvalue, $newamt, ".time().")";
-        $result = $db->query($query) or die($db->error);
+        $query = "INSERT INTO transactions (transtype, userkey, currencyid, amount, rate, receiveamt, time)  VALUES (0, $userkey, $currid, $buyamt, $buyvalue, $newamt, ".time().");";
+        $db->query($query) or die($db->error);
+        $query = "COMMIT;";
+        $db->query($query) or die($db->error);
         calculateWorth($userkey);
         header("Location: ../");
         exit();
@@ -145,13 +149,17 @@
             $newamt = $row["amount"];
             $sellamt = round($newamt / $sellvalue, 2);
         }
-        $query = "UPDATE wallet SET amount=amount-$newamt WHERE currencyid=$currid AND userkey=$userkey";
-        $result = $db->query($query) or die();
-        $query = "UPDATE wallet SET amount=amount+$sellamt WHERE currencyid=1 AND userkey=$userkey";
-        $result = $db->query($query) or die();
+        $query = "START TRANSACTION;";
+        $db->query($query) or die();
+        $query = "UPDATE wallet SET amount=amount-$newamt WHERE currencyid=$currid AND userkey=$userkey;";
+        $db->query($query) or die();
+        $query = "UPDATE wallet SET amount=amount+$sellamt WHERE currencyid=1 AND userkey=$userkey;";
+        $db->query($query) or die();
         //transtype: 0 for buy (USD to JPY), 1 for sell (JPY to USD)
-        $query = "INSERT INTO transactions (transtype, userkey, currencyid, amount, rate, receiveamt, time) VALUES (1, $userkey, $currid, $newamt, $sellvalue, $sellamt, ".time().")";
-        $result = $db->query($query) or die();
+        $query = "INSERT INTO transactions (transtype, userkey, currencyid, amount, rate, receiveamt, time) VALUES (1, $userkey, $currid, $newamt, $sellvalue, $sellamt, ".time().");";
+        $db->query($query) or die();
+        $query = "COMMIT;";
+        $db->query($query) or die();
         header("Location: ../");
         exit();
     }
