@@ -44,8 +44,7 @@
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css" media="screen,projection" />
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-        <link href="css/main.css" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <style>
    /* label focus color */
     .input-field input[type=text]:focus + label {
@@ -58,7 +57,26 @@
    /* icon prefix focus color */
    .input-field .prefix.active {
      color:  #3f51b5;
-   }</style>
+   }
+   #login-card {
+    width: 42%;
+    padding: 40px;
+    margin: 10% auto 0;
+}
+
+#login-card #Logo { margin-bottom: 20px; }
+
+#login-card i.material-icons { line-height: 1.5; }
+
+#login-card form .row .input-field.col {
+    padding: 0px;
+}
+#login-card #Submit { margin:40px -0.75rem 0; }
+#login-card #Submit button {
+    width: 100%;
+    height: 50px;
+}     
+   </style>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </head>
 

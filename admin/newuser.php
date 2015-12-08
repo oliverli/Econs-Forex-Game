@@ -41,7 +41,7 @@
                             continue;
                         else
                         {
-                            $query = "INSERT INTO wallet (userkey, currencyid, amount) VALUES ($userkey, '".$row["shortname"]."', 0)";
+                            $query = "INSERT INTO wallet (userkey, currencyid, amount) VALUES ($userkey, ".$row["currencyid"].", 0)";
                             if($db->query($query) === TRUE)
                                 continue;
                             else
