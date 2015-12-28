@@ -1,19 +1,5 @@
 /* LOGIN PAGE */
 
-/* label focus color */
-.input-field input[type=text]:focus + label {
-    color:  #3f51b5;
-}
-/* label underline focus color */
-.input-field input[type=text]:focus {
-    border-bottom: 1px solid  #3f51b5;
-}
-/* icon prefix focus color */
-.input-field .prefix.active {
-    color:  #3f51b5;
-}
-
-/* LOGIN CARD */
 #login-card {
     width: 42%;
     min-width:392px;
@@ -21,16 +7,13 @@
     margin: 10% auto 0;
 }
 
-#login-card #logo { margin-bottom: 20px; }
-#login-card img {
-    height: 50px;
-    opacity: 0.87;
-}
+#login-card #Logo { margin-bottom: 20px; }
 
 #login-card i.material-icons { line-height: 1.5; } /* <i> was line-height:1 in material, not for us. */
 
-#login-card form .row .input-field.col { padding: 0px; }
-
+#login-card form .row .input-field.col {
+    padding: 0px;
+}
 #login-card #Submit { margin:40px -0.75rem 0; }
 #login-card #Submit button {
     width: 100%;
@@ -44,8 +27,7 @@
     }
 }
 
-
-/* MUCH COPIED
+/* COPIED CODE
 table, th, td {
     border: 0px solid black;
     border-collapse: collapse;
