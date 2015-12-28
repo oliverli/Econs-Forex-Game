@@ -46,31 +46,22 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css" media="screen,projection" />
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <link href="./css/main.css" rel="stylesheet" />
-        <style>
-            /* label focus color */
-            .input-field input[type=text]:focus + label {
-                color:  #3f51b5;
-            }
-            /* label underline focus color */
-            .input-field input[type=text]:focus {
-                border-bottom: 1px solid  #3f51b5;
-            }
-            /* icon prefix focus color */
-            .input-field .prefix.active {
-                color:  #3f51b5;
-            }</style>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </head>
 
     <body class="indigo lighten-5">
+        
+        <!-- HEADER -->
         <nav>
             <div class="nav-wrapper indigo row">
                 <div class="col s12">Forex Trading Simulator</div>
             </div>
         </nav>
+        
+        <!-- LOGIN PART -->
         <div class="container">
             <div id="login-card" class="card">
-                <div class="center" id="Logo"><img src="./img/hci.png" height="50px" style="opacity:0.87;"/></div>
+                <div class="center" id="logo"><img src="./img/hci.png" /></div>
                 <form id="loginform" name="loginform" method="post">
                     <div class="row">
                         <div class="input-field col s12 m10 l10 push-m1 push-l1">
