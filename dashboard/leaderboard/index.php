@@ -92,10 +92,10 @@
             <h1<?php if(isset($_GET["teachermode"])) echo " style='position:relative; top:10px;'"; ?>>Leaderboards</h1>
             <div id="leaderboard">
                 <table style="width:100%">
-                    <tr class="indigo lighten-2">
-                        <th class="center">No.</th>
-                        <th class="center">Name</th>
-                        <th class="center"><?php
+                    <tr class="red">
+                        <th class="red">No.</th>
+                        <th class="red">Name</th>
+                        <th class="red"><?php
                                 if($gameEnded)
                                     echo "Net Profit";
                                 else
