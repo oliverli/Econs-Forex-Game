@@ -41,23 +41,29 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Forex Trading Simulator - Login</title>
         <?php if($gameNotStarted) echo "<script>alert('The game has not started yet. It starts in ".nicetime($startTime).".');window.onload = function(){document.getElementById(\"password\").focus();};</script>"; ?>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css" media="screen,projection" />
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+        <script>
+            documentRoot = "./";
+        </script>
+
+        <script src="js/onerror.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" onerror="this.onerror=null; this.src=resError(this.src)"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js" onerror="this.onerror=null; this.src=resError(this.src)"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css" media="screen,projection" onerror="this.onerror=null; this.src=resError(this.src)"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <link href="./css/main.css" rel="stylesheet" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </head>
 
     <body class="indigo lighten-5">
-        
+
         <!-- HEADER -->
         <nav>
             <div class="nav-wrapper indigo row">
                 <div class="col s12">Forex Trading Simulator</div>
             </div>
         </nav>
-        
+
         <!-- LOGIN PART -->
         <div class="container">
             <div id="login-card" class="card">
