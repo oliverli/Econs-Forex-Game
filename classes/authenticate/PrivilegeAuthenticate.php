@@ -29,7 +29,7 @@
      *
      * @author Li Yicheng <liyicheng340 [at] gmail [dot com]>
      */
-    include_once("./SessionAuthenticate.php");
+    require_once("SessionAuthenticate.php");
     
     class PrivilegeAuthenticate
     {

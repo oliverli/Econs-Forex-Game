@@ -29,9 +29,9 @@
      *
      * @author Li Yicheng <liyicheng340 [at] gmail [dot com]>
      */
-    include_once("../UniversalConnect.php");
-    include_once("./TimeAuthenticate.php");
-    include_once("./PrivilegeAuthenticate.php");
+    require_once("mysql/UniversalConnect.php");
+    require_once("TimeAuthenticate.php");
+    require_once("PrivilegeAuthenticate.php");
     
     class PasswordAuthenticate
     {

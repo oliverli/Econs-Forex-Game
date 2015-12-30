@@ -1,4 +1,5 @@
 <?php
+
     /*
      * The MIT License
      *
@@ -22,11 +23,21 @@
      * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
      * THE SOFTWARE.
      */
+
+    /**
+     * Description of HeaderFactory
+     *
+     * @author Li Yicheng <liyicheng340 [at] gmail [dot com]>
+     */
+    require_once("pageElements/ElementCreator.php");
+    require_once("pageElements/ElementProduct.php");
+    require_once("HeaderProduct.php");
     
-    //adds ./classes/ to include directory so that all the require_once statements will work
-    set_include_path(get_include_path().PATH_SEPARATOR.dirname(__FILE__)."/classes/");
-    require_once("pages/LoginHome.php");
+    class HeaderFactory extends ElementCreator
+    {
+        protected function factoryMethod($product)
+        {
+            return $product->giveProduct();
+        }
+    }
     
-    //all HTML is generated in the LoginHome constructor - edit ./classes/pages/LoginHome.php to update the page
-    $worker = new LoginHome();      
-?>

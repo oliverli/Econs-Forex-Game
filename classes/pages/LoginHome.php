@@ -29,16 +29,20 @@
      *
      * @author Li Yicheng <liyicheng340 [at] gmail [dot com]>
      */
-    include_once("../authenticate/SessionAuthenticate.php");
-    include_once("../authenticate/PasswordAuthenticate.php");
-    include_once("../miscellenous/FormatTimePassed.php");
+    require_once("authenticate/SessionAuthenticate.php");
+    require_once("authenticate/PasswordAuthenticate.php");
+    require_once("miscellenous/FormatTimePassed.php");
+    require_once("pageElements/header/HeaderFactory.php");
+    require_once("pageElements/header/HeaderProduct.php");
+    require_once("mysql/UniversalConnect.php");
     
     class LoginHome
     {
         private $authenticationStatus = -1;
         
-        public function _construct()
+        public function __construct()
         {
+            //Checks if user is logged in or has posted passwords. Redirects as appropriate.
             $SessAuthWorker = new SessionAuthenticate();
             if($SessAuthWorker->authenticateSession())
             {
@@ -55,63 +59,12 @@
                     exit();
                 }
             }
+            
+            //generates header from <!DOCTYPE html> all the way to </head>
+            //Title of the page is set in constructor i.e. new HeaderProduct("Title of page here");
+            $headerFactory = new HeaderFactory();
+            echo $headerFactory->startFactory(new HeaderProduct("Forex Trading Simulator - Login"));
             echo <<<PAGE
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Forex Trading Simulator - Login</title>
-PAGE;
-        if($this->authenticationStatus === 2)
-        {
-            $timeFormatWorker = new FormatTimePassed();
-            $db = new UniversalConnect();
-            $result = $db->query("SELECT starttime FROM startendtime LIMIT 1");
-            $row = $result->fetch_assoc();
-            $startTime = $row["starttime"];
-            echo "<script>alert('The game has not started yet. It starts in ".$timeFormatWorker->format($startTime).".');window.onload = function(){document.getElementById(\"password\").focus();};</script>";
-            $db->close();
-        }
-        echo <<<PAGE
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css" media="screen,projection" />
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-        <style>
-   /* label focus color */
-    .input-field input[type=text]:focus + label {
-     color:  #3f51b5;
-   }
-   /* label underline focus color */
-   .input-field input[type=text]:focus {
-     border-bottom: 1px solid  #3f51b5;
-   }
-   /* icon prefix focus color */
-   .input-field .prefix.active {
-     color:  #3f51b5;
-   }
-   #login-card {
-    width: 42%;
-    padding: 40px;
-    margin: 10% auto 0;
-}
-
-#login-card #Logo { margin-bottom: 20px; }
-
-#login-card i.material-icons { line-height: 1.5; }
-
-#login-card form .row .input-field.col {
-    padding: 0px;
-}
-#login-card #Submit { margin:40px -0.75rem 0; }
-#login-card #Submit button {
-    width: 100%;
-    height: 50px;
-}     
-   </style>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    </head>
-
     <body class="indigo lighten-5">
         <nav>
             <div class="nav-wrapper indigo row">
@@ -148,6 +101,16 @@ PAGE;
 PAGE;
                     if($this->authenticationStatus === 0)
                         echo "<script>alert('Login failed - username or password incorrect.');</script>";
+                    if($this->authenticationStatus === 2)
+                    {
+                        $timeFormatWorker = new FormatTimePassed();
+                        $db = new UniversalConnect();
+                        $result = $db->query("SELECT starttime FROM startendtime LIMIT 1");
+                        $row = $result->fetch_assoc();
+                        $startTime = $row["starttime"];
+                        echo "<script>alert('The game has not started yet. It starts in ".$timeFormatWorker->format($startTime).".');window.onload = function(){document.getElementById(\"password\").focus();};</script>";
+                        $db->close();
+                    }
 echo <<<PAGE
             </div>
         </div>

@@ -29,7 +29,7 @@
      *
      * @author Li Yicheng <liyicheng340 [at] gmail [dot com]>
      */
-    include_once("../UniversalConnect.php");
+    require_once("mysql/UniversalConnect.php");
     
     class TimeAuthenticate
     {
