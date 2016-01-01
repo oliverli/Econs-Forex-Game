@@ -66,11 +66,10 @@
             echo $headerFactory->startFactory(new HeaderProduct("Login - Forex Trading Simulator ", 1));
             echo <<<PAGE
     <body class="indigo lighten-5">
-        <nav>
-            <div class="nav-wrapper indigo row">
-                <div class="col s12">Forex Trading Simulator</div>
-            </div>
-        </nav>
+        <div class="top-margin bottom-margin">
+            <h3 class="title">Forex Trading Simulator</h3>
+            <h5 class="title top-margin">Simple, descriptive text</h5>
+        </div>
         <div class="container">
             <div id="login-card" class="card
 PAGE;
