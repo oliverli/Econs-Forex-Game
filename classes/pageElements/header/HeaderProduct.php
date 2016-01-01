@@ -102,7 +102,6 @@ HEADER;
             $this->return .= <<<HEADER
 css/main.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<<<<<<< HEAD
     <script>
         function failed(){
             $("#login-card").removeClass("failed")
@@ -115,8 +114,6 @@ css/main.css" rel="stylesheet" />
         }
     </script>
 </head>
-=======
->>>>>>> 773c27031c33cf0c217b6d3cfe6d4a867d822bf2
 HEADER;
             $this->return .= $this->extraScript."</head>";
             return $this->return;
