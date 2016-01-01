@@ -44,8 +44,8 @@
             $db = UniversalConnect::doConnect();
             $usernameToCheck = $db->real_escape_string(trim($_POST["username"]));
             $passwordToCheck = $db->real_escape_string(trim($_POST["password"]));
-            $query = "SELECT userkey, password, usertype FROM users WHERE username=$usernameToCheck LIMIT 1";
-            $result = $db->query($query);
+            $query = "SELECT userkey, password, usertype FROM users WHERE userid=\"$usernameToCheck\" LIMIT 1";
+            $result = $db->query($query) or die($db->error);
             if($result->num_rows < 1)
                 return 0;
             while($row = $result->fetch_assoc())
@@ -55,7 +55,7 @@
                     if(password_needs_rehash($row["password"], PASSWORD_DEFAULT))
                     {
                         $newHash = password_hash($passwordToCheck, PASSWORD_DEFAULT);
-                        $query = "UPDATE users SET password=$newHash WHERE userkey=".$row["userkey"];
+                        $query = "UPDATE users SET password=\"$newHash\" WHERE userkey=".$row["userkey"];
                         $db->query($query);
                     }
                     $TimeAuthWorker = new TimeAuthenticate();

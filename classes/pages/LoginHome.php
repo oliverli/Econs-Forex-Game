@@ -63,7 +63,7 @@
             //generates header from <!DOCTYPE html> all the way to </head>
             //Title of the page is set in constructor i.e. new HeaderProduct("Title of page here");
             $headerFactory = new HeaderFactory();
-            echo $headerFactory->startFactory(new HeaderProduct("Forex Trading Simulator - Login"));
+            echo $headerFactory->startFactory(new HeaderProduct("Login - Forex Trading Simulator ", 1));
             echo <<<PAGE
     <body class="indigo lighten-5">
         <nav>
@@ -72,7 +72,12 @@
             </div>
         </nav>
         <div class="container">
-            <div id="login-card" class="card">
+            <div id="login-card" class="card
+PAGE;
+                            if($this->authenticationStatus === 0)
+                                echo " failed";
+                            echo <<<PAGE
+">
                 <div class="center" id="Logo"><img src="./img/hci.png" height="50px" style="opacity:0.87;"/></div>
                 <form id="loginform" name="loginform" method="post">
                     <div class="row">
@@ -99,8 +104,6 @@ PAGE;
                     </div>
                 </form>
 PAGE;
-                    if($this->authenticationStatus === 0)
-                        echo "<script>alert('Login failed - username or password incorrect.');</script>";
                     if($this->authenticationStatus === 2)
                     {
                         $timeFormatWorker = new FormatTimePassed();

@@ -34,15 +34,27 @@
     class HeaderProduct implements ElementProduct
     {
         private $title;
+        private $extraScript;
+        private $return;
+        private $pathToRoot;
 
-        public function __construct($HTMLtitle)
+        public function __construct($HTMLtitle, $directoryLayer, $appendScript = "")
         {
             $this->title = $HTMLtitle;
+            $this->extraScript = $appendScript;
+            if($directoryLayer === 1)
+                $this->pathToRoot = "./";
+            else
+                $this->pathToRoot = "../";
+            for($i=1;$i<$directoryLayer;$i++)
+            {
+                $this->pathToRoot .= "../";
+            }
         }
 
         public function giveProduct()
         {
-            return <<<HEADER
+            $this->return = <<<HEADER
 <!--
 The MIT License
 
@@ -75,15 +87,24 @@ THE SOFTWARE.
         documentRoot = "./";
     </script>
 
-    <script src="js/onerror.js"></script>
+    <script src="
+HEADER;
+            $this->return .= $this->pathToRoot;
+            $this->return .= <<<HEADER
+js/onerror.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" onerror="this.onerror=null; this.src=resError(this.src)"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js" onerror="this.onerror=null; this.src=resError(this.src)"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css" media="screen,projection" onerror="this.onerror=null; this.src=resError(this.src)"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link href="./css/main.css" rel="stylesheet" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-</head>
+    <link href="
 HEADER;
+            $this->return .= $this->pathToRoot;
+            $this->return .= <<<HEADER
+css/main.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+HEADER;
+            $this->return .= $this->extraScript."</head>";
+            return $this->return;
         }
     }
     
