@@ -31,9 +31,9 @@
      */
     abstract class ElementCreator
     {
-        protected abstract function factoryMethod($product);
+        protected abstract function factoryMethod(ElementProduct $product);
         
-        public function startFactory($desiredProduct)
+        public function startFactory(ElementProduct $desiredProduct)
         {
             return $this->factoryMethod($desiredProduct);
         }

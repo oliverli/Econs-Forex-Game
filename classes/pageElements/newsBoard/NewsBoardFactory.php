@@ -1,9 +1,9 @@
 <?php
 
-/*
+    /*
      * The MIT License
      *
-     * Copyright 2015 Li Yicheng, Sun Yudong, and Walter Kong.
+     * Copyright 2016 Li Yicheng, Sun Yudong, and Walter Kong.
      *
      * Permission is hereby granted, free of charge, to any person obtaining a copy
      * of this software and associated documentation files (the "Software"), to deal
@@ -25,26 +25,19 @@
      */
 
     /**
-     * Description of TimeAuthenticate
+     * Description of NewsBoardFactory
      *
      * @author Li Yicheng <liyicheng340 [at] gmail [dot com]>
      */
-    require_once("mysql/UniversalConnect.php");
-    require_once("IAuthenticator.php");
+    require_once("pageElements/ElementCreator.php");
+    require_once("pageElements/ElementProduct.php");
+    require_once("NewsBoardProduct.php");
     
-    class TimeAuthenticate implements IAuthenticator
+    class NewsBoardFactory extends ElementCreator
     {
-        public function authenticate()
+        protected function factoryMethod(ElementProduct $product)
         {
-            $db = UniversalConnect::doConnect();
-            date_default_timezone_set('Asia/Singapore');
-            $query = "SELECT starttime FROM startendtime WHERE timeid = 1 LIMIT 1";
-            $result = $db->query($query);
-            $row = $result->fetch_assoc();
-            if(time() < $row["starttime"])
-                return false;
-            else
-                return true;
+            return $product->giveProduct();
         }
     }
     

@@ -32,8 +32,8 @@
     {
 
         const SERVER = "localhost";
-        const USERNAME = "root";
-        const PASSWORD = "<REDACTED>";
+        const USERNAME = "redacted";
+        const PASSWORD = "redacted";
         const DATABASE = "forex";
 
         public function doConnect();

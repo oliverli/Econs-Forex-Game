@@ -32,13 +32,17 @@
     require_once("mysql/UniversalConnect.php");
     require_once("TimeAuthenticate.php");
     require_once("PrivilegeAuthenticate.php");
+    require_once("IAuthenticator.php");
     
-    class PasswordAuthenticate
+    class PasswordAuthenticate implements IAuthenticator
     {
 
-        public function authenticatePassword()
+        public function authenticate()
         {
-            session_start();
+            if(session_status() === PHP_SESSION_NONE)
+            {
+                session_start();
+            }
             if(!isset($_POST["username"]) || !isset($_POST["password"]))
                 return 0;
             $db = UniversalConnect::doConnect();
@@ -60,7 +64,7 @@
                     }
                     $TimeAuthWorker = new TimeAuthenticate();
                     $PrivAuthWorker = new PrivilegeAuthenticate();
-                    if(!$PrivAuthWorker->authenticatePrivilege($row["usertype"]) && !$TimeAuthWorker->authenticateTime())
+                    if(!$PrivAuthWorker->authenticate($row["usertype"]) && !$TimeAuthWorker->authenticate())
                         return 2;
                     else
                     {

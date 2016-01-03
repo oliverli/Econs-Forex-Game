@@ -35,7 +35,7 @@
     
     class HeaderFactory extends ElementCreator
     {
-        protected function factoryMethod($product)
+        protected function factoryMethod(ElementProduct $product)
         {
             return $product->giveProduct();
         }

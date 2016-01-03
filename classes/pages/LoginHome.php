@@ -44,7 +44,7 @@
         {
             //Checks if user is logged in or has posted passwords. Redirects as appropriate.
             $SessAuthWorker = new SessionAuthenticate();
-            if($SessAuthWorker->authenticateSession())
+            if($SessAuthWorker->authenticate())
             {
                 header("Location: ./dashboard/");
                 exit();
@@ -52,7 +52,7 @@
             if(isset($_POST["username"]) && isset($_POST["password"]))
             {
                 $PassAuthWorker = new PasswordAuthenticate();
-                $this->authenticationStatus = $PassAuthWorker->authenticatePassword();
+                $this->authenticationStatus = $PassAuthWorker->authenticate();
                 if($this->authenticationStatus === 1)
                 {
                     header("Location: ./dashboard/");

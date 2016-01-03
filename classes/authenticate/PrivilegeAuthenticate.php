@@ -30,19 +30,23 @@
      * @author Li Yicheng <liyicheng340 [at] gmail [dot com]>
      */
     require_once("SessionAuthenticate.php");
+    require_once("IAuthenticator.php");
     
-    class PrivilegeAuthenticate
+    class PrivilegeAuthenticate implements IAuthenticator
     {
 
-        public function authenticatePrivilege($usertype = -1)
+        public function authenticate($usertype = -1)
         {
             if($usertype === -1)
             {
                 $SessAuthWorker = new SessionAuthenticate();
-                if(!$SessAuthWorker->authenticateSession())
+                if(!$SessAuthWorker->authenticate())
                     return false;
-                session_start();
-                return $this->authenticatePrivilege($_SESSION["usertype"]);
+                if(session_status() === PHP_SESSION_NONE)
+                {
+                    session_start();
+                }
+                return $this->authenticate($_SESSION["usertype"]);
             }
             else
             {

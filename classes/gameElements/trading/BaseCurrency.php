@@ -1,9 +1,9 @@
 <?php
 
-/*
+    /*
      * The MIT License
      *
-     * Copyright 2015 Li Yicheng, Sun Yudong, and Walter Kong.
+     * Copyright 2016 Li Yicheng, Sun Yudong, and Walter Kong.
      *
      * Permission is hereby granted, free of charge, to any person obtaining a copy
      * of this software and associated documentation files (the "Software"), to deal
@@ -25,26 +25,28 @@
      */
 
     /**
-     * Description of TimeAuthenticate
+     * Description of BaseCurrency
      *
      * @author Li Yicheng <liyicheng340 [at] gmail [dot com]>
      */
+    require_once("Currency.php");
     require_once("mysql/UniversalConnect.php");
-    require_once("IAuthenticator.php");
     
-    class TimeAuthenticate implements IAuthenticator
+    class BaseCurrency extends Currency
     {
-        public function authenticate()
+        public function __construct()
         {
             $db = UniversalConnect::doConnect();
-            date_default_timezone_set('Asia/Singapore');
-            $query = "SELECT starttime FROM startendtime WHERE timeid = 1 LIMIT 1";
-            $result = $db->query($query);
-            $row = $result->fetch_assoc();
-            if(time() < $row["starttime"])
-                return false;
-            else
-                return true;
+            $query = "SELECT * FROM currency WHERE currencyid = 1 LIMIT 1";
+            $result = $db->query($query) or die($db->error);
+            while($row = $result->fetch_assoc())
+            {
+                $this->id = $row["currencyid"];
+                $this->name = $row["name"];
+                $this->shortname = $row["shortname"];
+                $this->buyValue = $row["buyvalue"];
+                $this->sellValue = $row["sellvalue"];
+            }
         }
     }
     

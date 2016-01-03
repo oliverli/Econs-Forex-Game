@@ -29,11 +29,16 @@
      *
      * @author Li Yicheng <liyicheng340 [at] gmail [dot com]>
      */
-    class SessionAuthenticate
+    require_once("IAuthenticator.php");
+    
+    class SessionAuthenticate implements IAuthenticator
     {
-        public function AuthenticateSession()
+        public function authenticate()
         {
-            session_start();
+            if(session_status() === PHP_SESSION_NONE)
+            {
+                session_start();
+            }
             if(isset($_SESSION["userkey"]) && isset($_SESSION["usertype"]))
                 return true;
             else
