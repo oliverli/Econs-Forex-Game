@@ -20,7 +20,7 @@
 
 h3, h4 { font-family: 'Open Sans', arial; }
 h3 { opacity: 0.8; font-weight: 300; }
-h5 { opacity: 0.78; }
+h5  { opacity: 0.78; margin-bottom: 20px; font-weight: 300; }
 .top-margin { margin-top: 5%; }
 .bottom-margin { margin-bottom: 20px; }
 
@@ -32,13 +32,23 @@ h5 { opacity: 0.78; }
 #login-card {
     width: 42%;
     min-width:392px;
-    padding: 40px;
-    margin: 0 auto;
+    padding: 30px 40px;
+    margin: auto;
     background-color: rgba(255, 255, 255, .9);
 }
 
 .failed {
     animation: failed 1s ease-in;
+}
+
+.pageCenter {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    max-height: 490px;
+    max-width: 620px
 }
 
 #login-card #logo { margin-bottom: 20px; }
@@ -53,11 +63,11 @@ h5 { opacity: 0.78; }
 
 #login-card #Submit { margin:40px -0.75rem 0; }
 #login-card #Submit button {
-    width: 100%;
+    width: 90%;
     height: 50px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 620px) {
     .container, #login-card {
         margin: auto;
         width: 100%;
@@ -66,7 +76,6 @@ h5 { opacity: 0.78; }
         padding:15%;
     }
 }
-
 
 /* MUCH COPIED
 table, th, td {
@@ -98,7 +107,7 @@ html {
 }
 
 a:visited, a:link
-{ 
+{
     color: #0000EE;
 }
 

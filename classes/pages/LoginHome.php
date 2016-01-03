@@ -35,11 +35,11 @@
     require_once("pageElements/header/HeaderFactory.php");
     require_once("pageElements/header/HeaderProduct.php");
     require_once("mysql/UniversalConnect.php");
-    
+
     class LoginHome
     {
         private $authenticationStatus = -1;
-        
+
         public function __construct()
         {
             //Checks if user is logged in or has posted passwords. Redirects as appropriate.
@@ -59,25 +59,24 @@
                     exit();
                 }
             }
-            
+
             //generates header from <!DOCTYPE html> all the way to </head>
             //Title of the page is set in constructor i.e. new HeaderProduct("Title of page here");
             $headerFactory = new HeaderFactory();
             echo $headerFactory->startFactory(new HeaderProduct("Login - Forex Trading Simulator ", 1));
             echo <<<PAGE
-    <body class="indigo lighten-5">
-        <div class="top-margin bottom-margin">
-            <h3 class="title">Forex Trading Simulator</h3>
-            <h5 class="title top-margin">Simple, descriptive text</h5>
-        </div>
+    <body class="blue lighten-5" onload="$('#username').focus()">
         <div class="container">
-            <div id="login-card" class="card
+            <div id="login-card" class="pageCenter card
 PAGE;
                             if($this->authenticationStatus === 0)
                                 echo " failed";
                             echo <<<PAGE
 ">
-                <div class="center" id="Logo"><img src="./img/hci.png" height="50px" style="opacity:0.87;"/></div>
+                <div class="center">
+                    <h3 class="title">Forex Trading Simulator</h3>
+                    <h5 class="title top-margin">play forex, for free</h5>
+                </div>
                 <form id="loginform" name="loginform" method="post">
                     <div class="row">
                         <div class="input-field col s12 m10 l10 push-m1 push-l1">
@@ -98,7 +97,7 @@ PAGE;
                         </div>
                     </div>
                     <div class="row input-field center" id="Submit">
-                        <button class="btn waves-effect waves-light indigo accent-4" type="submit" name="action">Login
+                        <button class="btn waves-effect waves-light pink accent-4" type="submit" name="action">Login
                         </button>
                     </div>
                 </form>
@@ -121,4 +120,3 @@ echo <<<PAGE
 PAGE;
         }
     }
-    
