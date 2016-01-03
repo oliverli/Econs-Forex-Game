@@ -30,7 +30,7 @@
      * @author Li Yicheng <liyicheng340 [at] gmail [dot com]>
      */
     require_once("pageElements/ElementProduct.php");
-    
+
     class HeaderProduct implements ElementProduct
     {
         private $title;
@@ -102,6 +102,11 @@ HEADER;
             $this->return .= <<<HEADER
 css/main.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link type="image/x-icon" href="
+HEADER;
+            $this->return .= $this->pathToRoot;
+            $this->return .= <<<HEADER
+favicon.ico" rel="icon">
     <script>
         function failed(){
             $("#login-card").removeClass("failed")
@@ -112,6 +117,10 @@ css/main.css" rel="stylesheet" />
                                 $(this).dequeue();
                             });
         }
+
+        $(window).load(function() {
+            $('#username').focus();
+        });
     </script>
 </head>
 HEADER;
@@ -119,4 +128,3 @@ HEADER;
             return $this->return;
         }
     }
-    

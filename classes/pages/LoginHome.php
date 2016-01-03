@@ -65,7 +65,7 @@
             $headerFactory = new HeaderFactory();
             echo $headerFactory->startFactory(new HeaderProduct("Login - Forex Trading Simulator ", 1));
             echo <<<PAGE
-    <body class="blue lighten-5" onload="$('#username').focus()">
+    <body class="blue lighten-5">
         <div class="container">
             <div id="login-card" class="pageCenter card
 PAGE;
