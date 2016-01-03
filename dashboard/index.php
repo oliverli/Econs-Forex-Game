@@ -24,7 +24,6 @@
      */
     
     set_include_path(get_include_path().PATH_SEPARATOR.dirname(__FILE__)."/../classes/");
-    set_include_path(get_include_path().PATH_SEPARATOR.dirname(__FILE__)."/../"); //to be removed
     require_once("pages/Dashboard.php");
     
     $worker = new Dashboard();    
