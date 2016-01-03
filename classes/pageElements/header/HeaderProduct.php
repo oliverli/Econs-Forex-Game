@@ -30,7 +30,7 @@
      * @author Li Yicheng <liyicheng340 [at] gmail [dot com]>
      */
     require_once("pageElements/ElementProduct.php");
-    
+
     class HeaderProduct implements ElementProduct
     {
         private $title, $extraScript, $pathToRoot, $return;
@@ -92,6 +92,11 @@ THE SOFTWARE.
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link href="$this->pathToRoot/css/main.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link type="image/x-icon" href="
+HEADER;
+            $this->return .= $this->pathToRoot;
+            $this->return .= <<<HEADER
+favicon.ico" rel="icon">
     <script>
         function failed(){
             $("#login-card").removeClass("failed")
@@ -102,10 +107,13 @@ THE SOFTWARE.
                                 $(this).dequeue();
                             });
         }
+
+        $(window).load(function() {
+            $('#username').focus();
+        });
     </script>
 HTML;
             $this->return .= $this->extraScript."</head>";
             return $this->return;
         }
     }
-    
