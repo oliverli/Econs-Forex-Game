@@ -45,7 +45,7 @@
                 $this->pathToRoot = ".";
             else
                 $this->pathToRoot = "..";
-            for($i=1;$i<$directoryLayer;$i++)
+            for($i=2;$i<$directoryLayer;$i++)
             {
                 $this->pathToRoot .= "/..";
             }

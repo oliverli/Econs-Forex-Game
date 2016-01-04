@@ -75,7 +75,7 @@ PAGE;
 ">
                 <div class="center">
                     <h3 class="title">Forex Trading Simulator</h3>
-                    <h5 class="title top-margin">play forex, for free</h5>
+                    <h5 class="title top-margin">Master Forex, For Free</h5>
                 </div>
                 <form id="loginform" name="loginform" method="post">
                     <div class="row">
