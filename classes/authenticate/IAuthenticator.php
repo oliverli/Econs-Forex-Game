@@ -30,6 +30,7 @@
      */
     interface IAuthenticator
     {
+
         public function authenticate();
     }
     

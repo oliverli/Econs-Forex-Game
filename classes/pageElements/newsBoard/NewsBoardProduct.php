@@ -34,15 +34,18 @@
     require_once("gameElements/GameEndedChecker.php");
     require_once("gameElements/trading/BaseCurrency.php");
     require_once("miscellenous/FormatTimePassed.php");
-    
+
     class NewsBoardProduct implements ElementProduct
     {
+
         private $newsCount, $return;
+
         public function __construct($NumberNews = -1)
         {
             $this->newsCount = intval($NumberNews);
             $this->return = "";
         }
+
         public function giveProduct()
         {
             $db = UniversalConnect::doConnect();
@@ -70,5 +73,6 @@ HTML;
             $this->return .= "</table></div>";
             return $this->return;
         }
+
     }
     

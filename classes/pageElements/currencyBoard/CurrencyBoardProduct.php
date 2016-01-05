@@ -32,18 +32,21 @@
     require_once("mysql/UniversalConnect.php");
     require_once("gameElements/trading/BaseCurrency.php");
     require_once("pageElements/ElementProduct.php");
-    
+
     class CurrencyBoardProduct implements ElementProduct
     {
+
         private $basecurr, $return;
+
         public function __construct()
         {
             $this->basecurr = new BaseCurrency();
             $this->return = "";
         }
+
         public function giveProduct()
         {
-            if (session_status() === PHP_SESSION_NONE)
+            if(session_status() === PHP_SESSION_NONE)
             {
                 session_start();
             }
@@ -92,5 +95,6 @@ HTML;
             $db->close();
             return $this->return;
         }
+
     }
     

@@ -38,6 +38,7 @@
 
     class LoginHome
     {
+
         private $authenticationStatus = -1;
 
         public function __construct()
@@ -69,9 +70,9 @@
         <div class="container">
             <div id="login-card" class="pageCenter card
 PAGE;
-                            if($this->authenticationStatus === 0)
-                                echo " failed";
-                            echo <<<PAGE
+            if($this->authenticationStatus === 0)
+                echo " failed";
+            echo <<<PAGE
 ">
                 <div class="center">
                     <h3 class="title">Forex Trading Simulator</h3>
@@ -82,10 +83,11 @@ PAGE;
                         <div class="input-field col s12 m10 l10 push-m1 push-l1">
                             <i class="material-icons prefix">account_circle</i>
 PAGE;
-                            echo "<input type=\"text\" required=\"\" name=\"username\" id=\"username\"";
-                            if($this->authenticationStatus === 2 || $this->authenticationStatus === 0) echo " value=\"".htmlentities($_POST["username"], ENT_QUOTES, "UTF-8")."\"";
-                            echo "/>";
-                            echo <<<PAGE
+            echo "<input type=\"text\" required=\"\" name=\"username\" id=\"username\"";
+            if($this->authenticationStatus === 2 || $this->authenticationStatus === 0)
+                echo " value=\"".htmlentities($_POST["username"], ENT_QUOTES, "UTF-8")."\"";
+            echo "/>";
+            echo <<<PAGE
                             <label for="username">Username: </label>
                         </div>
                     </div>
@@ -102,21 +104,23 @@ PAGE;
                     </div>
                 </form>
 PAGE;
-                    if($this->authenticationStatus === 2)
-                    {
-                        $timeFormatWorker = new FormatTimePassed();
-                        $db = new UniversalConnect();
-                        $result = $db->query("SELECT starttime FROM startendtime LIMIT 1");
-                        $row = $result->fetch_assoc();
-                        $startTime = $row["starttime"];
-                        echo "<script>alert('The game has not started yet. It starts in ".$timeFormatWorker->format($startTime).".');window.onload = function(){document.getElementById(\"password\").focus();};</script>";
-                        $db->close();
-                    }
-echo <<<PAGE
+            if($this->authenticationStatus === 2)
+            {
+                $timeFormatWorker = new FormatTimePassed();
+                $db = new UniversalConnect();
+                $result = $db->query("SELECT starttime FROM startendtime LIMIT 1");
+                $row = $result->fetch_assoc();
+                $startTime = $row["starttime"];
+                echo "<script>alert('The game has not started yet. It starts in ".$timeFormatWorker->format($startTime).".');window.onload = function(){document.getElementById(\"password\").focus();};</script>";
+                $db->close();
+            }
+            echo <<<PAGE
             </div>
         </div>
     </body>
 </html>
 PAGE;
         }
+
     }
+    

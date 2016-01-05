@@ -30,23 +30,18 @@
      * @author Li Yicheng <liyicheng340 [at] gmail [dot com]>
      */
     require_once("pageElements/ElementProduct.php");
+    require_once("miscellenous/GenerateRootPath.php");
 
     class HeaderProduct implements ElementProduct
     {
+
         private $title, $extraScript, $pathToRoot, $return;
 
         public function __construct($HTMLtitle, $directoryLayer, $appendScript = "")
         {
             $this->title = $HTMLtitle;
             $this->extraScript = $appendScript;
-            if($directoryLayer === 1)
-                $this->pathToRoot = ".";
-            else
-                $this->pathToRoot = "..";
-            for($i=1;$i<$directoryLayer;$i++)
-            {
-                $this->pathToRoot .= "/..";
-            }
+            $this->pathToRoot = GenerateRootPath::getRoot($directoryLayer);
             $this->return = "";
         }
 
@@ -93,9 +88,9 @@ THE SOFTWARE.
     <link href="$this->pathToRoot/css/main.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link type="image/x-icon" href="
-HEADER;
+HTML;
             $this->return .= $this->pathToRoot;
-            $this->return .= <<<HEADER
+            $this->return .= <<<HTML
 favicon.ico" rel="icon">
     <script>
         function failed(){
@@ -116,4 +111,6 @@ HTML;
             $this->return .= $this->extraScript."</head>";
             return $this->return;
         }
+
     }
+    

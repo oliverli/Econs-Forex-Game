@@ -32,12 +32,14 @@
     require_once("pageElements/ElementCreator.php");
     require_once("pageElements/ElementProduct.php");
     require_once("NewsBoardProduct.php");
-    
+
     class NewsBoardFactory extends ElementCreator
     {
+
         protected function factoryMethod(ElementProduct $product)
         {
             return $product->giveProduct();
         }
+
     }
     

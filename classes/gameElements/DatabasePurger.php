@@ -30,9 +30,10 @@
      * @author Li Yicheng <liyicheng340 [at] gmail [dot com]>
      */
     require_once("mysql/UniversalConnect.php");
-    
+
     class DatabasePurger
     {
+
         public function purge()
         {
             ignore_user_abort(true);
@@ -72,5 +73,6 @@
             }
             $db->close();
         }
+
     }
     

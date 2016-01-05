@@ -1,6 +1,5 @@
 <?php
-
-/*
+    /*
      * The MIT License
      *
      * Copyright 2016 Li Yicheng, Sun Yudong, and Walter Kong.
@@ -41,9 +40,10 @@
     require_once("pageElements/newsBoard/NewsBoardFactory.php");
     require_once("pageElements/newsBoard/NewsBoardProduct.php");
     require_once("gameElements/DatabasePurger.php");
-    
+
     class Dashboard
     {
+
         public function __construct()
         {
             if(session_status() === PHP_SESSION_NONE)
@@ -67,21 +67,22 @@
                 echo $headerFactory->startFactory(new HeaderProduct("Dashboard - Forex Trading Simulator", 2, $remarks));
             else
                 echo $headerFactory->startFactory(new HeaderProduct("Dashboard - Forex Trading Simulator", 2));
-?>
-    <body class="indigo lighten-5">
-            <?php
+            ?>
+            <body class="indigo lighten-5">
+                <?php
                 $navbarFactory = new NavbarFactory();
                 echo $navbarFactory->startFactory(new NavbarProduct(2));
                 $currencyBoardFactory = new CurrencyBoardFactory();
                 echo $currencyBoardFactory->startFactory(new CurrencyBoardProduct());
                 $newsFactory = new NewsBoardFactory();
                 echo $newsFactory->startFactory(new NewsBoardProduct(30));
-            ?>
-        </div>
-    </body>
-</html>
-<?php
+                ?>
+            </div>
+            </body>
+            </html>
+            <?php
         }
+
     }
 ?>
     

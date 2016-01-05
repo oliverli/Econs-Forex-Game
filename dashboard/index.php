@@ -1,4 +1,5 @@
 <?php
+
     /*
      * The MIT License
      *
@@ -22,8 +23,9 @@
      * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
      * THE SOFTWARE.
      */
-    
+
     set_include_path(get_include_path().PATH_SEPARATOR.dirname(__FILE__)."/../classes/");
     require_once("pages/Dashboard.php");
+
+    $worker = new Dashboard();
     
-    $worker = new Dashboard();    

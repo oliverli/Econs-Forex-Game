@@ -31,7 +31,7 @@
      */
     require_once("SessionAuthenticate.php");
     require_once("IAuthenticator.php");
-    
+
     class PrivilegeAuthenticate implements IAuthenticator
     {
 

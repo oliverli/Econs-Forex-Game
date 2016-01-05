@@ -31,9 +31,10 @@
      */
     require_once("Currency.php");
     require_once("mysql/UniversalConnect.php");
-    
+
     class BaseCurrency extends Currency
     {
+
         public function __construct()
         {
             $db = UniversalConnect::doConnect();
@@ -48,5 +49,6 @@
                 $this->sellValue = $row["sellvalue"];
             }
         }
+
     }
     

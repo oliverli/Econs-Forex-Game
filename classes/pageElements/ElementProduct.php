@@ -30,6 +30,7 @@
      */
     interface ElementProduct
     {
+
         public function giveProduct();
     }
     

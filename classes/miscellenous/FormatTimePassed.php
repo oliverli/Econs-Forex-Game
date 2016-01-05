@@ -3,7 +3,7 @@
     /*
      * The MIT License
      *
-     * Copyright 2015 Li Yicheng, Sun Yudong, and Walter Kong.
+     * Copyright 2016 Li Yicheng, Sun Yudong, and Walter Kong.
      *
      * Permission is hereby granted, free of charge, to any person obtaining a copy
      * of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +31,8 @@
      */
     class FormatTimePassed
     {
-        public function format($originalTime)
+
+        public function format(int $originalTime)
         {
             if(empty($originalTime))
             {
@@ -63,5 +64,6 @@
             }
             return "$difference $periods[$j]{$tense}";
         }
+
     }
     

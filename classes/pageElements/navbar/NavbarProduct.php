@@ -34,24 +34,20 @@
     require_once("authenticate/PrivilegeAuthenticate.php");
     require_once("gameElements/GameEndedChecker.php");
     require_once("gameElements/trading/BaseCurrency.php");
-    
+    require_once("miscellenous/GenerateRootPath.php");
+
     class NavbarProduct implements ElementProduct
     {
+
         private $pathToRoot, $basecurr, $return;
-        
+
         public function __construct($directoryLayer)
         {
-            if($directoryLayer === 1)
-                $this->pathToRoot = ".";
-            else
-                $this->pathToRoot = "..";
-            for($i=2;$i<$directoryLayer;$i++)
-            {
-                $this->pathToRoot .= "/..";
-            }
+            $this->pathToRoot = GenerateRootPath::getRoot($directoryLayer);
             $this->basecurr = new BaseCurrency();
             $this->return = "";
         }
+
         public function giveProduct()
         {
             if(session_status() === PHP_SESSION_NONE)
@@ -70,7 +66,7 @@
 HTML;
             $PrivAuthWorker = new PrivilegeAuthenticate();
             if($PrivAuthWorker->authenticate())
-            $this->return .= "<li><a href=\"$this->pathToRoot/admin/\">Admin Console</a></li>";
+                $this->return .= "<li><a href=\"$this->pathToRoot/admin/\">Admin Console</a></li>";
             $this->return .= <<<HTML
             <li><a href="$this->pathToRoot/dashboard/changepassword/">Change Password</a></li>
             <li><a href="$this->pathToRoot/dashboard/logout/">Logout</a></li>
@@ -112,5 +108,6 @@ HTML;
             $db->close();
             return $this->return;
         }
+
     }
     

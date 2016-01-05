@@ -33,7 +33,7 @@
     require_once("TimeAuthenticate.php");
     require_once("PrivilegeAuthenticate.php");
     require_once("IAuthenticator.php");
-    
+
     class PasswordAuthenticate implements IAuthenticator
     {
 

@@ -30,9 +30,10 @@
      * @author Li Yicheng <liyicheng340 [at] gmail [dot com]>
      */
     require_once("IAuthenticator.php");
-    
+
     class SessionAuthenticate implements IAuthenticator
     {
+
         public function authenticate()
         {
             if(session_status() === PHP_SESSION_NONE)
@@ -44,5 +45,6 @@
             else
                 return false;
         }
+
     }
     

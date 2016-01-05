@@ -1,6 +1,6 @@
 <?php
 
-/*
+    /*
      * The MIT License
      *
      * Copyright 2015 Li Yicheng, Sun Yudong, and Walter Kong.
@@ -31,9 +31,10 @@
      */
     require_once("mysql/UniversalConnect.php");
     require_once("IAuthenticator.php");
-    
+
     class TimeAuthenticate implements IAuthenticator
     {
+
         public function authenticate()
         {
             $db = UniversalConnect::doConnect();
@@ -46,5 +47,6 @@
             else
                 return true;
         }
+
     }
     

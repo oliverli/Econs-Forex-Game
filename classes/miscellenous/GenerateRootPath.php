@@ -25,30 +25,24 @@
      */
 
     /**
-     * Description of GameEndedChecker
+     * Description of GenerateRootPath
      *
      * @author Li Yicheng <liyicheng340 [at] gmail [dot com]>
      */
-    require_once("mysql/UniversalConnect.php");
-
-    class GameEndedChecker
+    class GenerateRootPath
     {
 
-        public function gameEnded()
+        public function getRoot(int $directoryLayer)
         {
-            date_default_timezone_set('Asia/Singapore');
-            $db = UniversalConnect::doConnect();
-            $query = "SELECT endtime FROM startendtime WHERE timeid=1 LIMIT 1";
-            $result = $db->query($query); // or die($db->error);
-            $row = $result->fetch_assoc();
-            if($row["endtime"] < time())
-            {
-                return true;
-            }
+            if($directoryLayer === 1)
+                $return = ".";
             else
+                $return = "..";
+            for($i = 2; $i < $directoryLayer; $i++)
             {
-                return false;
+                $return .= "/..";
             }
+            return $return;
         }
 
     }

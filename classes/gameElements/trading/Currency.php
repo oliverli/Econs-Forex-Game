@@ -31,8 +31,9 @@
      */
     class Currency
     {
+
         protected $id, $name, $shortname, $buyValue, $sellValue;
-        
+
         public function __construct($currencyID, $currencyName, $currencyShortName, $currencyBuyValue, $currencySellValue)
         {
             $this->id = $currencyID;
@@ -41,14 +42,16 @@
             $this->buyValue = $currencyBuyValue;
             $this->sellValue = $currencySellValue;
         }
-        
+
         public function getName()
         {
             return $this->name;
         }
+
         public function getShortName()
         {
             return $this->shortname;
         }
+
     }
     
