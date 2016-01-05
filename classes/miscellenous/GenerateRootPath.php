@@ -32,7 +32,7 @@
     class GenerateRootPath
     {
 
-        public function getRoot(int $directoryLayer)
+        public function getRoot($directoryLayer)
         {
             if($directoryLayer === 1)
                 $return = ".";
