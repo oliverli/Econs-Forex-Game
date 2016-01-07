@@ -37,19 +37,15 @@
     class PasswordAuthenticate implements IAuthenticator
     {
 
-        public function authenticate()
+        public function authenticate($username = null, $password = null)
         {
-            if(session_status() === PHP_SESSION_NONE)
-            {
-                session_start();
-            }
-            if(!isset($_POST["username"]) || !isset($_POST["password"]))
-                return 0;
+            if(is_null($username) || is_null($password))
+                return -1;
             $db = UniversalConnect::doConnect();
-            $usernameToCheck = $db->real_escape_string(trim($_POST["username"]));
-            $passwordToCheck = $db->real_escape_string(trim($_POST["password"]));
+            $usernameToCheck = $db->real_escape_string(trim($username));
+            $passwordToCheck = $db->real_escape_string(trim($password));
             $query = "SELECT userkey, password, usertype FROM users WHERE userid=\"$usernameToCheck\" LIMIT 1";
-            $result = $db->query($query) or die($db->error);
+            $result = $db->query($query) or die($db->error.$query);
             if($result->num_rows < 1)
                 return 0;
             while($row = $result->fetch_assoc())
@@ -67,14 +63,13 @@
                     if(!$PrivAuthWorker->authenticate($row["usertype"]) && !$TimeAuthWorker->authenticate())
                         return 2;
                     else
-                    {
-                        $_SESSION["userkey"] = $row["userkey"];
-                        $_SESSION["usertype"] = $row["usertype"];
                         return 1;
-                    }
+                }
+                else
+                {
+                    return 0;
                 }
             }
         }
 
     }
-    

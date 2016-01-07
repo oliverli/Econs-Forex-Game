@@ -34,7 +34,7 @@
     require_once("authenticate/PrivilegeAuthenticate.php");
     require_once("gameElements/GameEndedChecker.php");
     require_once("gameElements/trading/BaseCurrency.php");
-    require_once("miscellenous/GenerateRootPath.php");
+    require_once("miscellaneous/GenerateRootPath.php");
 
     class NavbarProduct implements ElementProduct
     {
@@ -57,16 +57,18 @@
             $db = UniversalConnect::doConnect();
             $this->return .= <<<HTML
 <nav>
-    <div id="nav-wrapper" class="indigo row">
+    <div id="nav-wrapper" class="blue row">
         <div class="col left">Forex Trading Simulator</div>
         <ul id="nav-mobile" class="col right hide-on-small-and-down">
-            <li><a href="$this->pathToRoot/dashboard/">Home</a></li> 
+            <li><a href="$this->pathToRoot/dashboard/">Home</a></li>
             <li><a href="$this->pathToRoot/dashboard/history/">History</a></li>
             <li><a href="$this->pathToRoot/dashboard/leaderboard/">Leaderboards</a></li>
 HTML;
+            //going back to php
             $PrivAuthWorker = new PrivilegeAuthenticate();
             if($PrivAuthWorker->authenticate())
                 $this->return .= "<li><a href=\"$this->pathToRoot/admin/\">Admin Console</a></li>";
+            //returning to string mode again
             $this->return .= <<<HTML
             <li><a href="$this->pathToRoot/dashboard/changepassword/">Change Password</a></li>
             <li><a href="$this->pathToRoot/dashboard/logout/">Logout</a></li>
@@ -110,4 +112,3 @@ HTML;
         }
 
     }
-    

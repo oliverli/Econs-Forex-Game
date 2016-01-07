@@ -30,7 +30,7 @@
      * @author Li Yicheng <liyicheng340 [at] gmail [dot com]>
      */
     require_once("pageElements/ElementProduct.php");
-    require_once("miscellenous/GenerateRootPath.php");
+    require_once("miscellaneous/GenerateRootPath.php");
 
     class HeaderProduct implements ElementProduct
     {
@@ -51,7 +51,7 @@
 <!--
 The MIT License
 
-Copyright 2015 Li Yicheng, Sun Yudong, and Walter Kong.
+Copyright 2016 Li Yicheng, Sun Yudong, and Walter Kong.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -72,7 +72,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>$this->title</title>
@@ -113,4 +113,3 @@ HTML;
         }
 
     }
-    

@@ -33,7 +33,7 @@
     require_once("pageElements/ElementProduct.php");
     require_once("gameElements/GameEndedChecker.php");
     require_once("gameElements/trading/BaseCurrency.php");
-    require_once("miscellenous/FormatTimePassed.php");
+    require_once("miscellaneous/FormatTimePassed.php");
 
     class NewsBoardProduct implements ElementProduct
     {
@@ -53,7 +53,7 @@
             $this->return .= <<<HTML
 <div id="news" class="card">
     <table style="width:100%" class="card-content center">
-        <tr class="indigo lighten-2">
+        <tr class="blue lighten-2">
             <th colspan="2" class="center">BBT News Headlines</th>
 HTML;
             if($this->newsCount !== -1)

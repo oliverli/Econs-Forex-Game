@@ -3,7 +3,7 @@
     /*
      * The MIT License
      *
-     * Copyright 2015 Li Yicheng, Sun Yudong, and Walter Kong.
+     * Copyright 2016 Li Yicheng, Sun Yudong, and Walter Kong.
      *
      * Permission is hereby granted, free of charge, to any person obtaining a copy
      * of this software and associated documentation files (the "Software"), to deal
@@ -31,10 +31,11 @@
      */
     require_once("authenticate/SessionAuthenticate.php");
     require_once("authenticate/PasswordAuthenticate.php");
-    require_once("miscellenous/FormatTimePassed.php");
+    require_once("miscellaneous/FormatTimePassed.php");
     require_once("pageElements/header/HeaderFactory.php");
     require_once("pageElements/header/HeaderProduct.php");
     require_once("mysql/UniversalConnect.php");
+    require_once("miscellaneous/GenerateRootPath.php");
 
     class LoginHome
     {
@@ -47,16 +48,27 @@
             $SessAuthWorker = new SessionAuthenticate();
             if($SessAuthWorker->authenticate())
             {
-                header("Location: ./dashboard/");
+                header("Location: ".GenerateRootPath::getRoot(1)."/dashboard/");
                 exit();
             }
             if(isset($_POST["username"]) && isset($_POST["password"]))
             {
                 $PassAuthWorker = new PasswordAuthenticate();
-                $this->authenticationStatus = $PassAuthWorker->authenticate();
+                $this->authenticationStatus = $PassAuthWorker->authenticate($_POST["username"], $_POST["password"]);
                 if($this->authenticationStatus === 1)
                 {
-                    header("Location: ./dashboard/");
+                    if(session_status() === PHP_SESSION_NONE)
+                    {
+                        session_start();
+                    }
+                    $db = UniversalConnect::doConnect();
+                    $query = "SELECT userkey, usertype FROM users WHERE userid=\"".$db->real_escape_string(trim($_POST["username"]))."\" LIMIT 1";
+                    $result = $db->query($query);
+                    if($result->num_rows < 1) die("An unexpected error has occurred. The problem should go away by itself after some time.");
+                    $row = $result->fetch_assoc();
+                    $_SESSION["userkey"] = $row["userkey"];
+                    $_SESSION["usertype"] = $row["usertype"];
+                    header("Location: ".GenerateRootPath::getRoot(1)."/dashboard/");
                     exit();
                 }
             }
@@ -65,14 +77,14 @@
             //Title of the page is set in constructor i.e. new HeaderProduct("Title of page here");
             $headerFactory = new HeaderFactory();
             echo $headerFactory->startFactory(new HeaderProduct("Login - Forex Trading Simulator ", 1));
-            echo <<<PAGE
+            echo <<<HTML
     <body class="blue lighten-5">
         <div class="container">
             <div id="login-card" class="pageCenter card
-PAGE;
+HTML;
             if($this->authenticationStatus === 0)
                 echo " failed";
-            echo <<<PAGE
+            echo <<<HTML
 ">
                 <div class="center">
                     <h3 class="title">Forex Trading Simulator</h3>
@@ -82,12 +94,12 @@ PAGE;
                     <div class="row">
                         <div class="input-field col s12 m10 l10 push-m1 push-l1">
                             <i class="material-icons prefix">account_circle</i>
-PAGE;
+HTML;
             echo "<input type=\"text\" required=\"\" name=\"username\" id=\"username\"";
             if($this->authenticationStatus === 2 || $this->authenticationStatus === 0)
                 echo " value=\"".htmlentities($_POST["username"], ENT_QUOTES, "UTF-8")."\"";
             echo "/>";
-            echo <<<PAGE
+            echo <<<HTML
                             <label for="username">Username: </label>
                         </div>
                     </div>
@@ -103,24 +115,22 @@ PAGE;
                         </button>
                     </div>
                 </form>
-PAGE;
+HTML;
             if($this->authenticationStatus === 2)
             {
-                $timeFormatWorker = new FormatTimePassed();
                 $db = new UniversalConnect();
                 $result = $db->query("SELECT starttime FROM startendtime LIMIT 1");
                 $row = $result->fetch_assoc();
                 $startTime = $row["starttime"];
-                echo "<script>alert('The game has not started yet. It starts in ".$timeFormatWorker->format($startTime).".');window.onload = function(){document.getElementById(\"password\").focus();};</script>";
+                echo "<script>alert('The game has not started yet. It starts in ".FormatTimePassed::format($startTime).".');window.onload = function(){document.getElementById(\"password\").focus();};</script>";
                 $db->close();
             }
-            echo <<<PAGE
+            echo <<<HTML
             </div>
         </div>
     </body>
 </html>
-PAGE;
+HTML;
         }
 
     }
-    

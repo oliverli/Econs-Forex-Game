@@ -50,7 +50,7 @@
             }
             else
             {
-                if($usertype == 2)
+                if($usertype === 2)
                     return true;
                 else
                     return false;

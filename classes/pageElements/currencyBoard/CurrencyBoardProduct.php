@@ -55,7 +55,7 @@
             $this->return .= <<<HTML
 <div id="board" class="card">
     <table style="width:100%" class="card-content">
-        <tr class="indigo lighten-2" >
+        <tr class="blue lighten-2" >
             <th class="center">Currency</th>
 HTML;
             $this->return .= "<th class=\"center\">".$this->basecurr->getShortName()." Selling Value</th>";

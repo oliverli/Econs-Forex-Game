@@ -40,6 +40,7 @@
     require_once("pageElements/newsBoard/NewsBoardFactory.php");
     require_once("pageElements/newsBoard/NewsBoardProduct.php");
     require_once("gameElements/DatabasePurger.php");
+    require_once("miscellaneous/GenerateRootPath.php");
 
     class Dashboard
     {
@@ -53,7 +54,7 @@
             $SessAuthWorker = new SessionAuthenticate();
             if(!$SessAuthWorker->authenticate())
             {
-                header("Location: ../");
+                header("Location: ".GenerateRootPath::getRoot(2));
                 exit();
             }
             DatabasePurger::purge();
@@ -68,7 +69,7 @@
             else
                 echo $headerFactory->startFactory(new HeaderProduct("Dashboard - Forex Trading Simulator", 2));
             ?>
-            <body class="indigo lighten-5">
+            <body class="blue lighten-5">
                 <?php
                 $navbarFactory = new NavbarFactory();
                 echo $navbarFactory->startFactory(new NavbarProduct(2));
