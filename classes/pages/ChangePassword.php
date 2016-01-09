@@ -62,7 +62,7 @@
                     $result = $db->query($query);
                     $row = $result->fetch_assoc();
                     $userid = $row["userid"];
-                    if(PasswordAuthenticate::authenticate($userid, $_POST["currpass"]) === 1)
+                    if(PasswordAuthenticate::authenticate($userid, $_POST["currpass"]))
                     {
                         $query = "UPDATE users SET password=\"".password_hash($db->real_escape_string(trim($_POST["newpass"])), PASSWORD_DEFAULT)."\" WHERE userkey=".$_SESSION["userkey"];
                         $db->query($query);

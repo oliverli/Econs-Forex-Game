@@ -3,7 +3,7 @@
     /*
      * The MIT License
      *
-     * Copyright 2015 Li Yicheng, Sun Yudong, and Walter Kong.
+     * Copyright 2016 Li Yicheng, Sun Yudong, and Walter Kong.
      *
      * Permission is hereby granted, free of charge, to any person obtaining a copy
      * of this software and associated documentation files (the "Software"), to deal
@@ -30,8 +30,6 @@
      * @author Li Yicheng <liyicheng340 [at] gmail [dot com]>
      */
     require_once("mysql/UniversalConnect.php");
-    require_once("TimeAuthenticate.php");
-    require_once("PrivilegeAuthenticate.php");
     require_once("IAuthenticator.php");
 
     class PasswordAuthenticate implements IAuthenticator
@@ -40,14 +38,14 @@
         public function authenticate($username = null, $password = null)
         {
             if(is_null($username) || is_null($password))
-                return -1;
+                return false;
             $db = UniversalConnect::doConnect();
             $usernameToCheck = $db->real_escape_string(trim($username));
             $passwordToCheck = $db->real_escape_string(trim($password));
             $query = "SELECT userkey, password, usertype FROM users WHERE userid=\"$usernameToCheck\" LIMIT 1";
             $result = $db->query($query) or die($db->error.$query);
             if($result->num_rows < 1)
-                return 0;
+                return false;
             while($row = $result->fetch_assoc())
             {
                 if(password_verify($passwordToCheck, $row["password"]))
@@ -58,16 +56,11 @@
                         $query = "UPDATE users SET password=\"$newHash\" WHERE userkey=".$row["userkey"];
                         $db->query($query);
                     }
-                    $TimeAuthWorker = new TimeAuthenticate();
-                    $PrivAuthWorker = new PrivilegeAuthenticate();
-                    if(!$PrivAuthWorker->authenticate($row["usertype"]) && !$TimeAuthWorker->authenticate())
-                        return 2;
-                    else
-                        return 1;
+                    return true;
                 }
                 else
                 {
-                    return 0;
+                    return false;
                 }
             }
         }

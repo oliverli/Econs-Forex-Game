@@ -31,6 +31,8 @@
      */
     require_once("authenticate/SessionAuthenticate.php");
     require_once("authenticate/PasswordAuthenticate.php");
+    require_once("authenticate/TimeAuthenticate.php");
+    require_once("authenticate/PrivilegeAuthenticate.php");
     require_once("miscellaneous/FormatTimePassed.php");
     require_once("pageElements/header/HeaderFactory.php");
     require_once("pageElements/header/HeaderProduct.php");
@@ -54,9 +56,12 @@
             if(isset($_POST["username"]) && isset($_POST["password"]))
             {
                 $PassAuthWorker = new PasswordAuthenticate();
-                $this->authenticationStatus = $PassAuthWorker->authenticate($_POST["username"], $_POST["password"]);
-                if($this->authenticationStatus === 1)
+                if($PassAuthWorker->authenticate($_POST["username"], $_POST["password"]))
                 {
+                    $TimeAuthWorker = new TimeAuthenticate();
+                    $PrivAuthWorker = new PrivilegeAuthenticate();
+                    if(!$PrivAuthWorker->authenticate($row["usertype"]) && !$TimeAuthWorker->authenticate())
+                        $this->authenticationStatus = 2;
                     if(session_status() === PHP_SESSION_NONE)
                     {
                         session_start();
@@ -71,6 +76,8 @@
                     header("Location: ".GenerateRootPath::getRoot(1)."/dashboard/");
                     exit();
                 }
+                else
+                    $this->authenticationStatus = 0;
             }
 
             //generates header from <!DOCTYPE html> all the way to </head>
