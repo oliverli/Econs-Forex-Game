@@ -69,20 +69,41 @@
                 echo $headerFactory->startFactory(new HeaderProduct("Dashboard - Forex Trading Simulator", 2));
             ?>
             <body class="blue lighten-5">
-                <?php
-                $navbarFactory = new NavbarFactory();
-                echo $navbarFactory->startFactory(new NavbarProduct(2));
-                $currencyBoardFactory = new CurrencyBoardFactory();
-                echo $currencyBoardFactory->startFactory(new CurrencyBoardProduct());
-                $newsFactory = new NewsBoardFactory();
-                echo $newsFactory->startFactory(new NewsBoardProduct(30));
-                ?>
-            </div>
-            </body>
-            </html>
-            <?php
+                <?php $navbarFactory = new NavbarFactory();
+                echo $navbarFactory->startFactory(new NavbarProduct(2)); ?>
+                <div class="row">
+                    <div class="col s4"><div class="card">
+                        <div class="card-image">
+                            <img src="../img/user.jpg" class="activator">
+                            <span class="card-title">Username</span>
+                        </div>
+                        <div class="card-content">
+                            <p class="activator">
+                                <i class="material-icons right">more_vert</i>
+                                I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.
+                            </p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">This is a link</a>
+                        </div>
+                        <div class="card-reveal">
+                            <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                            <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                        </div>
+                    </div></div>
+                    
+                    <div class="col s8">
+                        <?php $currencyBoardFactory = new CurrencyBoardFactory();
+                        echo $currencyBoardFactory->startFactory(new CurrencyBoardProduct()); ?>
+                    </div>
+                    
+                    <div class="col s6">
+                        <?php $newsFactory = new NewsBoardFactory();
+                        echo $newsFactory->startFactory(new NewsBoardProduct(30)); ?>
+                    </div>
+                </div>
+            </body><?php
         }
 
     }
 ?>
-    
