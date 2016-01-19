@@ -39,12 +39,12 @@
         {
             parent::__construct(1);
         }
-        
+
         public function buy($baseSellAmount)
         {
             return false;
         }
-        
+
         public function sell($baseBuyAmount)
         {
             return false;

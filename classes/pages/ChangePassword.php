@@ -1,5 +1,4 @@
 <?php
-
     /*
      * The MIT License
      *
@@ -41,6 +40,7 @@
 
     class ChangePassword
     {
+
         public function __construct()
         {
             if(session_status() === PHP_SESSION_NONE)
@@ -127,4 +127,6 @@ JAVASCRIPT;
             </div>
             <?php
         }
+
     }
+    

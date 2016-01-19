@@ -31,7 +31,7 @@
      */
     require_once("mysql/UniversalConnect.php");
     require_once("BaseCurrency.php");
-    
+
     class Currency
     {
 
@@ -81,22 +81,21 @@
         {
             return $this->shortname;
         }
-        
+
         public function getAmount()
         {
             return $this->amount;
         }
-        
+
         public function getSellValue()
         {
             return $this->sellValue;
         }
-        
+
         public function getBuyValue()
         {
             return $this->buyValue;
         }
-
 
         public function buy($baseSellAmount)
         {
@@ -128,7 +127,7 @@
                 $db->rollback();
                 die("An error occurred during transaction. Please try again later. Technical details: ".$db->error);
             }
-            
+
             //calculates net worth
             $totalvalue = 0.00;
             $query = "SELECT wallet.amount, currency.sellvalue FROM wallet INNER JOIN currency ON currency.currencyid=wallet.currencyid WHERE userkey=$userkey";
@@ -140,11 +139,11 @@
             $totalvalue = round($totalvalue, 2);
             $query = "UPDATE users SET networth=$totalvalue WHERE userkey=$userkey";
             $db->query($query);
-            
+
             $db->close();
             return true;
         }
-        
+
         public function sell($baseBuyAmount)
         {
             ignore_user_abort(true);

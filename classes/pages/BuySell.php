@@ -44,11 +44,12 @@
 
     class BuySell
     {
+
         private $baseCurr, $secCurr, $pathToRoot;
-        
+
         public function __construct()
         {
-            
+
             $this->pathToRoot = GenerateRootPath::getRoot(3);
             $SessAuthWorker = new SessionAuthenticate();
             if(!$SessAuthWorker->authenticate())
@@ -181,46 +182,46 @@
                 <span class="card-title">Trade <?php echo $this->baseCurr->getShortName() ?>-<?php echo $this->secCurr->getShortName() ?></span>
                 <div class="card-content center">
                     <?php
-                        $chartWorker = new CurrencyChartFactory();
-                        echo $chartWorker->startFactory(new CurrencyChartProduct($currid))
+                    $chartWorker = new CurrencyChartFactory();
+                    echo $chartWorker->startFactory(new CurrencyChartProduct($currid))
                     ?>
                 </div>
             </div>
             <div class="row">
-            <div id="tradeTable" class="card col s8">
-                <div class="card-content">
-                
-                <p style="text-align:center">You own <?php echo $this->baseCurr->getShortName().number_format($this->baseCurr->getAmount() / 1000000, 2) ?> million (<?php echo $this->secCurr->getShortName().number_format(($this->baseCurr->getAmount() / 1000000) * $this->secCurr->getBuyValue(), 2) ?> million) and <?php echo $this->secCurr->getShortName().number_format($this->secCurr->getAmount() / 1000000, 2) ?> million (<?php echo $this->baseCurr->getShortName().number_format(($this->secCurr->getAmount() / 1000000) / $this->secCurr->getSellValue(), 2) ?> million).</p>
-                <form name="buy" action="" method="post">
-                    <input type="hidden" name="currid" value=<?php echo "\"".$currid."\"" ?> />
-                    <table style="width:100%" class="noborder">
-                        <tr class="noborder">
-                            <td class="noborder">Sell <?php echo $this->baseCurr->getShortName() ?>, Buy <?php echo $this->secCurr->getShortName() ?></td>
-                            <td class="noborder">Buy <?php echo $this->baseCurr->getShortName() ?>, Sell <?php echo $this->secCurr->getShortName() ?></td>
-                        </tr>
-                        <tr class="noborder">
-                            <td class="noborder"><?php echo $this->baseCurr->getShortName() ?>1.00 = <?php echo $this->secCurr->getShortName().number_format($this->secCurr->getBuyValue(), 4) ?></td>
-                            <td class="noborder"><?php echo $this->baseCurr->getShortName() ?>1.00 = <?php echo $this->secCurr->getShortName().number_format($this->secCurr->getSellValue(), 4) ?></td>
-                        </tr>
-                        <tr class="noborder">
-                            <td class="noborder">Sell <?php echo $this->baseCurr->getShortName() ?> <input type="number" name="buyamt" id="buyamt" onchange="buychange()" onkeyup="buychange()" <?php if(GameEndedChecker::GameEnded()) echo "disabled " ?>/> million <br /> for <br /><?php echo $this->secCurr->getShortName() ?><span id="buyamt2">0.00</span> million</td>
-                            <td class="noborder">Buy <?php echo $this->baseCurr->getShortName() ?> <input type="number" name="sellamt" id="sellamt" onchange="sellchange()" onkeyup="sellchange()" <?php if(GameEndedChecker::GameEnded()) echo "disabled " ?>/> million <br /> for <br /><?php echo $this->secCurr->getShortName() ?><span id="sellamt2">0.00</span> million</td>
-                        </tr>
-                        <tr class="noborder">
-                            <td class="noborder"><input type="submit" value="Sell USD" name="buybtn" onClick="cleanifyBuy()" <?php if(GameEndedChecker::GameEnded()) echo "disabled " ?>/></td>
-                            <td class="noborder"><input type="submit" value="Buy USD" name="sellbtn" onClick="cleanifySell()" <?php if(GameEndedChecker::GameEnded()) echo "disabled " ?>/></td>
-                        </tr>
-                    </table>
-                </form>
-                <p style="text-align:center"><a href="../" target="_top">Cancel Transaction</a></p>
+                <div id="tradeTable" class="card col s8">
+                    <div class="card-content">
+
+                        <p style="text-align:center">You own <?php echo $this->baseCurr->getShortName().number_format($this->baseCurr->getAmount() / 1000000, 2) ?> million (<?php echo $this->secCurr->getShortName().number_format(($this->baseCurr->getAmount() / 1000000) * $this->secCurr->getBuyValue(), 2) ?> million) and <?php echo $this->secCurr->getShortName().number_format($this->secCurr->getAmount() / 1000000, 2) ?> million (<?php echo $this->baseCurr->getShortName().number_format(($this->secCurr->getAmount() / 1000000) / $this->secCurr->getSellValue(), 2) ?> million).</p>
+                        <form name="buy" action="" method="post">
+                            <input type="hidden" name="currid" value=<?php echo "\"".$currid."\"" ?> />
+                            <table style="width:100%" class="noborder">
+                                <tr class="noborder">
+                                    <td class="noborder">Sell <?php echo $this->baseCurr->getShortName() ?>, Buy <?php echo $this->secCurr->getShortName() ?></td>
+                                    <td class="noborder">Buy <?php echo $this->baseCurr->getShortName() ?>, Sell <?php echo $this->secCurr->getShortName() ?></td>
+                                </tr>
+                                <tr class="noborder">
+                                    <td class="noborder"><?php echo $this->baseCurr->getShortName() ?>1.00 = <?php echo $this->secCurr->getShortName().number_format($this->secCurr->getBuyValue(), 4) ?></td>
+                                    <td class="noborder"><?php echo $this->baseCurr->getShortName() ?>1.00 = <?php echo $this->secCurr->getShortName().number_format($this->secCurr->getSellValue(), 4) ?></td>
+                                </tr>
+                                <tr class="noborder">
+                                    <td class="noborder">Sell <?php echo $this->baseCurr->getShortName() ?> <input type="number" name="buyamt" id="buyamt" onchange="buychange()" onkeyup="buychange()" <?php if(GameEndedChecker::GameEnded()) echo "disabled " ?>/> million <br /> for <br /><?php echo $this->secCurr->getShortName() ?><span id="buyamt2">0.00</span> million</td>
+                                    <td class="noborder">Buy <?php echo $this->baseCurr->getShortName() ?> <input type="number" name="sellamt" id="sellamt" onchange="sellchange()" onkeyup="sellchange()" <?php if(GameEndedChecker::GameEnded()) echo "disabled " ?>/> million <br /> for <br /><?php echo $this->secCurr->getShortName() ?><span id="sellamt2">0.00</span> million</td>
+                                </tr>
+                                <tr class="noborder">
+                                    <td class="noborder"><input type="submit" value="Sell USD" name="buybtn" onClick="cleanifyBuy()" <?php if(GameEndedChecker::GameEnded()) echo "disabled " ?>/></td>
+                                    <td class="noborder"><input type="submit" value="Buy USD" name="sellbtn" onClick="cleanifySell()" <?php if(GameEndedChecker::GameEnded()) echo "disabled " ?>/></td>
+                                </tr>
+                            </table>
+                        </form>
+                        <p style="text-align:center"><a href="../" target="_top">Cancel Transaction</a></p>
+                    </div>
                 </div>
-            </div>
-            <div class="col s4" id="news">
-                <?php
+                <div class="col s4" id="news">
+                    <?php
                     $newsBoardWorker = new NewsBoardFactory();
                     echo $newsBoardWorker->startFactory(new NewsBoardProduct(20));
-                ?>
-            </div>
+                    ?>
+                </div>
             </div>
             </body>
             </html><?php

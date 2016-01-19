@@ -39,7 +39,7 @@
     class NavbarProduct implements ElementProduct
     {
 
-        private $pathToRoot, $basecurr, $return;
+        private $pathToRoot, $basecurr, $return, $networth, $name;
 
         public function __construct($directoryLayer)
         {
@@ -68,6 +68,14 @@ HTML;
             $PrivAuthWorker = new PrivilegeAuthenticate();
             if($PrivAuthWorker->authenticate())
                 $this->return .= "<li><a href=\"$this->pathToRoot/admin/\">Admin Console</a></li>";
+            $userkey = intval($_SESSION["userkey"]);
+            $query = "SELECT name, networth FROM users WHERE userkey=$userkey LIMIT 1";
+            $result = $db->query($query) or die();
+            if($row = $result->fetch_assoc())
+            {
+                $this->name = $row["name"];
+                $this->networth = $row["networth"];
+            }
             //returning to string mode again
             $this->return .= <<<HTML
             <li><a href="$this->pathToRoot/dashboard/changepassword/">Change Password</a></li>
@@ -76,39 +84,61 @@ HTML;
     </div>
 </nav>
     <div class="container">
-        <div class="card">
-            <div class="card-content center">
+        <div class="row">
+            <div class="col s4"><div class="card">
+                    <div class="card-image">
+                        <img src="$this->pathToRoot/img/user.jpg" class="activator">
+                        <span class="card-title">$this->name</span>
+                    </div>
+                    <div class="card-content">
+                        <p class="activator">
+                            <i class="material-icons right">more_vert</i>
 HTML;
-            $userkey = intval($_SESSION["userkey"]);
-            $query = "SELECT name, networth FROM users WHERE userkey=$userkey LIMIT 1";
-            $result = $db->query($query) or die();
-            $totalvalue = 0;
-            if($row = $result->fetch_assoc())
-            {
-                $this->return .= "<p>Hello, ".$row["name"].".";
-                $totalvalue = $row["networth"];
-            }
             if(!GameEndedChecker::gameEnded())
-                $this->return .= " Your net worth is ".$this->basecurr->getShortName().number_format($totalvalue, 2).".</p>";
+            {
+                $this->return .= "Hello! You currently own a total of ".$this->basecurr->getShortName().number_format($this->networth, 2).".";
+            }
             else
             {
-                $this->return .= " The game has ended.</p><p>";
-                if($totalvalue == 10000000)
+                $this->return .= "Hello! The game has ended. You ended off with a total of ".$this->basecurr->getShortName().number_format($this->networth, 2).".";
+            }
+            $this->return .= <<<HTML
+                        </p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Some Title<i class="material-icons right">close</i></span>
+                        <p>
+HTML;
+                if($this->networth === 10000000)
                 {
-                    $this->return .= " You did not make or lose any money.</p>";
+                    $this->return .= "<p>You did not make or lose any money.</p>";
                 }
-                else if($totalvalue > 10000000)
+                else if($this->networth > 10000000)
                 {
-                    $this->return .= " You made a profit of ".$this->basecurr->getShortName().number_format($totalvalue - 10000000, 2)."!</p>";
+                    $this->return .= "<p>You made a profit of ".$this->basecurr->getShortName().number_format($this->networth - 10000000, 2)."! Congratulations!</p>";
                 }
                 else
                 {
-                    $this->return .= " You lost ".$this->basecurr->getShortName().number_format(0 - ($totalvalue - 10000000), 2).".</p>";
+                    $this->return .= "<p>You lost ".$this->basecurr->getShortName().number_format(0 - ($this->networth - 10000000), 2).".</p>";
+                    if(GameEndedChecker::gameEnded())
+                    {
+                        $this->return .= "<p>Better luck next time!</p>";
+                    }
+                    else
+                    {
+                        $this->return .= "<p>There's still time, try harder!</p>";
+                    }
                 }
-            }
-            $this->return .= "</div></div>";
+            $this->return .= <<<HTML
+</p>
+                    </div>
+                </div></div>
+
+            
+HTML;
             $db->close();
             return $this->return;
         }
 
     }
+    

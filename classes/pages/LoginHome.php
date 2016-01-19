@@ -67,7 +67,8 @@
                     $db = UniversalConnect::doConnect();
                     $query = "SELECT userkey, usertype FROM users WHERE userid=\"".$db->real_escape_string(trim($_POST["username"]))."\" LIMIT 1";
                     $result = $db->query($query);
-                    if($result->num_rows < 1) die("An unexpected error has occurred. The problem should go away by itself after some time.");
+                    if($result->num_rows < 1)
+                        die("An unexpected error has occurred. The problem should go away by itself after some time.");
                     $row = $result->fetch_assoc();
                     $_SESSION["userkey"] = $row["userkey"];
                     $_SESSION["usertype"] = $row["usertype"];
@@ -144,3 +145,4 @@ HTML;
         }
 
     }
+    

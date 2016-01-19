@@ -31,11 +31,12 @@
      */
     require_once("mysql/UniversalConnect.php");
     require_once("pageElements/ElementProduct.php");
-    
+
     class CurrencyChartProduct implements ElementProduct
     {
+
         private $currencyID, $return;
-        
+
         public function __construct($currencyID)
         {
             $this->currencyID = $currencyID;
@@ -120,5 +121,6 @@ JAVASCRIPT;
             $db->close();
             return $this->return;
         }
+
     }
     
