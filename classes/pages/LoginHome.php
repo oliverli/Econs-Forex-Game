@@ -60,8 +60,6 @@
                 {
                     $TimeAuthWorker = new TimeAuthenticate();
                     $PrivAuthWorker = new PrivilegeAuthenticate();
-                    if(!$PrivAuthWorker->authenticate($row["usertype"]) && !$TimeAuthWorker->authenticate())
-                        $this->authenticationStatus = 2;
                     if(session_status() === PHP_SESSION_NONE)
                     {
                         session_start();
@@ -73,8 +71,13 @@
                     $row = $result->fetch_assoc();
                     $_SESSION["userkey"] = $row["userkey"];
                     $_SESSION["usertype"] = $row["usertype"];
-                    header("Location: ".GenerateRootPath::getRoot(1)."/dashboard/");
-                    exit();
+                    if(!$PrivAuthWorker->authenticate($_SESSION["usertype"]) && !$TimeAuthWorker->authenticate())
+                        $this->authenticationStatus = 2;
+                    else
+                    {
+                        header("Location: ".GenerateRootPath::getRoot(1)."/dashboard/");
+                        exit();
+                    }
                 }
                 else
                     $this->authenticationStatus = 0;

@@ -81,6 +81,7 @@ THE SOFTWARE.
     </script>
 
     <script src="$this->pathToRoot/js/onerror.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" onerror="this.onerror=null; this.src=resError(this.src)"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js" onerror="this.onerror=null; this.src=resError(this.src)"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css" media="screen,projection" onerror="this.onerror=null; this.src=resError(this.src)"/>

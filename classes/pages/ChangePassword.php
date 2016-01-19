@@ -58,7 +58,7 @@
                 if($_POST["newpass"] === $_POST["conpass"])
                 {
                     $db = UniversalConnect::doConnect();
-                    $query = "SELECT userid FROM users WHERE userkey=".$_SESSION["userkey"];
+                    $query = "SELECT userid FROM users WHERE userkey=".$_SESSION["userkey"]." LIMIT 1";
                     $result = $db->query($query);
                     $row = $result->fetch_assoc();
                     $userid = $row["userid"];

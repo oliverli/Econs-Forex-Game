@@ -25,30 +25,19 @@
      */
 
     /**
-     * Description of BaseCurrency
+     * Description of CurrencyChartFactory
      *
      * @author Li Yicheng <liyicheng340 [at] gmail [dot com]>
      */
-    require_once("Currency.php");
-    require_once("mysql/UniversalConnect.php");
-
-    class BaseCurrency extends Currency
+    require_once("pageElements/ElementCreator.php");
+    require_once("pageElements/ElementProduct.php");
+    require_once("CurrencyChartProduct.php");
+    
+    class CurrencyChartFactory extends ElementCreator
     {
-
-        public function __construct()
+        protected function factoryMethod(ElementProduct $product)
         {
-            parent::__construct(1);
+            return $product->giveProduct();
         }
-        
-        public function buy($baseSellAmount)
-        {
-            return false;
-        }
-        
-        public function sell($baseBuyAmount)
-        {
-            return false;
-        }
-
     }
     

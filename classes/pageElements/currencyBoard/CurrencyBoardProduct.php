@@ -65,19 +65,13 @@ HTML;
             <th class="center">Buy/Sell</th>
         </tr>
 HTML;
-            $query = "SELECT amount FROM wallet WHERE currencyid=1 AND userkey = $userkey LIMIT 1";
-            $result = $db->query($query) or die($db->error);
-            while($row = $result->fetch_assoc())
-            {
-                $this->return .= "<tr>";
-                $this->return .= "<td class=\"center\">".$this->basecurr->getName()." (".$this->basecurr->getShortName().")</td>";
-                $this->return .= "<td class=\"center\">N.A.</td>";
-                $this->return .= "<td class=\"center\">N.A.</td>";
-                $this->return .= "<td class=\"center\">".number_format($row["amount"], 2)."</td>";
-                $this->return .= "<td class=\"center\">N.A.</td>";
-                $this->return .= "</tr>";
-                break;
-            }
+            $this->return .= "<tr>";
+            $this->return .= "<td class=\"center\">".$this->basecurr->getName()." (".$this->basecurr->getShortName().")</td>";
+            $this->return .= "<td class=\"center\">N.A.</td>";
+            $this->return .= "<td class=\"center\">N.A.</td>";
+            $this->return .= "<td class=\"center\">".number_format($this->basecurr->getAmount(), 2)."</td>";
+            $this->return .= "<td class=\"center\">N.A.</td>";
+            $this->return .= "</tr>";
             $query = "SELECT currency.name, currency.shortname, currency.sellvalue, currency.buyvalue, currency.currencyid, wallet.amount FROM currency INNER JOIN wallet ON currency.currencyid = wallet.currencyid WHERE currency.currencyid != 1 AND wallet.userkey = $userkey ORDER BY currency.name ASC";
             $result = $db->query($query) or die($db->error);
             while($row = $result->fetch_assoc())

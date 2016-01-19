@@ -28,8 +28,7 @@
      *
      * @author Li Yicheng <liyicheng340 [at] gmail [dot com]>
      */
-    //Highly WIP, code pasted here so that existing page will still work even after
-    //require_once in dashboard/
+    
     require_once("authenticate/SessionAuthenticate.php");
     require_once("pageElements/header/HeaderFactory.php");
     require_once("pageElements/header/HeaderProduct.php");
