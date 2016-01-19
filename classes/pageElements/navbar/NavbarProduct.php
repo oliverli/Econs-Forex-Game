@@ -107,34 +107,30 @@ HTML;
                     </div>
                     <div class="card-reveal">
                         <span class="card-title grey-text text-darken-4">Some Title<i class="material-icons right">close</i></span>
-                        <p>
 HTML;
-                if($this->networth === 10000000)
+            if($this->networth === 10000000)
+            {
+                $this->return .= "<p>You did not make or lose any money.</p>";
+            }
+            else if($this->networth > 10000000)
+            {
+                $this->return .= "<p>You made a profit of ".$this->basecurr->getShortName().number_format($this->networth - 10000000, 2)."! Congratulations!</p>";
+            }
+            else
+            {
+                $this->return .= "<p>You lost ".$this->basecurr->getShortName().number_format(0 - ($this->networth - 10000000), 2).".</p>";
+                if(GameEndedChecker::gameEnded())
                 {
-                    $this->return .= "<p>You did not make or lose any money.</p>";
-                }
-                else if($this->networth > 10000000)
-                {
-                    $this->return .= "<p>You made a profit of ".$this->basecurr->getShortName().number_format($this->networth - 10000000, 2)."! Congratulations!</p>";
+                    $this->return .= "<p>Better luck next time!</p>";
                 }
                 else
                 {
-                    $this->return .= "<p>You lost ".$this->basecurr->getShortName().number_format(0 - ($this->networth - 10000000), 2).".</p>";
-                    if(GameEndedChecker::gameEnded())
-                    {
-                        $this->return .= "<p>Better luck next time!</p>";
-                    }
-                    else
-                    {
-                        $this->return .= "<p>There's still time, try harder!</p>";
-                    }
+                    $this->return .= "<p>There's still time, try harder!</p>";
                 }
+            }
             $this->return .= <<<HTML
-</p>
                     </div>
-                </div></div>
-
-            
+                </div></div></div>
 HTML;
             $db->close();
             return $this->return;
