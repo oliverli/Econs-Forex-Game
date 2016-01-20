@@ -1,3 +1,7 @@
+* {
+    text-overflow: ellipsis /* DANGEROUS! Will change when error */
+}
+
 /* LOGIN PAGE */
 
 /* label focus color */
@@ -71,8 +75,11 @@ h5  { opacity: 0.78; margin-bottom: 20px; font-weight: 300; }
 
 .activator {
     cursor: pointer;
+    transition: opacity .3s ease;
 }
 
+.card-image img.activator:hover { opacity: 0.6; }
+.card .card-reveal { background-color: rgba(255,255,255,0.9); }
 /* Left Border
 #nav-mobile li {
     position: relative;

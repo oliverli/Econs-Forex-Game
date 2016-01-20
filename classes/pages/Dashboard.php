@@ -85,7 +85,7 @@
                     echo $newsFactory->startFactory(new NewsBoardProduct(30));
                     ?>
                 </div>
-            </div>
+            </div></div> <!-- This is for </div class="row"></div class="container"> in $navbarFactory because PHP OOP ftw right? -->
             </body><?php
         }
 

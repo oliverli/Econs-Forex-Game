@@ -86,27 +86,27 @@ HTML;
     <div class="container">
         <div class="row">
             <div class="col s4"><div class="card">
-                    <div class="card-image">
-                        <img src="$this->pathToRoot/img/user.jpg" class="activator">
-                        <span class="card-title">$this->name</span>
-                    </div>
-                    <div class="card-content">
-                        <p class="activator">
-                            <i class="material-icons right">more_vert</i>
+                <div class="card-image">
+                    <img src="$this->pathToRoot/img/user.jpg" class="activator">
+                    <span class="card-title">$this->name</span>
+                </div>
+                <div class="card-content">
+                    <p>
+                        <i class="material-icons right activator">library_books</i>
 HTML;
             if(!GameEndedChecker::gameEnded())
             {
-                $this->return .= "Hello! You currently own a total of ".$this->basecurr->getShortName().number_format($this->networth, 2).".";
+                $this->return .= "Account Balance:<br />".$this->basecurr->getShortName().number_format($this->networth, 2).".";
             }
             else
             {
-                $this->return .= "Hello! The game has ended. You ended off with a total of ".$this->basecurr->getShortName().number_format($this->networth, 2).".";
+                $this->return .= "Game Over. You ended off with a total of ".$this->basecurr->getShortName().number_format($this->networth, 2).".";
             }
             $this->return .= <<<HTML
-                        </p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Some Title<i class="material-icons right">close</i></span>
+                    </p>
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">Transaction History<i class="material-icons right">close</i></span>
 HTML;
             if($this->networth === 10000000)
             {
@@ -129,8 +129,8 @@ HTML;
                 }
             }
             $this->return .= <<<HTML
-                    </div>
-                </div></div></div>
+                </div>
+            </div></div>
 HTML;
             $db->close();
             return $this->return;
