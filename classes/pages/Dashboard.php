@@ -30,13 +30,10 @@
      */
     require_once("authenticate/SessionAuthenticate.php");
     require_once("pageElements/header/HeaderFactory.php");
-    require_once("pageElements/header/HeaderProduct.php");
     require_once("pageElements/navbar/NavbarFactory.php");
-    require_once("pageElements/navbar/NavbarProduct.php");
     require_once("pageElements/currencyBoard/CurrencyBoardFactory.php");
-    require_once("pageElements/currencyBoard/CurrencyBoardProduct.php");
     require_once("pageElements/newsBoard/NewsBoardFactory.php");
-    require_once("pageElements/newsBoard/NewsBoardProduct.php");
+    require_once("pageElements/profileCard/ProfileCardFactory.php");
     require_once("gameElements/DatabasePurger.php");
     require_once("miscellaneous/GenerateRootPath.php");
 
@@ -68,24 +65,35 @@
                 echo $headerFactory->startFactory(new HeaderProduct("Dashboard - Forex Trading Simulator", 2));
             ?>
             <body class="blue lighten-5">
+
                 <?php
                 $navbarFactory = new NavbarFactory();
                 echo $navbarFactory->startFactory(new NavbarProduct(2));
                 ?>
-                <div class="col s8">
-                    <?php
-                    $currencyBoardFactory = new CurrencyBoardFactory();
-                    echo $currencyBoardFactory->startFactory(new CurrencyBoardProduct());
-                    ?>
+                <div class="container">
+                    <div class="row">
+                        <div class="col s4">
+                            <?php
+                                $profileCardFactory = new ProfileCardFactory();
+                                echo $profileCardFactory->startFactory(new ProfileCardProduct());
+                            ?>
+                        </div>
+                        <div class="col s8">
+                            <?php
+                            $currencyBoardFactory = new CurrencyBoardFactory();
+                            echo $currencyBoardFactory->startFactory(new CurrencyBoardProduct());
+                            ?>
+                        </div>
+                    </div>
+                    <div class ="row">
+                        <div class="col s12">
+                            <?php
+                            $newsFactory = new NewsBoardFactory();
+                            echo $newsFactory->startFactory(new NewsBoardProduct(30));
+                            ?>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="col s6">
-                    <?php
-                    $newsFactory = new NewsBoardFactory();
-                    echo $newsFactory->startFactory(new NewsBoardProduct(30));
-                    ?>
-                </div>
-            </div>
             </body><?php
         }
 

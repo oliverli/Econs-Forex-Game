@@ -67,7 +67,7 @@ HTML;
             {
                 $this->return .= "<tr>";
                 $this->return .= "<td class=\"center\">".$row["newstext"]."</td>";
-                $this->return .= "<td class=\"center\" style=\"width:25%\">".FormatTimePassed::format(intval($row["time"]))."</td>";
+                $this->return .= "<td class=\"center\" style=\"width:25%\">".FormatTimePassed::format((int) intval($row["time"]))."</td>";
                 $this->return .= "</tr>";
             }
             $this->return .= "</table></div>";
