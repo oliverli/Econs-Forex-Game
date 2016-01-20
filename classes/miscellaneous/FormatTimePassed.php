@@ -32,7 +32,7 @@
     class FormatTimePassed
     {
 
-        public function format(int $originalTime)
+        public function format($originalTime)
         {
             if(empty($originalTime))
             {

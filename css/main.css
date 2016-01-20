@@ -77,8 +77,12 @@ h5  { opacity: 0.78; margin-bottom: 20px; font-weight: 300; }
     cursor: pointer;
     transition: opacity .3s ease;
 }
+img.activator:hover, i.activator:hover { opacity: 0.6; }
 
-.card-image img.activator:hover { opacity: 0.6; }
+.card.small { height: auto; }
+.card.small .card-image { max-height: 216px; }
+
+.card-image img.activator:hover { opacity: 0.6; } /* More natural card-reveal */
 .card .card-reveal { background-color: rgba(255,255,255,0.9); }
 /* Left Border
 #nav-mobile li {

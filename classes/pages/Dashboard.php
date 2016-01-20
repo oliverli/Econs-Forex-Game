@@ -76,20 +76,14 @@
                             <?php
                             $profileCardFactory = new ProfileCardFactory();
                             echo $profileCardFactory->startFactory(new ProfileCardProduct(2));
+                            $newsFactory = new NewsBoardFactory();
+                            echo $newsFactory->startFactory(new NewsBoardProduct(30));
                             ?>
                         </div>
                         <div class="col s8">
                             <?php
                             $currencyBoardFactory = new CurrencyBoardFactory();
                             echo $currencyBoardFactory->startFactory(new CurrencyBoardProduct());
-                            ?>
-                        </div>
-                    </div>
-                    <div class ="row">
-                        <div class="col s12">
-                            <?php
-                            $newsFactory = new NewsBoardFactory();
-                            echo $newsFactory->startFactory(new NewsBoardProduct(30));
                             ?>
                         </div>
                     </div>

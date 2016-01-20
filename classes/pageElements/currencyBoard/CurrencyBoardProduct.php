@@ -54,7 +54,7 @@
             $db = UniversalConnect::doConnect();
             $this->return .= <<<HTML
 <div id="board" class="card">
-    <table style="width:100%" class="card-content">
+    <table style="width:100%" class="card-content responsive-table">
         <tr class="blue lighten-2" >
             <th class="center">Currency</th>
 HTML;

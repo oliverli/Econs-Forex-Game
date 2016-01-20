@@ -67,7 +67,7 @@
             <div class="card small">
                     <div class="card-image">
 	                    <img src="$this->pathToRoot/img/user.jpg" class="activator">
-	                    <span class="card-title">$this->name</span>
+	                    <span class="card-title activator">$this->name</span>
 	                </div>
 	                <div class="card-content">
 	                    <p>
