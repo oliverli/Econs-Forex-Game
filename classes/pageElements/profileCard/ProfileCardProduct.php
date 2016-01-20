@@ -72,16 +72,32 @@
 	                <div class="card-content">
 	                    <p>
 	                        <i class="material-icons right activator">library_books</i>
+                            <!--
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th data-field="balance">Account Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>-->
+                            <b>Account Balance</b><br />
 HTML;
             if(!GameEndedChecker::gameEnded())
             {
-                $this->return .= "Account Balance:<br />".$this->basecurr->getShortName().number_format($this->networth, 2);
+                $this->return .= "".$this->basecurr->getShortName().number_format($this->networth, 2);
             }
             else
             {
                 $this->return .= "Game Over. You ended off with a total of ".$this->basecurr->getShortName().number_format($this->networth, 2).".";
             }
             $this->return .= <<<HTML
+                            <!--
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>-->
                         </p>
 	                </div>
 	                <div class="card-reveal">

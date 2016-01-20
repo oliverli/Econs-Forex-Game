@@ -77,6 +77,8 @@
                             <?php
                             $profileCardFactory = new ProfileCardFactory();
                             echo $profileCardFactory->startFactory(new ProfileCardProduct(2));
+                            $newsFactory = new NewsBoardFactory();
+                            echo $newsFactory->startFactory(new NewsBoardProduct(30));
                             ?>
                         </div>
                         <div class="col s8">
@@ -89,16 +91,6 @@
                                 echo $currencyChartFactory->startFactory(new CurrencyChartProduct(2));
                                 ?>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s4">
-                            <?php
-                            $newsFactory = new NewsBoardFactory();
-                            echo $newsFactory->startFactory(new NewsBoardProduct(30));
-                            ?>
-                        </div>
-                        <div class="col s8">
                             <?php
                             $currencyBoardFactory = new CurrencyBoardFactory();
                             echo $currencyBoardFactory->startFactory(new CurrencyBoardProduct());
@@ -106,7 +98,16 @@
                         </div>
                     </div>
                 </div>
-            </body><?php
+            </body>
+            <script>
+                window.onload = function(){
+                    $(window).bind("load", function(){
+                        $('.collapsible').collapsible({
+                            accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+                        });
+                    });
+                }
+            </script><?php
         }
 
     }

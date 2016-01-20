@@ -46,7 +46,7 @@
             $this->return = "";
         }
 
-        public function giveProduct()
+        /*public function giveProduct()
         {
             $db = UniversalConnect::doConnect();
             date_default_timezone_set('Asia/Singapore');
@@ -71,6 +71,37 @@ HTML;
                 $this->return .= "</tr>";
             }
             $this->return .= "</table></div>";
+            return $this->return;
+        }*/
+        
+        public function giveProduct()
+        {
+            $db = UniversalConnect::doConnect();
+            date_default_timezone_set('Asia/Singapore');
+            $this->return .= <<<HTML
+            <div id="news"><ul class="collapsible popout" data-collapsible="accordion">                    
+HTML;
+            if($this->newsCount !== -1)
+                $query = "SELECT newstext, time FROM news WHERE time <= ".time()." ORDER BY time DESC LIMIT $this->newsCount";
+            else
+                $query = "SELECT newstext, time FROM news WHERE time <= ".time()." ORDER BY time DESC";
+            $result = $db->query($query) or die($db->error);
+            if($result->num_rows <= 0)
+            {
+                $this->return .= "<li><div class=\"collapsible-header\">";
+                $this->return .= "There are no news reports at the moment.";
+                $this->return .= "</div></li>";
+            }
+            while($row = $result->fetch_assoc())
+            {
+                $this->return .= "<li><div class=\"collapsible-header\">";
+                $this->return .= $row["newstext"];
+                $this->return .= "</div><div class=\"collapsible-body\"><p>";
+                $this->return .= "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu tortor sed nulla porta fringilla. In risus tellus, dictum quis purus id, euismod lacinia elit. Vivamus ac viverra magna, eget accumsan mauris. Nulla molestie vulputate lectus sit amet rutrum. Sed tempus efficitur sagittis. Aenean ultricies quis sapien ut tempus. Pellentesque euismod nisl a felis interdum pharetra. Nullam id nisi in ante volutpat posuere."; // Add article info before this
+                $this->return .= "</p></div></li>";
+//                $this->return .= "<td class=\"center\" style=\"width:25%\">".FormatTimePassed::format((int) intval($row["time"]))."</td>";
+            }
+            $this->return .= "</ul></div>";
             return $this->return;
         }
 

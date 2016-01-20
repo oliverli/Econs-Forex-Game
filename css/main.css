@@ -1,6 +1,17 @@
 * {
     text-overflow: ellipsis /* DANGEROUS! Will change when error */
 }
+html, body, .container .row, .container .row .col.s4 { height: 100%; overflow: hidden; }
+.container { height: 90%; }
+
+/* Scroll */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track, ::-webkit-scrollbar-thumb { -webkit-border-radius: 12px; border-radius: 12px; }
+/* Track */
+::-webkit-scrollbar-track { border-radius: 12px; }
+/* Handle */
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.4); -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1); }
+::-webkit-scrollbar-thumb:hover { -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.9); }
 
 /* LOGIN PAGE */
 
@@ -71,7 +82,7 @@ h5  { opacity: 0.78; margin-bottom: 20px; font-weight: 300; }
     height: 50px;
 }
 
-/* Nav Bar */
+/* Profile */
 
 .activator {
     cursor: pointer;
@@ -84,6 +95,32 @@ img.activator:hover, i.activator:hover { opacity: 0.6; }
 
 .card-image img.activator:hover { opacity: 0.6; } /* More natural card-reveal */
 .card .card-reveal { background-color: rgba(255,255,255,0.9); }
+
+.card-content table {
+    width: auto;
+}
+.card-content table * {
+    padding: 0;
+}
+
+#news {
+    padding:0 5px;
+    height: 45%;
+    overflow: auto;
+}
+#news .collapsible-header { overflow: hidden; white-space: nowrap; transition: background-color .3s ease; } /* To make text-overflow work in CSS */
+#news .collapsible-header.active {
+    overflow: initial; white-space: initial;
+    
+    background-color: #64B5F6;
+    font-weight: 300;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    padding: 10px 15px;
+}
+#news .collapsible-body {
+    background-color: #fff;
+}
 /* Left Border
 #nav-mobile li {
     position: relative;
