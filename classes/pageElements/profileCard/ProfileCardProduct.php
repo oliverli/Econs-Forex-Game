@@ -33,18 +33,20 @@
     require_once("pageElements/ElementProduct.php");
     require_once("gameElements/GameEndedChecker.php");
     require_once("gameElements/trading/BaseCurrency.php");
+    require_once("miscellaneous/GenerateRootPath.php");
 
     class ProfileCardProduct implements ElementProduct
     {
 
-        private $return, $basecurr, $networth, $name;
+        private $return, $basecurr, $networth, $name, $pathToRoot;
 
-        public function __construct()
+        public function __construct($directoryLayer)
         {
             if(session_status() === PHP_SESSION_NONE)
             {
                 session_start();
             }
+            $this->pathToRoot = GenerateRootPath::getRoot($directoryLayer);
             $userkey = intval($_SESSION["userkey"]);
             $db = UniversalConnect::doConnect();
             $query = "SELECT name, networth FROM users WHERE userkey=$userkey LIMIT 1";
@@ -64,26 +66,26 @@
             $this->return .= <<<HTML
             <div class="card small">
                     <div class="card-image">
-                        <img src="$this->pathToRoot/img/user.jpg" class="activator">
-                        <span class="card-title">$this->name</span>
-                    </div>
-                    <div class="card-content">
-                        <p class="activator">
-                            <i class="material-icons right">more_vert</i>
+	                    <img src="$this->pathToRoot/img/user.jpg" class="activator">
+	                    <span class="card-title">$this->name</span>
+	                </div>
+	                <div class="card-content">
+	                    <p>
+	                        <i class="material-icons right activator">library_books</i>
 HTML;
             if(!GameEndedChecker::gameEnded())
             {
-                $this->return .= "Hello! You currently own a total of ".$this->basecurr->getShortName().number_format($this->networth, 2).".";
+                $this->return .= "Account Balance:<br />".$this->basecurr->getShortName().number_format($this->networth, 2).".";
             }
             else
             {
-                $this->return .= "Hello! The game has ended. You ended off with a total of ".$this->basecurr->getShortName().number_format($this->networth, 2).".";
+                $this->return .= "Game Over. You ended off with a total of ".$this->basecurr->getShortName().number_format($this->networth, 2).".";
             }
             $this->return .= <<<HTML
                         </p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Some Title<i class="material-icons right">close</i></span>
+	                </div>
+	                <div class="card-reveal">
+	                    <span class="card-title grey-text text-darken-4">Transaction History<i class="material-icons right">close</i></span>
 HTML;
             if($this->networth === 10000000)
             {

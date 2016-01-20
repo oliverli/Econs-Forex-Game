@@ -74,8 +74,8 @@
                     <div class="row">
                         <div class="col s4">
                             <?php
-                                $profileCardFactory = new ProfileCardFactory();
-                                echo $profileCardFactory->startFactory(new ProfileCardProduct());
+                            $profileCardFactory = new ProfileCardFactory();
+                            echo $profileCardFactory->startFactory(new ProfileCardProduct(2));
                             ?>
                         </div>
                         <div class="col s8">

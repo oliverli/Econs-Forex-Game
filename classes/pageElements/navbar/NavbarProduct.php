@@ -42,7 +42,6 @@
         public function __construct($directoryLayer)
         {
             $this->pathToRoot = GenerateRootPath::getRoot($directoryLayer);
-            
             $this->return = "";
         }
 
