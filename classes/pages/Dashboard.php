@@ -101,11 +101,9 @@
             </body>
             <script>
                 window.onload = function(){
-                    $(window).bind("load", function(){
-                        $('.collapsible').collapsible({
-                            accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-                        });
-                    });
+                    $(document).ready(function(){
+                        Materialize.showStaggeredList('#news ul.collapsible')
+                    })
                 }
             </script><?php
         }

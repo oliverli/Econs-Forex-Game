@@ -108,6 +108,9 @@ img.activator:hover, i.activator:hover { opacity: 0.6; }
     height: 45%;
     overflow: auto;
 }
+
+#news ul.collapsible li { opacity: 0; } /* For prettiness */
+
 #news .collapsible-header { overflow: hidden; white-space: nowrap; transition: background-color .3s ease; } /* To make text-overflow work in CSS */
 #news .collapsible-header.active {
     overflow: initial; white-space: initial;
@@ -118,6 +121,7 @@ img.activator:hover, i.activator:hover { opacity: 0.6; }
     line-height: 1.8rem;
     padding: 10px 15px;
 }
+
 #news .collapsible-body {
     background-color: #fff;
 }
