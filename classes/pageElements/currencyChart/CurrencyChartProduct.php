@@ -102,11 +102,11 @@ HTML;
 ],
                     datasets: [
                         {
-                            fillColor: "rgba(204,0,0,0.2)",
-                            strokeColor: "rgba(204,0,0,1)",
-                            pointColor: "rgba(204,0,0,0.65)",
+                            fillColor: "rgba(33, 150, 243,0.2)",
+                            strokeColor: "rgba(33, 150, 243,1)",
+                            pointColor: "rgba(33, 150, 243,0.65)",
                             pointStrokeColor: "#fff",
-                            pointHighlightFill: "rgba(210,0,0,1)",
+                            pointHighlightFill: "rgb(30,136,229)",
                             pointHighlightStroke: "#fff",
                             data: [
 JAVASCRIPT;

@@ -34,6 +34,7 @@
     require_once("pageElements/currencyBoard/CurrencyBoardFactory.php");
     require_once("pageElements/newsBoard/NewsBoardFactory.php");
     require_once("pageElements/profileCard/ProfileCardFactory.php");
+    require_once("pageElements/currencyChart/CurrencyChartFactory.php");
     require_once("gameElements/DatabasePurger.php");
     require_once("miscellaneous/GenerateRootPath.php");
 
@@ -76,6 +77,23 @@
                             <?php
                             $profileCardFactory = new ProfileCardFactory();
                             echo $profileCardFactory->startFactory(new ProfileCardProduct(2));
+                            ?>
+                        </div>
+                        <div class="col s8">
+                            <div class="card center small">
+                                <div class="card-title">
+                                    <p>JPY Value History</p>
+                                </div>
+                                <?php
+                                $currencyChartFactory = new CurrencyChartFactory();
+                                echo $currencyChartFactory->startFactory(new CurrencyChartProduct(2));
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s4">
+                            <?php
                             $newsFactory = new NewsBoardFactory();
                             echo $newsFactory->startFactory(new NewsBoardProduct(30));
                             ?>
