@@ -107,7 +107,7 @@
             echo $headerFactory->startFactory(new HeaderProduct("Transact Currencies - Forex Trading Simulator", 3));
             echo "<body class=\"blue lighten-5\">";
             $navbarFactory = new NavbarFactory();
-            echo $navbarFactory->startFactory(new NavbarProduct(3));
+            echo $navbarFactory->startFactory(new NavbarProduct(3, 0));
             ?>
             <script>
                 $(document).ready(function ()

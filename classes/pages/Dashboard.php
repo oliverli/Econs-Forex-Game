@@ -68,7 +68,7 @@
 
                 <?php
                 $navbarFactory = new NavbarFactory();
-                echo $navbarFactory->startFactory(new NavbarProduct(2));
+                echo $navbarFactory->startFactory(new NavbarProduct(2, 0));
                 ?>
                 <div class="container">
                     <div class="row">

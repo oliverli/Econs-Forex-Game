@@ -75,7 +75,7 @@
 HTML;
             if(!GameEndedChecker::gameEnded())
             {
-                $this->return .= "Account Balance:<br />".$this->basecurr->getShortName().number_format($this->networth, 2).".";
+                $this->return .= "Account Balance:<br />".$this->basecurr->getShortName().number_format($this->networth, 2);
             }
             else
             {

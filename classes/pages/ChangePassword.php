@@ -104,7 +104,7 @@ JAVASCRIPT;
             echo $headerFactory->startFactory(new HeaderProduct("Dashboard - Forex Trading Simulator", 3, $javascript));
             echo "<body class=\"blue lighten-5\">";
             $navbarFactory = new NavbarFactory();
-            echo $navbarFactory->startFactory(new NavbarProduct(3));
+            echo $navbarFactory->startFactory(new NavbarProduct(3, 40));
             ?>
             <form id="passChangeForm" name="passChangeForm" method="post" action="./" onsubmit="return submitValidation();">
                 <p>
