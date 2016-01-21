@@ -82,7 +82,7 @@
                             ?>
                         </div>
                         <div class="col s8">
-                            <div class="card center small">
+                            <div class="card center small hoverable">
                                 <div class="card-title">
                                     <p>JPY Value History</p>
                                 </div>
