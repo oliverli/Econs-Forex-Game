@@ -106,24 +106,44 @@ JAVASCRIPT;
             $navbarFactory = new NavbarFactory();
             echo $navbarFactory->startFactory(new NavbarProduct(3, 40));
             ?>
-            <form id="passChangeForm" name="passChangeForm" method="post" action="./" onsubmit="return submitValidation();">
-                <p>
-                    <label for="currpass">Current Password: </label>
-                    <input type="password" name="currpass" id="currpass" />
-                </p>
-                <p>
-                    <label for="newpass" onchange="checkpass()">New Password: </label>
-                    <input type="password" name="newpass" id="newpass" onkeyup="checkpass()" />
-                </p>
-                <p>
-                    <label for="conpass">Confirm Password: </label>
-                    <input type="password" name="conpass" id="conpass" onkeyup="checkpass()"/>
-                </p>
-                <div id="checkpassresult"></div>
-                <p>
-                    <input type="submit" name="submit" id="submit" value="Change Password" />
-                </p>
-            </form>
+            <div class="container">
+                <div class="card">
+                    <div class="row">
+                        <div class="card-title col s12 center">
+                            Change Password
+                        </div>
+                    </div>
+                    <div class="row">
+                        <form id="passChangeForm" name="passChangeForm" method="post" action="./" onsubmit="return submitValidation();">
+                            <div class="row">
+                                <div class="input-field col s8 push-s2">
+                                    <input type="password" name="currpass" id="currpass" />
+                                    <label for="currpass">Current Password</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s8 push-s2">
+                                    <input type="password" name="newpass" id="newpass" onkeyup="checkpass()" onchange="checkpass()" />
+                                    <label for="newpass" >New Password</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s8 push-s2">
+                                    <input type="password" name="conpass" id="conpass" onkeyup="checkpass()" onchange="checkpass()" />
+                                    <label for="conpass">Confirm Password</label>
+                                </div>
+                            </div>
+                            <div id="checkpassresult"></div>
+                            <div class="row">
+                                <div class="center">
+                                    <button class="btn waves-effect waves-light blue accent-4" type="submit" name="action">Change Password
+                                        <i class="material-icons right">send</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
             <?php
         }

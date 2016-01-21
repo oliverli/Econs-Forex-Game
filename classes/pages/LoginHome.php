@@ -122,7 +122,7 @@ HTML;
                         </div>
                     </div>
                     <div class="row input-field center" id="Submit">
-                        <button class="btn waves-effect waves-light pink accent-4" type="submit" name="action">Login
+                        <button class="btn waves-effect waves-light blue accent-4" type="submit" name="action">Login
                         </button>
                     </div>
                 </form>
