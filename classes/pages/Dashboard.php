@@ -100,9 +100,19 @@
                 </div>
             </body>
             <script>
+                function changeHeight(){ setTimeout(function(){
+                    if ( $("#news ul").height() >= $("#news").height() ){
+                        $("#news").addClass("active")
+                    }
+                    else{
+                        $("#news").removeClass("active");
+                    }
+                },100)}
                 window.onload = function(){
                     $(document).ready(function(){
-                        Materialize.showStaggeredList('#news ul.collapsible')
+                        Materialize.showStaggeredList('#news ul.collapsible');
+                        changeHeight();
+                        $(".collapsible-header").click(function(){changeHeight()});
                     })
                 }
             </script><?php

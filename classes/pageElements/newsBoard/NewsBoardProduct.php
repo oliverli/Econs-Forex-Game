@@ -79,7 +79,11 @@ HTML;
             $db = UniversalConnect::doConnect();
             date_default_timezone_set('Asia/Singapore');
             $this->return .= <<<HTML
-            <div id="news"><ul class="collapsible popout" data-collapsible="accordion">                    
+            <div id="news">
+                <div class="card-panel blue lighten-1 z-depth-2">
+                    NEWS
+                </div>
+                <ul class="collapsible" data-collapsible="accordion">                    
 HTML;
             if($this->newsCount !== -1)
                 $query = "SELECT newstext, time FROM news WHERE time <= ".time()." ORDER BY time DESC LIMIT $this->newsCount";
@@ -94,8 +98,8 @@ HTML;
             }
             while($row = $result->fetch_assoc())
             {
-                $this->return .= "<li><div class=\"collapsible-header\">";
-                $this->return .= $row["newstext"];
+                $this->return .= "<li class=\"z-depth-1\"><div class=\"collapsible-header\">";
+                $this->return .= $row["newstext"]."super test time memememmee.";
                 $this->return .= "</div><div class=\"collapsible-body\"><p>";
                 $this->return .= "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu tortor sed nulla porta fringilla. In risus tellus, dictum quis purus id, euismod lacinia elit. Vivamus ac viverra magna, eget accumsan mauris. Nulla molestie vulputate lectus sit amet rutrum. Sed tempus efficitur sagittis. Aenean ultricies quis sapien ut tempus. Pellentesque euismod nisl a felis interdum pharetra. Nullam id nisi in ante volutpat posuere."; // Add article info before this
                 $this->return .= "</p></div></li>";
