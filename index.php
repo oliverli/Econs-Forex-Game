@@ -30,4 +30,21 @@
 
     //all HTML is generated in the LoginHome constructor - edit ./classes/pages/LoginHome.php to update the page
     $worker = new LoginHome();
+<<<HTML
+    <script>
+        function failed(){
+            $("#login-card").removeClass("failed")
+                            .addClass("failed")
+                            .delay(1000)
+                            .queue(function() {
+                                $(this).removeClass("failed");
+                                $(this).dequeue();
+                            });
+        }
+
+        $(window).load(function() {
+            $('#username').focus();
+        });
+    </script>
+HTML;
 ?>

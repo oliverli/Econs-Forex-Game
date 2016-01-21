@@ -93,21 +93,6 @@ HTML;
             $this->return .= $this->pathToRoot;
             $this->return .= <<<HTML
 favicon.ico" rel="icon">
-    <script>
-        function failed(){
-            $("#login-card").removeClass("failed")
-                            .addClass("failed")
-                            .delay(1000)
-                            .queue(function() {
-                                $(this).removeClass("failed");
-                                $(this).dequeue();
-                            });
-        }
-
-        $(window).load(function() {
-            $('#username').focus();
-        });
-    </script>
 HTML;
             $this->return .= $this->extraScript."</head>";
             return $this->return;
