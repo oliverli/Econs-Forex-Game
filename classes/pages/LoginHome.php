@@ -111,14 +111,14 @@ HTML;
                 echo " value=\"".htmlentities($_POST["username"], ENT_QUOTES, "UTF-8")."\"";
             echo "/>";
             echo <<<HTML
-                            <label for="username">Username: </label>
+                            <label for="username">Username</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12 m10 l10 push-m1 push-l1">
                             <i class="material-icons prefix">vpn_key</i>
-                            <label for="password">Password: </label>
                             <input type="password" name="password" id="password" />
+                            <label for="password">Password</label>
                         </div>
                     </div>
                     <div class="row input-field center" id="Submit">
