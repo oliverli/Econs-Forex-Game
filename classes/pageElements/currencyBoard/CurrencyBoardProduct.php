@@ -53,7 +53,7 @@
             $userkey = intval($_SESSION["userkey"]);
             $db = UniversalConnect::doConnect();
             $this->return .= <<<HTML
-<div id="board" class="card">
+<div id="board" class="card hoverable">
     <table style="width:100%" class="card-content responsive-table">
         <tr class="blue lighten-2" >
             <th class="center">Currency</th>

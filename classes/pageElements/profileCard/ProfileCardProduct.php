@@ -64,7 +64,7 @@
         public function giveProduct()
         {
             $this->return .= <<<HTML
-            <div class="card small">
+            <div class="card small hoverable">
                     <div class="card-image">
 	                    <img src="$this->pathToRoot/img/user.jpg" class="activator">
 	                    <span class="card-title activator">$this->name</span>
