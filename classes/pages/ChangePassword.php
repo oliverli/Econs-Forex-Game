@@ -101,7 +101,7 @@
 </script>
 JAVASCRIPT;
             $headerFactory = new HeaderFactory();
-            echo $headerFactory->startFactory(new HeaderProduct("Dashboard - Forex Trading Simulator", 3, $javascript));
+            echo $headerFactory->startFactory(new HeaderProduct("Change Password - Forex Trading Simulator", 3, $javascript));
             echo "<body class=\"blue lighten-5\">";
             $navbarFactory = new NavbarFactory();
             echo $navbarFactory->startFactory(new NavbarProduct(3, 40));

@@ -101,7 +101,7 @@ HTML;
                         </p>
 	                </div>
 	                <div class="card-reveal">
-	                    <span class="card-title grey-text text-darken-4">Transaction History<i class="material-icons right">close</i></span>
+	                    <span class="card-title grey-text text-darken-4">Trading Statistics<i class="material-icons right">close</i></span>
 HTML;
             if($this->networth === 10000000)
             {

@@ -25,31 +25,19 @@
      */
 
     /**
-     * Description of GameEndedChecker
+     * Description of LeaderboardFactory
      *
      * @author Li Yicheng <liyicheng340 [at] gmail [dot com]>
      */
-    require_once("mysql/UniversalConnect.php");
-
-    class GameEndedChecker
+    require_once("pageElements/ElementCreator.php");
+    require_once("pageElements/ElementProduct.php");
+    require_once("LeaderboardProduct.php");
+    
+    class LeaderboardFactory extends ElementCreator
     {
-
-        public function gameEnded()
+        protected function factoryMethod(ElementProduct $product)
         {
-            date_default_timezone_set('Asia/Singapore');
-            $db = UniversalConnect::doConnect();
-            $query = "SELECT endtime FROM startendtime WHERE timeid=1 LIMIT 1";
-            $result = $db->query($query); // or die($db->error);
-            $row = $result->fetch_assoc();
-            if($row["endtime"] < time())
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return $product->giveProduct();
         }
-
     }
     

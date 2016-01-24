@@ -24,21 +24,19 @@
      */
 
     /**
-     * Description of Dashboard
+     * Description of Leaderboard
      *
      * @author Li Yicheng <liyicheng340 [at] gmail [dot com]>
      */
     require_once("authenticate/SessionAuthenticate.php");
     require_once("pageElements/header/HeaderFactory.php");
     require_once("pageElements/navbar/NavbarFactory.php");
-    require_once("pageElements/currencyBoard/CurrencyBoardFactory.php");
-    require_once("pageElements/newsBoard/NewsBoardFactory.php");
     require_once("pageElements/profileCard/ProfileCardFactory.php");
-    require_once("pageElements/currencyChart/CurrencyChartFactory.php");
+    require_once("pageElements/leaderboard/LeaderboardFactory.php");
     require_once("gameElements/DatabasePurger.php");
     require_once("miscellaneous/GenerateRootPath.php");
 
-    class Dashboard
+    class Leaderboard
     {
 
         public function __construct()
@@ -50,73 +48,41 @@
             $SessAuthWorker = new SessionAuthenticate();
             if(!$SessAuthWorker->authenticate())
             {
-                header("Location: ".GenerateRootPath::getRoot(2));
+                header("Location: ".GenerateRootPath::getRoot(3));
                 exit();
             }
             DatabasePurger::purge();
-            if(isset($_SESSION["remarks"]))
-            {
-                $remarks = $_SESSION["remarks"];
-                unset($_SESSION["remarks"]);
-            }
             $headerFactory = new HeaderFactory();
-            if(isset($remarks))
-                echo $headerFactory->startFactory(new HeaderProduct("Dashboard - Forex Trading Simulator", 2, $remarks));
-            else
-                echo $headerFactory->startFactory(new HeaderProduct("Dashboard - Forex Trading Simulator", 2));
+            echo $headerFactory->startFactory(new HeaderProduct("Leaderboards - Forex Trading Simulator", 3));
             ?>
             <body class="blue lighten-5">
 
                 <?php
                 $navbarFactory = new NavbarFactory();
-                echo $navbarFactory->startFactory(new NavbarProduct(2, 0));
+                echo $navbarFactory->startFactory(new NavbarProduct(3, 20));
                 ?>
                 <div class="container">
                     <div class="row">
                         <div class="col s4">
                             <?php
                             $profileCardFactory = new ProfileCardFactory();
-                            echo $profileCardFactory->startFactory(new ProfileCardProduct(2));
-                            $newsFactory = new NewsBoardFactory();
-                            echo $newsFactory->startFactory(new NewsBoardProduct(30));
+                            echo $profileCardFactory->startFactory(new ProfileCardProduct(3));
                             ?>
                         </div>
                         <div class="col s8">
-                            <div class="card center small hoverable">
-                                <div class="card-title">
-                                    <p>JPY Value History</p>
+                            <div class="row">
+                                <div class="col s12">
+                                    <?php
+                                    $leaderboardWorker = new LeaderboardFactory();
+                                    echo $leaderboardWorker->startFactory(new LeaderboardProduct());
+                                    ?>
                                 </div>
-                                <?php
-                                $currencyChartFactory = new CurrencyChartFactory();
-                                echo $currencyChartFactory->startFactory(new CurrencyChartProduct(2));
-                                ?>
                             </div>
-                            <?php
-                            $currencyBoardFactory = new CurrencyBoardFactory();
-                            echo $currencyBoardFactory->startFactory(new CurrencyBoardProduct());
-                            ?>
                         </div>
                     </div>
                 </div>
-            </body>
-            <script>
-                function changeHeight(){ setTimeout(function(){
-                    if ( $("#news ul").height() >= $("#news").height() ){
-                        $("#news").addClass("active")
-                    }
-                    else{
-                        $("#news").removeClass("active");
-                    }
-                },100)}
-                window.onload = function(){
-                    $(document).ready(function(){
-                        Materialize.showStaggeredList('#news ul.collapsible');
-                        changeHeight();
-                        $(".collapsible-header").click(function(){changeHeight()});
-                    })
-                }
-            </script><?php
-        }
+                <?php
+            }
 
-    }
-?>
+        }
+        

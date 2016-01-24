@@ -3,7 +3,7 @@
     /*
      * The MIT License
      *
-     * Copyright 2015 Li Yicheng, Sun Yudong, and Walter Kong.
+     * Copyright 2016 Li Yicheng, Sun Yudong, and Walter Kong.
      *
      * Permission is hereby granted, free of charge, to any person obtaining a copy
      * of this software and associated documentation files (the "Software"), to deal
@@ -50,11 +50,12 @@
             }
             else
             {
-                if($usertype === 2)
+                if(intval($usertype) === 2)
                     return true;
                 else
                     return false;
             }
+            
         }
 
     }
