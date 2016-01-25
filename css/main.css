@@ -149,10 +149,6 @@ img.activator:hover, i.activator:hover { opacity: 0.6; }
     border: 0; box-shadow: none; /* Change default settings */
 }
 #news ul.collapsible li { opacity: 0; /* margin-bottom: 2px; */ } /* Transition on start */
-#news ul.collapsible li:hover { /* .hoverable overridden by li.active */
-    transition: box-shadow .25s;
-    box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-}
 
 #news .collapsible-header { overflow: hidden; white-space: nowrap; transition: background-color .3s ease; } /* To make text-overflow work */
 #news .collapsible-header.active {

@@ -100,7 +100,7 @@ HTML;
             }
             while($row = $result->fetch_assoc())
             {
-                $this->return .= "<li class=\"z-depth-1 hoverable\"><div class=\"collapsible-header\">";
+                $this->return .= "<li class=\"z-depth-1\"><div class=\"collapsible-header\">";
                 $this->return .= $row["newstext"];
                 $this->return .= "</div>";
 //                $this->return .= "<div class=\"collapsible-body\"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu tortor sed nulla porta fringilla. In risus tellus, dictum quis purus id, euismod lacinia elit. Vivamus ac viverra magna, eget accumsan mauris. Nulla molestie vulputate lectus sit amet rutrum. Sed tempus efficitur sagittis. Aenean ultricies quis sapien ut tempus. Pellentesque euismod nisl a felis interdum pharetra. Nullam id nisi in ante volutpat posuere.</p></div>"; // Add article info before this
