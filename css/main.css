@@ -148,7 +148,7 @@ img.activator:hover, i.activator:hover { opacity: 0.6; }
     padding: 48px 7px 0; /* Looks pretty on my screen */
     border: 0; box-shadow: none; /* Change default settings */
 }
-#news ul.collapsible li { opacity: 0; margin-bottom: 2px; } /* Transition on start */
+#news ul.collapsible li { opacity: 0; /* margin-bottom: 2px; */ } /* Transition on start */
 #news ul.collapsible li:hover { /* .hoverable overridden by li.active */
     transition: box-shadow .25s;
     box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
