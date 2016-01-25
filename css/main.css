@@ -1,12 +1,12 @@
 * {
     text-overflow: ellipsis /* DANGEROUS! Will change when error */
 }
-html, body, .container .row, .container .row .col.s4 { height: 100%; overflow: hidden; }
+html, body, .container .row, .container .row .col.s4 { height: 100%; }
 .container { height: 90%; }
 
 /* Scroll */
 ::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track, ::-webkit-scrollbar-thumb { -webkit-border-radius: 12px; border-radius: 12px; }
+::-webkit-scrollbar-track, ::-webkit-scrollbar-thumb { border-radius: 12px; }
 /* Track */
 ::-webkit-scrollbar-track { border-radius: 12px; }
 /* Handle */
@@ -15,159 +15,169 @@ html, body, .container .row, .container .row .col.s4 { height: 100%; overflow: h
 
 /* LOGIN PAGE */
 
-/* label focus color */
-.input-field input[type=text]:focus + label {
-    color:  #2196f3;
+/* failed entry */
+@-webkit-keyframes failed {
+    0% { background-color: rgb(255,148,148); }
+    100% { background-color: rgba(255,255,255,.9); }
 }
-/* label underline focus color */
-.input-field input[type=text]:focus {
-    border-bottom: 1px solid  #2196f3;
-}
-/* label focus color */
-.input-field input[type=password]:focus + label {
-    color:  #2196f3;
-}
-/* label underline focus color */
-.input-field input[type=password]:focus {
-    border-bottom: 1px solid  #2196f3;
-}
-/* icon prefix focus color */
-.input-field .prefix.active {
-    color:  #2196f3;
-}
-
 @keyframes failed {
     0% { background-color: rgb(255,148,148); }
     100% { background-color: rgba(255,255,255,.9); }
 }
 
 h3, h4 { font-family: 'Open Sans', arial; }
-h3 { opacity: 0.8; font-weight: 300; }
-h5  { opacity: 0.78; margin-bottom: 20px; font-weight: 300; }
+h3 { opacity: 0.8; filter: alpha(opacity=80); font-weight: 300; }
+h5  { opacity: 0.78; filter: alpha(opacity=78); margin-bottom: 20px; font-weight: 300; }
+
 .top-margin { margin-top: 5%; }
 .bottom-margin { margin-bottom: 20px; }
+.title { text-align: center; }
 
-.title {
-    text-align: center;
-}
+    /* indent for specific items */
 
-/* LOGIN CARD */
-#login-card {
-    width: 42%;
-    min-width:392px;
-    padding: 30px 40px;
-    margin: auto;
-    background-color: rgba(255, 255, 255, .9);
-}
+    /* label focus color */
+    .input-field input[type=text]:focus + label {
+        color:  #2196f3;
+    }
+    /* label underline focus color */
+    .input-field input[type=text]:focus {
+        border-bottom: 1px solid  #2196f3;
+    }
+    /* label focus color */
+    .input-field input[type=password]:focus + label {
+        color:  #2196f3;
+    }
+    /* label underline focus color */
+    .input-field input[type=password]:focus {
+        border-bottom: 1px solid  #2196f3;
+    }
+    /* icon prefix focus color */
+    .input-field .prefix.active {
+        color:  #2196f3;
+    }
 
-.failed {
-    animation: failed 1s ease-in;
-}
+    #login-card {
+        width: 42%;
+        min-width:392px;
+        padding: 30px 40px;
+        margin: auto;
+        background-color: rgba(255, 255, 255, .9);
+    }
 
-.pageCenter {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    max-height: 490px;
-    max-width: 620px
-}
+    .failed {
+        -webkit-animation: failed 1s ease-in;
+                animation: failed 1s ease-in;
+    }
 
-#login-card #logo { margin-bottom: 20px; }
-#login-card img {
-    height: 50px;
-    opacity: 0.87;
-}
+    .pageCenter {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        max-height: 490px;
+        max-width: 620px
+    }
 
-#login-card i.material-icons { line-height: 1.5; } /* <i> was line-height:1 in material, not for us. */
+    #login-card #logo { margin-bottom: 20px; }
+    #login-card img {
+        height: 50px;
+        opacity: 0.87;
+        filter: alpha(opacity=87);
+    }
 
-#login-card form .row .input-field.col { padding: 0px; }
+    #login-card i.material-icons { line-height: 1.5; } /* <i> was line-height:1 in material, not for us. */
 
-#login-card #Submit { margin:40px -0.75rem 0; }
-#login-card #Submit button {
-    width: 90%;
-    height: 50px;
-}
+    #login-card form .row .input-field.col { padding: 0px; }
+
+    #login-card #Submit { margin: 40px -12px 0; margin:40px -0.75rem 0; }
+    #login-card #Submit button {
+        width: 90%;
+        height: 50px;
+    }
 
 
 /* Profile */
 
 .activator {
     cursor: pointer;
-    transition: opacity .3s ease;
+    -webkit-transition: opacity .3s ease;
+            transition: opacity .3s ease;
 }
-img.activator:hover, i.activator:hover { opacity: 0.6; }
+    img.activator:hover, i.activator:hover { opacity: 0.6; filter: alpha(opacity=60); }
 
-.card.small { height: auto; }
-.card.small .card-image { max-height: 216px; }
+    .card.small { height: auto; }
+    .card.small .card-image { max-height: 216px; }
 
-.card-image img.activator:hover { opacity: 0.6; } /* More natural card-reveal */
-.card-reveal { background-color: rgba(255,255,255,0.9); }
+    .card-image img.activator:hover { opacity: 0.6; filter: alpha(opacity=60); } /* More natural card-reveal */
+    .card-reveal { background-color: rgba(255,255,255,0.9); }
 
 
 /* News */
+    .container .row { margin-bottom: 0; } /* Change default settings */
+    #news {
+        height: 45%;
+        position: relative;
+        margin: 0 -10px;
+        overflow: hidden; 
+    }
 
-#news {
-    height: 45%;
-    position: relative;
-    margin: 0 -10px;
-}
+    #news::-webkit-scrollbar { display: none; } /* Optional */
 
-#news::-webkit-scrollbar { display: none; } /* Optional */
+    #news .relative { /* To fix absolute + overflow problem */
+        position: relative;
+        height: 100%; width: 100%;
+        overflow: auto; 
+        padding: 0 10px;
+    }
 
-#news .relative { /* To fix absolute + overflow problem */
-    position: relative;
-    height: 100%; width: 100%;
-    overflow: auto; 
-    padding: 0 10px;
-}
+    #news:before { /* Bottom box shadow when overflow */
+        content: '';
+        position: absolute;
+        top: 0; bottom: 0; left: 10px; right: 10px;
+        z-index: 1; pointer-events: none; /* Appear in front but still clickable */
+    }
+    #news.active:before {
+        -webkit-transition: box-shadow .5s ease;
+                transition: box-shadow .5s ease;
+        border-radius: 3px;
+        box-shadow: inset  0 -20px 20px -20px rgba(0,0,0,0.5);
+    }
 
-#news::before { /* Bottom box shadow when overflow */
-    content: '';
-    position: absolute;
-    top: 0; bottom: 0; left: 10px; right: 10px;
-    z-index: 1; pointer-events: none; /* Appear in front but still clickable */
-}
-#news.active::before {
-    transition: box-shadow .5s ease;
-    border-radius: 3px;
-    box-shadow: inset  0 -20px 20px -20px rgba(0,0,0,0.5);
-}
+    #news .card-panel {
+        position: absolute;
+        top: 0; left: 10px; right: 10px;
+        padding: 15px; margin-top: 0; /* Change default settings */
+        z-index: 1;
+        -webkit-transition: .3s opacity ease;
+                transition: .3s opacity ease;
+    }
+    #news.active:hover .card-panel { opacity: 0.9; filter: alpha(opacity=90); } /* When overflow */
 
-#news .card-panel {
-    position: absolute;
-    top: 0; left: 10px; right: 10px;
-    padding: 15px; margin-top: 0; /* Change default settings */
-    z-index: 1;
-    transition: .3s opacity ease;
-}
-#news.active:hover .card-panel { opacity: 0.9; } /* When overflow */
+    #news ul.collapsible {
+        padding: 48px 7px 0; /* Looks pretty on my screen */
+        border: 0; box-shadow: none; /* Change default settings */
+    }
+    #news ul.collapsible li { opacity: 0; filter: alpha(opacity=0); /* margin-bottom: 2px; */ } /* Transition on start */
 
-#news ul.collapsible {
-    padding: 48px 7px 0; /* Looks pretty on my screen */
-    border: 0; box-shadow: none; /* Change default settings */
-}
-#news ul.collapsible li { opacity: 0; /* margin-bottom: 2px; */ } /* Transition on start */
+    #news .collapsible-header { overflow: hidden; white-space: nowrap; -webkit-transition: background-color .3s ease; transition: background-color .3s ease; } /* To make text-overflow work */
+    #news .collapsible-header.active {
+        overflow: initial; white-space: initial;
+        position:relative; /* .collapsible-body was sticking out */
+        background-color: #BBDEFB; /* .active did not include .blue */
+        padding: 10px 15px; line-height: 24px; line-height: 1.5rem; /* Change default settings */
+    }
 
-#news .collapsible-header { overflow: hidden; white-space: nowrap; transition: background-color .3s ease; } /* To make text-overflow work */
-#news .collapsible-header.active {
-    overflow: initial; white-space: initial;
-    position:relative; /* .collapsible-body was sticking out */
-    background-color: #BBDEFB; /* .active did not include .blue */
-    padding: 10px 15px; line-height: 1.5rem; /* Change default settings */
-}
-
-#news .collapsible-header.active::before { /* Segregate header from body */
-    content: '';
-    position: absolute;
-    top: 0; bottom: 0; left: 0; right: 0;
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16);
-}
-#news .collapsible-body {
-    background-color: #fff;
-    z-index: -1;
-}
+    #news .collapsible-header.active:before { /* Segregate header from body */
+        content: '';
+        position: absolute;
+        top: 0; bottom: 0; left: 0; right: 0;
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16);
+    }
+    #news .collapsible-body {
+        background-color: #fff;
+        z-index: -1;
+    }
 
 /* Left Border
 #nav-mobile li {
@@ -182,16 +192,6 @@ img.activator:hover, i.activator:hover { opacity: 0.6; }
     width: 1px;
     background-color: rgba(255,255,255,0.6);
 }*/
-
-@media (max-width: 620px) {
-    .container, #login-card {
-        margin: auto;
-        width: 100%;
-    }
-    #login-card {
-        padding:15%;
-    }
-}
 
 /* MUCH COPIED
 table, th, td {
@@ -272,3 +272,13 @@ hr{
     background-image:     -ms-linear-gradient(left, rgba(204,0,0,1), rgba(204,0,0,1), rgba(204,0,0,1));
     background-image:      -o-linear-gradient(left, rgba(204,0,0,1), rgba(204,0,0,1), rgba(204,0,0,1));
 }*/
+
+@media (max-width: 620px) {
+    .container, #login-card {
+        margin: auto;
+        width: 100%;
+    }
+    #login-card {
+        padding: 15%;
+    }
+}
