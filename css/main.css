@@ -155,7 +155,7 @@ h5  { opacity: 0.78; filter: alpha(opacity=78); margin-bottom: 20px; font-weight
     #news.active:hover .card-panel { opacity: 0.9; filter: alpha(opacity=90); } /* When overflow */
 
     #news ul.collapsible {
-        padding: 48px 7px 0; /* Looks pretty on my screen */
+        padding: 47px 7px 0; /* Looks pretty on my screen */
         border: 0; box-shadow: none; /* Change default settings */
     }
     #news ul.collapsible li { opacity: 0; filter: alpha(opacity=0); /* margin-bottom: 2px; */ } /* Transition on start */
