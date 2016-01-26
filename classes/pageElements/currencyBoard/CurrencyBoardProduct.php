@@ -53,7 +53,14 @@
             $userkey = intval($_SESSION["userkey"]);
             $db = UniversalConnect::doConnect();
             $this->return .= <<<HTML
-<ul class="card">
+<script>
+$(document).ready(function(){
+    $('.collapsible').collapsible({
+      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    });
+  });
+</script>
+<ul class="collapsible card" data-collapsible="accordion">
     <li class="blue">
         <div class="row" style="padding: 5px 10px;">
             <div class="col s3 center card-title">
@@ -77,7 +84,7 @@ HTML;
             $result = $db->query($query) or die($db->error);
             while($row = $result->fetch_assoc())
             {
-                $this->return .= "<li><div class=\"row\">";
+                $this->return .= "<li><div class=\"row collapsible-header\">";
                 $this->return .= "<div class=\"col s3 center card-content\">".$row["name"]." (";
                 $this->return .= $row["shortname"].")</div>";
                 $this->return .= "<div class=\"col s3 center card-content\">".$row["buyvalue"]."</div>";
