@@ -53,17 +53,18 @@
             $userkey = intval($_SESSION["userkey"]);
             $db = UniversalConnect::doConnect();
             $this->return .= <<<HTML
-<div id="board" class="card hoverable">
-    <table style="width:100%" class="card-content responsive-table">
-        <tr class="blue lighten-2" >
-            <th class="center">Currency</th>
+<ul class="card">
+    <li class="blue">
+        <div class="row">
+            <div class="col s3 center card-title">
+                Currency
+            </div>
 HTML;
-            $this->return .= "<th class=\"center\">".$this->basecurr->getShortName()." Selling Value</th>";
-            $this->return .= "<th class=\"center\">USD Buying Value</th>";
+            $this->return .= "<div class=\"col s3 center card-title\">Bid Rate</div>";
+            $this->return .= "<div class=\"col s3 center card-title\">Offer Rate</div>";
             $this->return .= <<<HTML
-            <th class="center">Amount Owned</th>
-            <th class="center">Buy/Sell</th>
-        </tr>
+        <div class="col s3 center card-title">Amount</div>
+    </li>
 HTML;
             $this->return .= "<tr>";
             $this->return .= "<td class=\"center\">".$this->basecurr->getName()." (".$this->basecurr->getShortName().")</td>";
@@ -85,7 +86,7 @@ HTML;
                 $this->return .= "<td class=\"center\"><a href='./buysell/?currid=".$row["currencyid"]."' target=\"_top\" data-ftrans=\"slide\" id=\"buysell\">Buy/Sell</a></td>";
                 $this->return .= "</tr>";
             }
-            $this->return .= "</table></div>";
+            $this->return .= "</ul>";
             $db->close();
             return $this->return;
         }

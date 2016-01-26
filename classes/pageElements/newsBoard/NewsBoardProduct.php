@@ -81,7 +81,7 @@ HTML;
             $this->return .= <<<HTML
             <div id="news">
                 <div class="card-panel blue lighten-1 z-depth-2">
-                    NEWS
+                    <div class="card-title">NEWS</div>
                 </div>
                 <div class="relative">
                     <ul class="collapsible" data-collapsible="accordion">
