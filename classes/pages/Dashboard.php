@@ -82,7 +82,7 @@
                             ?>
                         </div>
                         <div class="col s8">
-                            <div class="card center small">
+                            <div class="card center"><div class="card-content">
                                 <div class="card-title">
                                     <p>JPY Value History</p>
                                 </div>
@@ -90,7 +90,7 @@
                                 $currencyChartFactory = new CurrencyChartFactory();
                                 echo $currencyChartFactory->startFactory(new CurrencyChartProduct(2));
                                 ?>
-                            </div>
+                            </div></div>
                             <?php
                             $currencyBoardFactory = new CurrencyBoardFactory();
                             echo $currencyBoardFactory->startFactory(new CurrencyBoardProduct());

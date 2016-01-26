@@ -1,5 +1,6 @@
 * {
-    text-overflow: ellipsis /* DANGEROUS! Will change when error */
+    text-overflow: ellipsis; /* DANGEROUS! Will change when error */
+    margin: 0; padding: 0;
 }
 html, body, .container .row, .container .row .col.s4 { height: 100%; }
 .container { height: 90%; }
@@ -185,6 +186,13 @@ h5  { opacity: 0.78; filter: alpha(opacity=78); margin-bottom: 20px; font-weight
     #news .collapsible-body {
         background-color: #fff;
         z-index: -1;
+    }
+
+/* CHART */
+
+    canvas.chart {
+        width: 550px;
+        height: 200px;
     }
 
 /* Left Border

@@ -51,7 +51,7 @@
             }
             $db = UniversalConnect::doConnect();
             $this->return .= <<<HTML
-<canvas id="myChart$this->currencyID" width="550" height="200"></canvas>
+<canvas id="myChart$this->currencyID" class="chart"></canvas>
 <script>
                 var ctx = $("#myChart$this->currencyID").get(0).getContext("2d");
                 var options = {
