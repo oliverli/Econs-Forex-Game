@@ -55,7 +55,7 @@
             $this->return .= <<<HTML
 <ul class="card">
     <li class="blue">
-        <div class="row">
+        <div class="row" style="padding: 5px 10px;">
             <div class="col s3 center card-title">
                 Currency
             </div>
@@ -64,27 +64,27 @@ HTML;
             $this->return .= "<div class=\"col s3 center card-title\">Offer Rate</div>";
             $this->return .= <<<HTML
         <div class="col s3 center card-title">Amount</div>
+        </div>
     </li>
 HTML;
-            $this->return .= "<tr>";
-            $this->return .= "<td class=\"center\">".$this->basecurr->getName()." (".$this->basecurr->getShortName().")</td>";
-            $this->return .= "<td class=\"center\">N.A.</td>";
-            $this->return .= "<td class=\"center\">N.A.</td>";
-            $this->return .= "<td class=\"center\">".number_format($this->basecurr->getAmount(), 2)."</td>";
-            $this->return .= "<td class=\"center\">N.A.</td>";
-            $this->return .= "</tr>";
+            $this->return .= "<li><div class=\"row\">";
+            $this->return .= "<div class=\"col s3 center card-content\">".$this->basecurr->getName()." (".$this->basecurr->getShortName().")</div>";
+            $this->return .= "<div class=\"col s3 center card-content\">N.A.</div>";
+            $this->return .= "<div class=\"col s3 center card-content\">N.A.</div>";
+            $this->return .= "<div class=\"col s3 center card-content\">".number_format($this->basecurr->getAmount(), 2)."</div>";
+            $this->return .= "</div></li>";
             $query = "SELECT currency.name, currency.shortname, currency.sellvalue, currency.buyvalue, currency.currencyid, wallet.amount FROM currency INNER JOIN wallet ON currency.currencyid = wallet.currencyid WHERE currency.currencyid != 1 AND wallet.userkey = $userkey ORDER BY currency.name ASC";
             $result = $db->query($query) or die($db->error);
             while($row = $result->fetch_assoc())
             {
-                $this->return .= "<tr>";
-                $this->return .= "<td class=\"center\">".$row["name"]." (";
-                $this->return .= $row["shortname"].")</td>";
-                $this->return .= "<td class=\"center\">".$row["buyvalue"]."</td>";
-                $this->return .= "<td class=\"center\">".$row["sellvalue"]."</td>";
-                $this->return .= "<td class=\"center\">".number_format($row["amount"], 2)."</td>";
-                $this->return .= "<td class=\"center\"><a href='./buysell/?currid=".$row["currencyid"]."' target=\"_top\" data-ftrans=\"slide\" id=\"buysell\">Buy/Sell</a></td>";
-                $this->return .= "</tr>";
+                $this->return .= "<li><div class=\"row\">";
+                $this->return .= "<div class=\"col s3 center card-content\">".$row["name"]." (";
+                $this->return .= $row["shortname"].")</div>";
+                $this->return .= "<div class=\"col s3 center card-content\">".$row["buyvalue"]."</div>";
+                $this->return .= "<div class=\"col s3 center card-content\">".$row["sellvalue"]."</div>";
+                $this->return .= "<div class=\"col s3 center card-content\">".number_format($row["amount"], 2)."</div>";
+                //$this->return .= "<td class=\"center\"><a href='./buysell/?currid=".$row["currencyid"]."' target=\"_top\" data-ftrans=\"slide\" id=\"buysell\">Buy/Sell</a></td>";
+                $this->return .= "</div></li>";
             }
             $this->return .= "</ul>";
             $db->close();
