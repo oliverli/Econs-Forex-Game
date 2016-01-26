@@ -80,7 +80,7 @@ HTML;
             date_default_timezone_set('Asia/Singapore');
             $this->return .= <<<HTML
             <div id="news">
-                <div class="card-panel pink accent-2 z-depth-2">
+                <div class="card-panel pink accent-2 z-depth-1">
                     NEWS
                 </div>
                 <div class="relative">
