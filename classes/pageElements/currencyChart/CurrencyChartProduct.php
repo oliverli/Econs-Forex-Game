@@ -51,7 +51,7 @@
             }
             $db = UniversalConnect::doConnect();
             $this->return .= <<<HTML
-<canvas id="myChart$this->currencyID" class="chart"></canvas>
+<div><canvas id="myChart$this->currencyID" class="chart"></canvas></div>
 <script>
                 var ctx = $("#myChart$this->currencyID").get(0).getContext("2d");
                 var options = {
@@ -60,15 +60,16 @@
                     scaleGridLineWidth: 1,
                     scaleShowHorizontalLines: true,
                     scaleShowVerticalLines: true,
-                    bezierCurve: true,
-                    bezierCurveTension: 0.4,
+                    bezierCurve: false,
                     pointDot: true,
                     pointDotRadius: 4,
                     pointDotStrokeWidth: 1,
                     pointHitDetectionRadius: 20,
                     datasetStroke: true,
                     datasetStrokeWidth: 2,
-                    datasetFill: true
+                    datasetFill: true,
+                    responsive: true,
+                    maintainAspectRatio: false
                 };
 HTML;
             $data = array();
@@ -82,7 +83,7 @@ HTML;
                 {
                     $avg = ($row["newbuyvalue"] + $row["newsellvalue"]) / 2;
                     array_push($data, $avg);
-                    array_push($labels, date("D H:i:s", $row["time"]));
+                    array_push($labels, date("D H:i", $row["time"]));
                 }
             }
             if(count($data) == 1)

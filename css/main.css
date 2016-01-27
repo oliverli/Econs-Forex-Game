@@ -188,13 +188,6 @@ h5  { opacity: 0.78; filter: alpha(opacity=78); margin-bottom: 20px; font-weight
         z-index: -1;
     }
 
-/* CHART */
-
-    canvas.chart {
-        width: 550px;
-        height: 200px;
-    }
-
 /* Left Border
 #nav-mobile li {
     position: relative;
