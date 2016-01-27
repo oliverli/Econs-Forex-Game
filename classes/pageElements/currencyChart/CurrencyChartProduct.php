@@ -51,7 +51,7 @@
             }
             $db = UniversalConnect::doConnect();
             $this->return .= <<<HTML
-<div><canvas id="myChart$this->currencyID" class="chart"></canvas></div>
+<div><canvas id="myChart$this->currencyID" class="chart"></canvas></div><div id="legend"></div>
 <script>
                 var ctx = $("#myChart$this->currencyID").get(0).getContext("2d");
                 var options = {
@@ -72,7 +72,8 @@
                     maintainAspectRatio: false
                 };
 HTML;
-            $data = array();
+            $offerRate = array();
+            $bidRate = array();
             $labels = array();
 //selects the latest 20 currency changes (i.e highest 20) and then sorts them in ascending order (i.e. earliest entries come first)
             $query = "SELECT * FROM(SELECT newbuyvalue, newsellvalue, time FROM valuechanges WHERE currencyid=$this->currencyID AND yetcompleted=0 ORDER BY time DESC LIMIT 20) g ORDER BY g.time ASC";
@@ -81,14 +82,16 @@ HTML;
             {
                 while($row = $result->fetch_assoc())
                 {
-                    $avg = ($row["newbuyvalue"] + $row["newsellvalue"]) / 2;
-                    array_push($data, $avg);
+                    //$a = ($row["newbuyvalue"] + $row["newsellvalue"]) / 2;
+                    array_push($offerRate, $row["newsellvalue"]);
+                    array_push($bidRate, $row["newbuyvalue"]);
                     array_push($labels, date("D H:i", $row["time"]));
                 }
             }
-            if(count($data) == 1)
+            if(count($labels) === 1)
             {
-                array_push($data, $data[0]);
+                array_push($offerRate, $offerRate[0]);
+                array_push($bidRate, $bidRate[0]);
                 array_push($labels, $labels[0]);
             }
             $this->return .= "var data = { labels: [";
@@ -103,6 +106,7 @@ HTML;
 ],
                     datasets: [
                         {
+                            label: "Offer Rate",
                             fillColor: "rgba(33, 150, 243,0.2)",
                             strokeColor: "rgba(33, 150, 243,1)",
                             pointColor: "rgba(33, 150, 243,0.65)",
@@ -111,14 +115,34 @@ HTML;
                             pointHighlightStroke: "#fff",
                             data: [
 JAVASCRIPT;
-            for($i = 0; $i < count($data) - 1; $i++)
+            for($i = 0; $i < count($offerRate) - 1; $i++)
             {
-                $this->return .= $data[$i].", ";
+                $this->return .= $offerRate[$i].", ";
             }
-            if(count($data) == 1)
-                $this->return .= "\"".$data[0]."\", ";
-            $this->return .= $data[count($data) - 1];
-            $this->return .= "]}]}; new Chart(ctx).Line(data, options); </script>";
+            $this->return .= $offerRate[count($offerRate) - 1];
+            $this->return .= <<<JAVASCRIPT
+    ]},
+                        {
+                            label: "Bid Rate",
+                            fillColor: "rgba(76, 175, 80, 0.2)",
+                            strokeColor: "rgba(76, 175, 80, 1)",
+                            pointColor: "rgba(76, 175, 80,0.65)",
+                            pointStrokeColor: "#fff",
+                            pointHighlightFill: "rgb(0,200,83)",
+                            pointHighlightStroke: "#fff",
+                            data: [
+JAVASCRIPT;
+            for($i = 0; $i < count($bidRate) - 1; $i++)
+            {
+                $this->return .= $bidRate[$i].", ";
+            }
+            $this->return .= $bidRate[count($bidRate) - 1];
+            $this->return .= <<<JAVASCRIPT
+]}]}; 
+    var currencyChart = new Chart(ctx).Line(data, options);
+    document.getElementById("legend").innerHTML = currencyChart.generateLegend();
+</script>
+JAVASCRIPT;
             $db->close();
             return $this->return;
         }

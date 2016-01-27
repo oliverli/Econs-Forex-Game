@@ -60,14 +60,14 @@
                 {
                     //purges database
                     $totalvalue = 0.00;
-                    $query = "SELECT wallet.amount, currency.sellvalue FROM wallet INNER JOIN currency ON currency.currencyid=wallet.currencyid WHERE userkey=$userkey";
+                    $query = "SELECT wallet.amount, currency.sellvalue FROM wallet INNER JOIN currency ON currency.currencyid=wallet.currencyid WHERE userkey=".$row["userkey"];
                     $result2 = $db->query($query);
                     while($row2 = $result2->fetch_assoc())
                     {
                         $totalvalue += round($row2["amount"] / ($row2["sellvalue"]), 4);
                     }
                     $totalvalue = round($totalvalue, 2);
-                    $query = "UPDATE users SET networth=$totalvalue WHERE userkey=$userkey";
+                    $query = "UPDATE users SET networth=$totalvalue WHERE userkey=".$row["userkey"];
                     $db->query($query);
                 }
             }
