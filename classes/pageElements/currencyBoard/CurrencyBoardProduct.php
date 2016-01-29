@@ -3,7 +3,7 @@
     /*
      * The MIT License
      *
-     * Copyright 2016 Li Yicheng, Sun Yudong, and Walter Kong.
+     * Copyright 2016 Li Yicheng, Walter Kong, and Sun Yudong.
      *
      * Permission is hereby granted, free of charge, to any person obtaining a copy
      * of this software and associated documentation files (the "Software"), to deal
@@ -91,6 +91,7 @@ HTML;
                 $this->return .= "<div class=\"col s3 center card-content\">".$row["sellvalue"]."</div>";
                 $this->return .= "<div class=\"col s3 center card-content\">".number_format($row["amount"], 2)."</div>";
                 //$this->return .= "<td class=\"center\"><a href='./buysell/?currid=".$row["currencyid"]."' target=\"_top\" data-ftrans=\"slide\" id=\"buysell\">Buy/Sell</a></td>";
+                //$this->return
                 $this->return .= "</div></li>";
             }
             $this->return .= "</ul>";

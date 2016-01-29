@@ -3,7 +3,7 @@
     /*
      * The MIT License
      *
-     * Copyright 2016 Li Yicheng, Sun Yudong, and Walter Kong.
+     * Copyright 2016 Li Yicheng, Walter Kong, and Sun Yudong.
      *
      * Permission is hereby granted, free of charge, to any person obtaining a copy
      * of this software and associated documentation files (the "Software"), to deal
@@ -51,7 +51,7 @@
             }
             $db = UniversalConnect::doConnect();
             $this->return .= <<<HTML
-<div><canvas id="myChart$this->currencyID" class="chart"></canvas></div><div id="legend"></div>
+<div><canvas id="myChart$this->currencyID" class="chart"></canvas></div>
 <script>
                 var ctx = $("#myChart$this->currencyID").get(0).getContext("2d");
                 var options = {
@@ -72,25 +72,22 @@
                     maintainAspectRatio: false
                 };
 HTML;
-            $offerRate = array();
             $bidRate = array();
             $labels = array();
 //selects the latest 20 currency changes (i.e highest 20) and then sorts them in ascending order (i.e. earliest entries come first)
-            $query = "SELECT * FROM(SELECT newbuyvalue, newsellvalue, time FROM valuechanges WHERE currencyid=$this->currencyID AND yetcompleted=0 ORDER BY time DESC LIMIT 20) g ORDER BY g.time ASC";
+            $query = "SELECT * FROM(SELECT newbuyvalue, time FROM valuechanges WHERE currencyid=$this->currencyID AND yetcompleted=0 ORDER BY time DESC LIMIT 20) g ORDER BY g.time ASC";
             $result = $db->query($query) or die($query.$db->error);
             if($result->num_rows > 0)
             {
                 while($row = $result->fetch_assoc())
                 {
                     //$a = ($row["newbuyvalue"] + $row["newsellvalue"]) / 2;
-                    array_push($offerRate, $row["newsellvalue"]);
                     array_push($bidRate, $row["newbuyvalue"]);
                     array_push($labels, date("D H:i", $row["time"]));
                 }
             }
             if(count($labels) === 1)
             {
-                array_push($offerRate, $offerRate[0]);
                 array_push($bidRate, $bidRate[0]);
                 array_push($labels, $labels[0]);
             }
@@ -106,29 +103,12 @@ HTML;
 ],
                     datasets: [
                         {
-                            label: "Offer Rate",
+                            label: "Bid Rate",
                             fillColor: "rgba(33, 150, 243,0.2)",
                             strokeColor: "rgba(33, 150, 243,1)",
                             pointColor: "rgba(33, 150, 243,0.65)",
                             pointStrokeColor: "#fff",
                             pointHighlightFill: "rgb(30,136,229)",
-                            pointHighlightStroke: "#fff",
-                            data: [
-JAVASCRIPT;
-            for($i = 0; $i < count($offerRate) - 1; $i++)
-            {
-                $this->return .= $offerRate[$i].", ";
-            }
-            $this->return .= $offerRate[count($offerRate) - 1];
-            $this->return .= <<<JAVASCRIPT
-    ]},
-                        {
-                            label: "Bid Rate",
-                            fillColor: "rgba(76, 175, 80, 0.2)",
-                            strokeColor: "rgba(76, 175, 80, 1)",
-                            pointColor: "rgba(76, 175, 80,0.65)",
-                            pointStrokeColor: "#fff",
-                            pointHighlightFill: "rgb(0,200,83)",
                             pointHighlightStroke: "#fff",
                             data: [
 JAVASCRIPT;
@@ -140,7 +120,6 @@ JAVASCRIPT;
             $this->return .= <<<JAVASCRIPT
 ]}]}; 
     var currencyChart = new Chart(ctx).Line(data, options);
-    document.getElementById("legend").innerHTML = currencyChart.generateLegend();
 </script>
 JAVASCRIPT;
             $db->close();
