@@ -100,12 +100,14 @@ HTML;
             }
             while($row = $result->fetch_assoc())
             {
-                $this->return .= "<li class=\"z-depth-1\"><div class=\"collapsible-header\">";
-                $this->return .= $row["newstext"];
-                $this->return .= "</div>";
+                $this->return .= "<li class=\"z-depth-1\">";
+                
+                $this->return .= "<div class=\"collapsible-header\">";
+                $this->return .= "<span>".FormatTimePassed::format((int) intval($row["time"]))."</span>";
+                $this->return .= $row["newstext"]."</div>";
+                
 //                $this->return .= "<div class=\"collapsible-body\"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu tortor sed nulla porta fringilla. In risus tellus, dictum quis purus id, euismod lacinia elit. Vivamus ac viverra magna, eget accumsan mauris. Nulla molestie vulputate lectus sit amet rutrum. Sed tempus efficitur sagittis. Aenean ultricies quis sapien ut tempus. Pellentesque euismod nisl a felis interdum pharetra. Nullam id nisi in ante volutpat posuere.</p></div>"; // Add article info before this
                 $this->return .= "</li>";
-//                $this->return .= "<td class=\"center\" style=\"width:25%\">".FormatTimePassed::format((int) intval($row["time"]))."</td>";
             }
             $this->return .= "</ul></div></div>";
             return $this->return;
