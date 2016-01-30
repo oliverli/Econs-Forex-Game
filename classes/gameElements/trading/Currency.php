@@ -48,8 +48,7 @@
             $result = $db->query($query) or die($db->error);
             if($result->num_rows <= 0)
             {
-                header("Location: ../");
-                exit();
+                throw new Exception("Invalid currencyID");
             }
             while($row = $result->fetch_assoc())
             {
@@ -97,7 +96,7 @@
             return $this->buyValue;
         }
 
-        public function buy($baseSellAmount)
+        public function sell($baseSellAmount)
         {
             ignore_user_abort(true);
             if(session_status() === PHP_SESSION_NONE)
@@ -119,7 +118,7 @@
             $db->query($query);
             $query = "UPDATE wallet SET amount=amount-$baseSellAmount WHERE currencyid=1 AND userkey=$userkey;";
             $db->query($query);
-            //transtype: 0 for buy (USD to JPY), 1 for sell (JPY to USD)
+            //transtype: 0 for sell (USD to JPY), 1 for buy (JPY to USD)
             $query = "INSERT INTO transactions (transtype, userkey, currencyid, amount, rate, receiveamt, time)  VALUES (0, $userkey, $this->id, $baseSellAmount, $this->buyValue, $addAmount, ".time().");";
             $db->query($query);
             if(!$db->commit())
@@ -144,7 +143,7 @@
             return true;
         }
 
-        public function sell($baseBuyAmount)
+        public function buy($baseBuyAmount)
         {
             ignore_user_abort(true);
             if(session_status() === PHP_SESSION_NONE)
@@ -169,7 +168,7 @@
             $db->query($query);
             $query = "UPDATE wallet SET amount=amount+$baseBuyAmount WHERE currencyid=1 AND userkey=$userkey;";
             $db->query($query);
-            //transtype: 0 for buy (USD to JPY), 1 for sell (JPY to USD)
+            //transtype: 0 for sell (USD to JPY), 1 for buy (JPY to USD)
             $query = "INSERT INTO transactions (transtype, userkey, currencyid, amount, rate, receiveamt, time) VALUES (1, $userkey, $this->id, $reduceAmount, $this->sellValue, $baseBuyAmount, ".time().");";
             $db->query($query);
             if(!$db->commit())

@@ -36,11 +36,13 @@
     require_once("pageElements/profileCard/ProfileCardFactory.php");
     require_once("pageElements/currencyChart/CurrencyChartFactory.php");
     require_once("gameElements/DatabasePurger.php");
+    require_once("gameElements/trading/BaseCurrency.php");
     require_once("miscellaneous/GenerateRootPath.php");
 
     class Dashboard
     {
-
+        private $baseCurrency, $secCurr;
+        
         public function __construct()
         {
             if(session_status() === PHP_SESSION_NONE)
@@ -53,20 +55,71 @@
                 header("Location: ".GenerateRootPath::getRoot(2));
                 exit();
             }
-            DatabasePurger::purge();
-            if(isset($_SESSION["remarks"]))
+            if(isset($_POST["currid"]) && !GameEndedChecker::GameEnded())
             {
-                $remarks = $_SESSION["remarks"];
-                unset($_SESSION["remarks"]);
+                $currid = intval($_POST["currid"]);
+                if($currid > 1)
+                {
+                    if(isset($_POST["sellamt".$currid]) && isset($_POST["sellBase".$currid]))
+                    {
+                        $exceptionThrown = false;
+                        try
+                        {
+                            $this->secCurr = new Currency($currid);
+                        }
+                        catch(Exception $e)
+                        {
+                            $exceptionThrown = true;
+                        }
+                        if(!$exceptionThrown)
+                        {
+                            $sellamt = round(floatval($_POST["sellamt".$currid] * 1000000), 2);
+                            $this->secCurr->sell($sellamt);
+                        }
+                    }
+                    else if(isset($_POST["buyamt".$currid]) && isset($_POST["buyBase".$currid]))
+                    {
+                        $exceptionThrown = false;
+                        try
+                        {
+                            $this->secCurr = new Currency($currid);
+                        }
+                        catch(Exception $e)
+                        {
+                            $exceptionThrown = true;
+                        }
+                        if(!$exceptionThrown)
+                        {
+                            $buyamt = round(floatval($_POST["buyamt".$currid] * 1000000), 2);
+                            $this->secCurr->buy($buyamt);
+                        }
+                    }
+                }
             }
+            DatabasePurger::purge();
+            $this->baseCurrency = new BaseCurrency();
             $headerFactory = new HeaderFactory();
-            if(isset($remarks))
-                echo $headerFactory->startFactory(new HeaderProduct("Dashboard - Forex Trading Simulator", 2, $remarks));
-            else
-                echo $headerFactory->startFactory(new HeaderProduct("Dashboard - Forex Trading Simulator", 2));
+            echo $headerFactory->startFactory(new HeaderProduct("Dashboard - Forex Trading Simulator", 2));
             ?>
+            
             <body class="blue lighten-5">
-
+            <script>
+                function changeHeight(){ setTimeout(function(){
+                    if ( $("#news ul").height() >= $("#news").height() ){
+                        $("#news").addClass("active")
+                    }
+                    else{
+                        $("#news").removeClass("active");
+                    }
+                },100)}
+                window.onload = function(){
+                    $(document).ready(function(){
+                        Materialize.showStaggeredList('#news ul.collapsible');
+                        changeHeight();
+                        $(".collapsible-header").click(function(){changeHeight()});
+                    })
+                }
+            </script>
                 <?php
                 $navbarFactory = new NavbarFactory();
                 echo $navbarFactory->startFactory(new NavbarProduct(2, 0));
@@ -84,9 +137,10 @@
                         <div class="col s8">
                             <div class="card center"><div class="card-content">
                                 <div class="card-title">
-                                    <p>JPY Value History</p>
+                                    <p><?php echo $this->baseCurrency->getShortName() ?>-JPY Bid Rates</p>
                                 </div>
                                 <?php
+                                //USD-JPY above is sloppy coding to be improved on when we need multiple currencies
                                 $currencyChartFactory = new CurrencyChartFactory();
                                 echo $currencyChartFactory->startFactory(new CurrencyChartProduct(2));
                                 ?>
@@ -99,23 +153,7 @@
                     </div>
                 </div>
             </body>
-            <script>
-                function changeHeight(){ setTimeout(function(){
-                    if ( $("#news ul").height() >= $("#news").height() ){
-                        $("#news").addClass("active")
-                    }
-                    else{
-                        $("#news").removeClass("active");
-                    }
-                },100)}
-                window.onload = function(){
-                    $(document).ready(function(){
-                        Materialize.showStaggeredList('#news ul.collapsible');
-                        changeHeight();
-                        $(".collapsible-header").click(function(){changeHeight()});
-                    })
-                }
-            </script><?php
+            <?php
         }
 
     }

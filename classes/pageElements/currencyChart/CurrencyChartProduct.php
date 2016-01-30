@@ -60,7 +60,7 @@
                     scaleGridLineWidth: 1,
                     scaleShowHorizontalLines: true,
                     scaleShowVerticalLines: true,
-                    bezierCurve: false,
+                    bezierCurve: true,
                     pointDot: true,
                     pointDotRadius: 4,
                     pointDotStrokeWidth: 1,
@@ -83,7 +83,7 @@ HTML;
                 {
                     //$a = ($row["newbuyvalue"] + $row["newsellvalue"]) / 2;
                     array_push($bidRate, $row["newbuyvalue"]);
-                    array_push($labels, date("D H:i", $row["time"]));
+                    array_push($labels, date("H:i", $row["time"]));
                 }
             }
             if(count($labels) === 1)

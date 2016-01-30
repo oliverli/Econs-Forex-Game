@@ -38,7 +38,7 @@
     class ProfileCardProduct implements ElementProduct
     {
 
-        private $return, $basecurr, $networth, $name, $pathToRoot;
+        private $return, $basecurr, $netPosition, $marketValue, $name, $pathToRoot, $transactionCount;
 
         public function __construct($directoryLayer)
         {
@@ -54,8 +54,17 @@
             if($row = $result->fetch_assoc())
             {
                 $this->name = $row["name"];
-                $this->networth = $row["networth"];
+                $this->marketValue = $row["networth"];
             }
+            $query = "SELECT amount FROM wallet WHERE userkey=$userkey AND currencyid=1 LIMIT 1";
+            $result = $db->query($query) or die();
+            if($row = $result->fetch_assoc())
+            {
+                $this->netPosition = ($row["amount"]-10000000);
+            }
+            $query = "SELECT transid FROM transactions WHERE userkey=$userkey AND (transtype=0 OR transtype=1)";
+            $result = $db->query($query) or die();
+            $this->transactionCount = $result->num_rows;
             $this->basecurr = new BaseCurrency();
             $this->return = "";
             $db->close();
@@ -82,16 +91,21 @@
                                 <tbody>
                                     <tr>
                                         <td>-->
-                            <b>Account Balance</b><br />
+                            <b>Net Position</b><br />
 HTML;
-            if(!GameEndedChecker::gameEnded())
-            {
-                $this->return .= "".$this->basecurr->getShortName().number_format($this->networth, 2);
-            }
-            else
+            //if(!GameEndedChecker::gameEnded())
+            //{
+                if($this->netPosition > 0)
+                    $this->return .= "Long ".$this->basecurr->getShortName().number_format($this->netPosition/1000000, 2). " million";
+                else if($this->netPosition === 0.00)
+                    $this->return .= "Neutral";
+                else
+                    $this->return .= "Short ".$this->basecurr->getShortName().number_format(($this->netPosition*-1)/1000000, 2)." million";
+            //}
+            /*else
             {
                 $this->return .= "Game Over. You ended off with a total of ".$this->basecurr->getShortName().number_format($this->networth, 2).".";
-            }
+            }*/
             $this->return .= <<<HTML
                             <!--
                                         </td>
@@ -103,7 +117,7 @@ HTML;
 	                <div class="card-reveal">
 	                    <span class="card-title grey-text text-darken-4">Trading Statistics<i class="material-icons right">close</i></span>
 HTML;
-            if($this->networth === 10000000)
+            /*if($this->networth === 10000000)
             {
                 $this->return .= "<p>You did not make or lose any money.</p>";
             }
@@ -122,7 +136,9 @@ HTML;
                 {
                     $this->return .= "<p>There's still time, try harder!</p>";
                 }
-            }
+            }*/
+            $this->return .= "<p>Mark-to-market value: ".$this->basecurr->getShortName().number_format($this->marketValue, 2)."</p>";
+            $this->return .= "<p>Number of trades: ".$this->transactionCount."</p>";
             $this->return .= "</div></div>";
             return $this->return;
         }
