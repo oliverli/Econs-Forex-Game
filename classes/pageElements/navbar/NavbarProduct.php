@@ -59,7 +59,9 @@
 <nav>
     <div id="nav-wrapper" class="blue row">
         <div class="col left">Forex Trading Simulator</div>
-        <ul id="nav-mobile" class="col right hide-on-small-and-down">
+        
+        <!-- Original Nav -->
+        <ul id="nav-mobile" class="col right hide-on-med-and-down">
 HTML;
             $this->return .= "<li".($this->pageID === 0 ? " class=\"active\"" : "")."><a href=\"$this->pathToRoot/dashboard/\">Home</a></li>";
             $this->return .= "<li".($this->pageID === 10 ? " class=\"active\"" : "")."><a href=\"$this->pathToRoot/dashboard/history/\">History</a></li>";
@@ -73,6 +75,24 @@ HTML;
             $this->return .= <<<HTML
             <li><a href="$this->pathToRoot/dashboard/logout/">Logout</a></li>
         </ul>
+        
+        <!-- Sidenav -->
+        <ul id="slide-out" class="side-nav">
+HTML;
+            $this->return .= "<li".($this->pageID === 0 ? " class=\"active\"" : "")."><a href=\"$this->pathToRoot/dashboard/\">Home</a></li>";
+            $this->return .= "<li".($this->pageID === 10 ? " class=\"active\"" : "")."><a href=\"$this->pathToRoot/dashboard/history/\">History</a></li>";
+            $this->return .= "<li".($this->pageID === 20 ? " class=\"active\"" : "")."><a href=\"$this->pathToRoot/dashboard/leaderboard/\">Leaderboards</a></li>";
+            //going back to php
+            $PrivAuthWorker = new PrivilegeAuthenticate();
+            if($PrivAuthWorker->authenticate())
+                $this->return .= "<li".($this->pageID === 30 ? " class=\"active\"" : "")."><a href=\"$this->pathToRoot/admin/\">Admin Console</a></li>";
+            //returning to string mode again
+            $this->return .= "<li".($this->pageID === 40 ? " class=\"active\"" : "")."><a href=\"$this->pathToRoot/dashboard/changepassword/\">Change Password</a></li>";
+            $this->return .= <<<HTML
+            <li><a href="$this->pathToRoot/dashboard/logout/">Logout</a></li>
+        </ul>
+        
+        <a href="#" data-activates="slide-out" class="right button-collapse"><i class="mdi-navigation-menu"></i></a>
     </div>
 </nav>
 HTML;

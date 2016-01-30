@@ -114,9 +114,17 @@
                 },100)}
                 window.onload = function(){
                     $(document).ready(function(){
+                        // News card
                         Materialize.showStaggeredList('#news ul.collapsible');
                         changeHeight();
                         $(".collapsible-header").click(function(){changeHeight()});
+                        
+                        // Mobile Sidenav
+                        $('.button-collapse').sideNav({
+                            menuWidth: 240, // Default is 240
+                            edge: 'right', // Choose the horizontal origin
+                            closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+                        });
                     })
                 }
             </script>
@@ -126,7 +134,7 @@
                 ?>
                 <div class="container">
                     <div class="row">
-                        <div class="col s4">
+                        <div class="col s12 m5 l4">
                             <?php
                             $profileCardFactory = new ProfileCardFactory();
                             echo $profileCardFactory->startFactory(new ProfileCardProduct(2));
@@ -134,7 +142,7 @@
                             echo $newsFactory->startFactory(new NewsBoardProduct(30));
                             ?>
                         </div>
-                        <div class="col s8">
+                        <div class="col s12 m7 l8">
                             <div class="card center"><div class="card-content">
                                 <div class="card-title">
                                     <p><?php echo $this->baseCurrency->getShortName() ?>-JPY Bid Rates</p>

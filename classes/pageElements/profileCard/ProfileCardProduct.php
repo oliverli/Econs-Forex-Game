@@ -73,9 +73,9 @@
         public function giveProduct()
         {
             $this->return .= <<<HTML
-            <div class="card small hoverable">
+            <div id="profile" class="card small hoverable">
                     <div class="card-image">
-	                    <img src="$this->pathToRoot/img/user.jpg" class="activator">
+	                    <img src="$this->pathToRoot/img/joker.jpg" class="activator">
 	                    <span class="card-title activator">$this->name</span>
 	                </div>
 	                <div class="card-content">
@@ -91,28 +91,22 @@
                                 <tbody>
                                     <tr>
                                         <td>-->
-                            <b>Net Position</b><br />
+                            <b>Net Position</b>
+                            <br />
+                            <span>
 HTML;
             //if(!GameEndedChecker::gameEnded())
             //{
                 if($this->netPosition > 0)
-                    $this->return .= "Long ".$this->basecurr->getShortName().number_format($this->netPosition/1000000, 2). " million";
+                    $this->return .= "<i class=\"material-icons tiny left green-text\">trending_up</i> Long ".$this->basecurr->getShortName().number_format($this->netPosition/1000000, 2). " million";
                 else if($this->netPosition === 0.00)
-                    $this->return .= "Neutral";
+                    $this->return .= "<i class=\"material-icons tiny left green-text\">trending_flat</i> Neutral";
                 else
-                    $this->return .= "Short ".$this->basecurr->getShortName().number_format(($this->netPosition*-1)/1000000, 2)." million";
+                    $this->return .= "<i class=\"material-icons tiny left red-text\">trending_down</i>Short ".$this->basecurr->getShortName().number_format(($this->netPosition*-1)/1000000, 2)." million";
             //}
-            /*else
-            {
-                $this->return .= "Game Over. You ended off with a total of ".$this->basecurr->getShortName().number_format($this->networth, 2).".";
-            }*/
             $this->return .= <<<HTML
-                            <!--
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>-->
-                        </p>
+                        </span>
+                       </p> 
 	                </div>
 	                <div class="card-reveal">
 	                    <span class="card-title grey-text text-darken-4">Trading Statistics<i class="material-icons right">close</i></span>
