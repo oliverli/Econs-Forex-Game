@@ -108,7 +108,7 @@ h5  { opacity: 0.78; filter: alpha(opacity=78); margin-bottom: 20px; font-weight
 img.activator:hover, i.activator:hover { opacity: 0.6; filter: alpha(opacity=60); }
 
 .card.small { height: auto; }
-.card.small .card-image { max-height: 216px; }
+.card.small .card-image { max-height: 190px; }
 
 .card-image { position: relative; }
 .card-image:after { 
@@ -121,6 +121,12 @@ img.activator:hover, i.activator:hover { opacity: 0.6; filter: alpha(opacity=60)
 .card-image img.activator:hover { opacity: 0.6; filter: alpha(opacity=60); } /* More natural card-reveal */
 .card-reveal { background-color: rgba(255,255,255,0.9); }
 
+#profile .card-content p span {
+    font-size: 0.9rem; color: rgba(0,0,0,0.76);
+}
+#profile .card-content p span i.material-icons {
+    line-height: 1.5; /* Change default settings */
+}
 
 /* News */
 .container .row { margin-bottom: 0; } /* Change default settings */

@@ -64,28 +64,25 @@
         public function giveProduct()
         {
             $this->return .= <<<HTML
-            <div class="card small hoverable">
+            <div id="profile" class="card small hoverable">
                     <div class="card-image">
-	                    <img src="$this->pathToRoot/img/user.jpg" class="activator">
+	                    <img src="$this->pathToRoot/img/joker.jpg" class="activator">
 	                    <span class="card-title activator">$this->name</span>
 	                </div>
 	                <div class="card-content">
 	                    <p>
 	                        <i class="material-icons right activator">library_books</i>
-                            <!--
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th data-field="balance">Account Balance</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>-->
-                            <b>Account Balance</b><br />
+                            <b>Account Balance</b>
+                            <span>
 HTML;
             if(!GameEndedChecker::gameEnded())
             {
+                // USD
+                $this->return .= "<br /><i class=\"material-icons tiny left green-text\">trending_up</i>5.00 ";
+                $this->return .= "".$this->basecurr->getShortName().number_format($this->networth, 2);
+                
+                // JPY
+                $this->return .= "<br /><i class=\"material-icons tiny left red-text\">trending_down</i>-3.14 ";
                 $this->return .= "".$this->basecurr->getShortName().number_format($this->networth, 2);
             }
             else
@@ -93,12 +90,8 @@ HTML;
                 $this->return .= "Game Over. You ended off with a total of ".$this->basecurr->getShortName().number_format($this->networth, 2).".";
             }
             $this->return .= <<<HTML
-                            <!--
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>-->
-                        </p>
+                        </span>
+                       </p> 
 	                </div>
 	                <div class="card-reveal">
 	                    <span class="card-title grey-text text-darken-4">Trading Statistics<i class="material-icons right">close</i></span>
