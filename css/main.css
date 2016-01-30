@@ -176,15 +176,15 @@ img.activator:hover, i.activator:hover { opacity: 0.6; filter: alpha(opacity=60)
 #news ul.collapsible li { opacity: 0; filter: alpha(opacity=0); /* margin-bottom: 2px; */ } /* Transition on start */
 
 #news .collapsible-header { overflow: hidden; white-space: nowrap; -webkit-transition: background-color .3s ease; transition: background-color .3s ease; } /* To make text-overflow work */
-#news .collapsible-header span {
+#news .collapsible-header b {
     display: inline-block;
     text-align: center; vertical-align: middle;
-    font-size: .7rem; font-weight: bold; color: rgba(0,0,0,0.6);
+    font-size: .7rem; color: rgba(0,0,0,0.6);
 /*    max-width: 50px; line-height: 1rem; /* For 2 lines */
     line-height: 2.7rem;
     white-space: normal; padding: 5px 0; margin: 0 5px 0 -5px;
 }
-#news .collapsible-header.active span { display: none; }
+#news .collapsible-header.active b { display: none; }
 #news .collapsible-header.active {
     overflow: initial; white-space: initial;
     position:relative; /* .collapsible-body was sticking out */
