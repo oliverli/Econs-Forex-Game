@@ -55,13 +55,17 @@
                     </tr>
 HTML;
             $db = UniversalConnect::doConnect();
+            $query = "SELECT starttime FROM startendtime LIMIT 1";
+            $result = $db->query($query);
+            $row = $result->fetch_assoc();
+            $startTime = $row["starttime"];
             $query = "SELECT currency.shortname, valuechanges.newbuyvalue, valuechanges.newsellvalue, valuechanges.time FROM valuechanges INNER JOIN currency ON valuechanges.currencyid = currency.currencyid WHERE valuechanges.yetcompleted=0 ORDER BY valuechanges.time DESC";
             $result = $db->query($query) or die($db->error);
             while($row = $result->fetch_assoc())
             {
                 $this->return .= "<tr>";
                 $this->return .= "<td class=\"center\">".$row["shortname"]."</td>";
-                $this->return .= "<td class=\"center\">".FormatTimePassed::format($row["time"])."</td>";
+                $this->return .= "<td class=\"center\">".FormatTimePassed::format($row["time"]+$startTime)."</td>";
                 $this->return .= "<td class=\"center\">".number_format($row["newbuyvalue"], 2)."</td>";
                 $this->return .= "<td class=\"center\">".number_format($row["newsellvalue"], 2)."</td>";
                 $this->return .= "</tr>";

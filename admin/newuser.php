@@ -32,6 +32,8 @@
                     $userkey = $row["userkey"];
                     $query = "INSERT INTO wallet (userkey, currencyid, amount) VALUES ($userkey, 1, 10000000)";
                     $db->query($query);
+                    //$query = "INSERT INTO wallet (userkey, currencyid, amount) VALUES ($userkey, 2, 1300000000)";
+                    //$db->query($query);
                     $query = "SELECT currencyid FROM currency WHERE currencyid != 1";
                     $result = $db->query($query);
                     while($row = $result->fetch_assoc())
@@ -40,7 +42,7 @@
                         //    continue;
                         //else
                         //{
-                            $query = "INSERT INTO wallet (userkey, currencyid, amount) VALUES ($userkey, '".$row["currencyid"]."', 0)";
+                            $query = "INSERT INTO wallet (userkey, currencyid, amount) VALUES ($userkey, '".$row["currencyid"]."', 1300000000)";
                             if($db->query($query) === TRUE)
                                 continue;
                             else

@@ -51,6 +51,10 @@
                 session_start();
             }
             $db = UniversalConnect::doConnect();
+            $query = "SELECT starttime FROM startendtime LIMIT 1";
+            $result = $db->query($query);
+            $row = $result->fetch_assoc();
+            $startTime = $row["starttime"];
             $this->return .= <<<HTML
 <div><canvas id="myChart$this->currencyID" class="chart"></canvas></div>
 <script>
@@ -87,7 +91,7 @@ HTML;
                 {
                     //$a = ($row["newbuyvalue"] + $row["newsellvalue"]) / 2;
                     array_push($bidRate, $row["newbuyvalue"]);
-                    array_push($labels, date("H:i", $row["time"]));
+                    array_push($labels, date("H:i", $row["time"]+$startTime));
                 }
             }
             if(count($labels) === 1)

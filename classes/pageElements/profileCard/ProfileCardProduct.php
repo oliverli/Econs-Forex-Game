@@ -75,7 +75,7 @@
             $this->return .= <<<HTML
             <div id="profile" class="card small hoverable">
                     <div class="card-image">
-	                    <img src="$this->pathToRoot/img/joker.jpg" class="activator">
+	                    <img src="$this->pathToRoot/img/user.jpg" class="activator">
 	                    <span class="card-title activator">$this->name</span>
 	                </div>
 	                <div class="card-content">
@@ -131,8 +131,8 @@ HTML;
               $this->return .= "<p>There's still time, try harder!</p>";
               }
               } */
-            $this->return .= "<p>Mark-to-market value: ".$this->basecurr->getShortName().number_format($this->marketValue, 2)."</p>";
-            $this->return .= "<p>Number of trades: ".$this->transactionCount."</p>";
+            $this->return .= "<p><b>Mark-to-market value:</b> ".$this->basecurr->getShortName().number_format($this->marketValue, 2)."</p>";
+            $this->return .= "<p><b>Number of trades:</b> ".$this->transactionCount."</p>";
             $this->return .= "</div></div>";
             return $this->return;
         }

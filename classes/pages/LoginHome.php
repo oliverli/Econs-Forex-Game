@@ -99,7 +99,7 @@ HTML;
 ">
                 <div class="center">
                     <h3 class="title">Forex Trading Simulator</h3>
-                    <h5 class="title top-margin">Master Forex, For Free</h5>
+                    <h5 class="title top-margin">Exchange rates, made easier</h5>
                 </div>
                 <form id="loginform" name="loginform" method="post">
                     <div class="row">

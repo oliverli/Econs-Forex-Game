@@ -39,7 +39,11 @@
             ignore_user_abort(true);
             $db = UniversalConnect::doConnect();
             date_default_timezone_set('Asia/Singapore');
-            $query = "SELECT valuechangeid, currencyid, newsellvalue, newbuyvalue FROM valuechanges WHERE yetcompleted=1 AND time<=".time()." ORDER BY time DESC LIMIT 1";
+            $query = "SELECT starttime FROM startendtime LIMIT 1";
+            $result = $db->query($query);
+            $row = $result->fetch_assoc();
+            $startTime = $row["starttime"];
+            $query = "SELECT valuechangeid, currencyid, newsellvalue, newbuyvalue FROM valuechanges WHERE yetcompleted=1 AND time <= ".(time()-$startTime)." ORDER BY time DESC LIMIT 1";
             $result = $db->query($query);
             if($result->num_rows >= 1)
             {
@@ -48,7 +52,7 @@
                     $db->begin_transaction();
                     $query = "UPDATE currency SET buyvalue=".$row["newbuyvalue"].", sellvalue=".$row["newsellvalue"]." WHERE currencyid=".$row["currencyid"];
                     $db->query($query);
-                    $query = "UPDATE valuechanges SET yetcompleted=0 WHERE time <= ".time();
+                    $query = "UPDATE valuechanges SET yetcompleted=0 WHERE time <= ".(time()-$startTime);
                     $db->query($query);
                     $db->commit();
                 }

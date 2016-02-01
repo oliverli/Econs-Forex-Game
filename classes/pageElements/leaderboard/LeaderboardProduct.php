@@ -54,7 +54,7 @@
                         <th class="center">Name</th>
                         <th class="center">
 HTML;
-            $this->return .= "Net Profit ";
+            $this->return .= "Mark-to-Market Value ";
             $this->return .= "(".$this->basecurr->getShortName().")</th></tr>";
             $db = UniversalConnect::doConnect();
             $query = "SELECT name, networth FROM users WHERE usertype=1 ORDER BY networth DESC";
@@ -72,7 +72,7 @@ HTML;
                     $tietally++;
                     $this->return .= "<td class=\"center\">".$row["name"]."</td>";
                     //if($gameEnded)
-                    $this->return .= "<td class=\"center\">".number_format($row["networth"] - 10000000, 2)."</td>";
+                    $this->return .= "<td class=\"center\">".number_format($row["networth"], 2)."</td>";
                     //else
                     //    $this->return .= "<td class=\"center\">".number_format($row["networth"], 2)."</td>";
                 }
@@ -83,7 +83,7 @@ HTML;
                     $tietally = 0;
                     $this->return .= "<td class=\"center\">".$row["name"]."</td>";
                     //if($gameEnded)
-                    $this->return .= "<td class=\"center\">".number_format($row["networth"] - 10000000, 2)."</td>";
+                    $this->return .= "<td class=\"center\">".number_format($row["networth"], 2)."</td>";
                     //else
                     //    $this->return .= "<td class=\"center\">".number_format($row["networth"], 2)."</td>";
                 }
@@ -92,7 +92,7 @@ HTML;
                     $this->return .= "<td class=\"center\">".$number."</td>";
                     $this->return .= "<td class=\"center\">".$row["name"]."</td>";
                     //if($gameEnded)
-                    $this->return .= "<td class=\"center\">".number_format($row["networth"] - 10000000, 2)."</td>";
+                    $this->return .= "<td class=\"center\">".number_format($row["networth"], 2)."</td>";
                     //else
                     //    $this->return .= "<td class=\"center\">".number_format($row["networth"], 2)."</td>";
                 }

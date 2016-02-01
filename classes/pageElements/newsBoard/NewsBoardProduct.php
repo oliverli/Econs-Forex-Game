@@ -40,7 +40,7 @@
 
         private $newsCount, $return;
 
-        public function __construct($NumberNews = 30)
+        public function __construct($NumberNews = 10)
         {
             $this->newsCount = intval($NumberNews);
             $this->return = "";
@@ -59,10 +59,14 @@
                     <ul class="collapsible" data-collapsible="accordion">
                     <!-- OR <ul class="collapsible popout" data-collapsible="accordion"> -->
 HTML;
+            $query = "SELECT starttime FROM startendtime LIMIT 1";
+            $result = $db->query($query);
+            $row = $result->fetch_assoc();
+            $startTime = $row["starttime"];
             if($this->newsCount !== 0)
-                $query = "SELECT newstext, time FROM news WHERE time <= ".time()." ORDER BY time DESC LIMIT $this->newsCount";
+                $query = "SELECT newstext, time FROM news WHERE time <= ".(time()-$startTime)." ORDER BY time DESC LIMIT $this->newsCount";
             else
-                $query = "SELECT newstext, time FROM news WHERE time <= ".time()." ORDER BY time DESC";
+                $query = "SELECT newstext, time FROM news WHERE time <= ".(time()-$startTime)." ORDER BY time DESC";
             $result = $db->query($query) or die($db->error);
             if($result->num_rows <= 0)
             {
@@ -75,7 +79,7 @@ HTML;
                 $this->return .= "<li class=\"z-depth-1\">";
 
                 $this->return .= "<div class=\"collapsible-header\">";
-                $this->return .= "<b>".FormatTimePassed::format(intval($row["time"]))."</b>";
+                $this->return .= "<b>".FormatTimePassed::format(intval($row["time"])+$startTime)."</b>";
                 $this->return .= $row["newstext"]."</div>";
 
 //                $this->return .= "<div class=\"collapsible-body\"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu tortor sed nulla porta fringilla. In risus tellus, dictum quis purus id, euismod lacinia elit. Vivamus ac viverra magna, eget accumsan mauris. Nulla molestie vulputate lectus sit amet rutrum. Sed tempus efficitur sagittis. Aenean ultricies quis sapien ut tempus. Pellentesque euismod nisl a felis interdum pharetra. Nullam id nisi in ante volutpat posuere.</p></div>"; // Add article info before this

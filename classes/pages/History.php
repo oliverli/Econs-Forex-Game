@@ -106,7 +106,7 @@
                             $profileCardFactory = new ProfileCardFactory();
                             echo $profileCardFactory->startFactory(new ProfileCardProduct(3));
                             $newsFactory = new NewsBoardFactory();
-                            echo $newsFactory->startFactory(new NewsBoardProduct());
+                            echo $newsFactory->startFactory(new NewsBoardProduct(0));
                             ?>
                         </div>
                         <div class="col s12 m7 l8">
@@ -118,13 +118,13 @@
                                     <?php
                                     //USD-JPY above is sloppy coding to be improved on when we need multiple currencies
                                     $currencyChartFactory = new CurrencyChartFactory();
-                                    echo $currencyChartFactory->startFactory(new CurrencyChartProduct(2, 0));
+                                    echo $currencyChartFactory->startFactory(new CurrencyChartProduct(2, 50));
                                     ?>
                                 </div>
                             </div>
                             <ul class="collapsible" data-collapsible="expandable">
                                 <li>
-                                    <div class="collapsible-header"><i class="material-icons">trending_up</i>Historical Market Rates</div>
+                                    <div class="collapsible-header"><i class="material-icons">trending_up</i>Full Historical Market Rates</div>
                                     <div class="collapsible-body">
                                         <?php
                                             $currencyHistoryBoardFactory = new CurrencyHistoryBoardFactory();
@@ -137,7 +137,7 @@
                                     <div class="collapsible-body">
                                         <?php
                                             $transactionHistoryBoardFactory = new TransactionHistoryBoardFactory();
-                            echo $transactionHistoryBoardFactory->startFactory(new TransactionHistoryBoardProduct());
+                                            echo $transactionHistoryBoardFactory->startFactory(new TransactionHistoryBoardProduct());
                                         ?>
                                     </div>
                                 </li>
