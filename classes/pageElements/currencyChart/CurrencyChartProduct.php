@@ -35,11 +35,12 @@
     class CurrencyChartProduct implements ElementProduct
     {
 
-        private $currencyID, $return;
+        private $currencyID, $dataCount, $return;
 
-        public function __construct($currencyID)
+        public function __construct($currencyID, $dataCount = 20)
         {
             $this->currencyID = $currencyID;
+            $this->dataCount = $dataCount;
             $this->return = "";
         }
 
@@ -75,7 +76,10 @@ HTML;
             $bidRate = array();
             $labels = array();
 //selects the latest 20 currency changes (i.e highest 20) and then sorts them in ascending order (i.e. earliest entries come first)
-            $query = "SELECT * FROM(SELECT newbuyvalue, time FROM valuechanges WHERE currencyid=$this->currencyID AND yetcompleted=0 ORDER BY time DESC LIMIT 20) g ORDER BY g.time ASC";
+            if($this->dataCount !== 0)
+                $query = "SELECT * FROM(SELECT newbuyvalue, time FROM valuechanges WHERE currencyid=$this->currencyID AND yetcompleted=0 ORDER BY time DESC LIMIT $this->dataCount) g ORDER BY g.time ASC";
+            else
+                $query = "SELECT newbuyvalue, time FROM valuechanges WHERE currencyid=$this->currencyID AND yetcompleted=0 ORDER BY time ASC";
             $result = $db->query($query) or die($query.$db->error);
             if($result->num_rows > 0)
             {

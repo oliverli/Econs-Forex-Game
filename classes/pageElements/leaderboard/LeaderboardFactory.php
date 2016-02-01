@@ -32,12 +32,14 @@
     require_once("pageElements/ElementCreator.php");
     require_once("pageElements/ElementProduct.php");
     require_once("LeaderboardProduct.php");
-    
+
     class LeaderboardFactory extends ElementCreator
     {
+
         protected function factoryMethod(ElementProduct $product)
         {
             return $product->giveProduct();
         }
+
     }
     

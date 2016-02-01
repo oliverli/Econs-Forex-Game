@@ -63,15 +63,19 @@ $(document).ready(function(){
 </script>
 <ul class="collapsible card" data-collapsible="accordion">
     <li class="blue">
-        <div class="row" style="padding: 5px 10px;">
-            <div class="col s3 center card-title">
-                Currency
+        <div class="row flow-text" style="padding: 5px 10px;">
+            <div class="col s3 center">
+                <p>Currency</p>
             </div>
-HTML;
-            $this->return .= "<div class=\"col s3 center card-title\">Bid Rate</div>";
-            $this->return .= "<div class=\"col s3 center card-title\">Offer Rate</div>";
-            $this->return .= <<<HTML
-        <div class="col s3 center card-title">Amount</div>
+            <div class="col s3 center">
+                <p>Bid Rate</p>
+            </div>
+            <div class="col s3 center">
+                <p>Offer Rate</p>
+            </div>
+            <div class="col s3 center">
+                <p>Amount</p>
+            </div>
         </div>
     </li>
 HTML;
@@ -89,8 +93,8 @@ HTML;
                 $secCurr = new Currency($row["currencyid"]);
                 $name = $secCurr->getName();
                 $shortname = $secCurr->getShortName();
-                $bidRate = $secCurr->getBuyValue();
-                $offerRate = $secCurr->getSellValue();
+                $bidRate = number_format($secCurr->getBuyValue(), 2);
+                $offerRate = number_format($secCurr->getSellValue(), 2);
                 $currencyID = $row["currencyid"];
                 $this->return .= <<<JAVASCRIPT
 <script>
@@ -143,7 +147,7 @@ HTML;
 JAVASCRIPT;
                 $this->return .= <<<HTML
 <li>
-    <div class="collapsible-header">
+    <div class="collapsible-header" style="padding:0px">
         <div class="row">
             <div class="col s3 center card-content">
                 <p>$name ($shortname)</p>

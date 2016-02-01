@@ -1,4 +1,5 @@
 <?php
+
     /*
      * The MIT License
      *
@@ -71,7 +72,7 @@ HTML;
                     $tietally++;
                     $this->return .= "<td class=\"center\">".$row["name"]."</td>";
                     //if($gameEnded)
-                        $this->return .= "<td class=\"center\">".number_format($row["networth"] - 10000000, 2)."</td>";
+                    $this->return .= "<td class=\"center\">".number_format($row["networth"] - 10000000, 2)."</td>";
                     //else
                     //    $this->return .= "<td class=\"center\">".number_format($row["networth"], 2)."</td>";
                 }
@@ -82,7 +83,7 @@ HTML;
                     $tietally = 0;
                     $this->return .= "<td class=\"center\">".$row["name"]."</td>";
                     //if($gameEnded)
-                        $this->return .= "<td class=\"center\">".number_format($row["networth"] - 10000000, 2)."</td>";
+                    $this->return .= "<td class=\"center\">".number_format($row["networth"] - 10000000, 2)."</td>";
                     //else
                     //    $this->return .= "<td class=\"center\">".number_format($row["networth"], 2)."</td>";
                 }
@@ -91,7 +92,7 @@ HTML;
                     $this->return .= "<td class=\"center\">".$number."</td>";
                     $this->return .= "<td class=\"center\">".$row["name"]."</td>";
                     //if($gameEnded)
-                        $this->return .= "<td class=\"center\">".number_format($row["networth"] - 10000000, 2)."</td>";
+                    $this->return .= "<td class=\"center\">".number_format($row["networth"] - 10000000, 2)."</td>";
                     //else
                     //    $this->return .= "<td class=\"center\">".number_format($row["networth"], 2)."</td>";
                 }

@@ -40,40 +40,40 @@
 
         private $newsCount, $return;
 
-        public function __construct($NumberNews = -1)
+        public function __construct($NumberNews = 30)
         {
             $this->newsCount = intval($NumberNews);
             $this->return = "";
         }
 
-        /*public function giveProduct()
-        {
-            $db = UniversalConnect::doConnect();
-            date_default_timezone_set('Asia/Singapore');
-            $this->return .= <<<HTML
-<div id="news" class="card">
-    <table style="width:100%" class="card-content center">
-        <tr class="blue lighten-2">
-            <th colspan="2" class="center">BBT News Headlines</th>
-HTML;
-            if($this->newsCount !== -1)
-                $query = "SELECT newstext, time FROM news WHERE time <= ".time()." ORDER BY time DESC LIMIT $this->newsCount";
-            else
-                $query = "SELECT newstext, time FROM news WHERE time <= ".time()." ORDER BY time DESC";
-            $result = $db->query($query) or die($db->error);
-            if($result->num_rows <= 0)
-                $this->return .= "<tr><td colspan=\"2\" class=\"center\">There are no news reports at the moment.</td></tr>";
-            while($row = $result->fetch_assoc())
-            {
-                $this->return .= "<tr>";
-                $this->return .= "<td class=\"center\">".$row["newstext"]."</td>";
-                $this->return .= "<td class=\"center\" style=\"width:25%\">".FormatTimePassed::format((int) intval($row["time"]))."</td>";
-                $this->return .= "</tr>";
-            }
-            $this->return .= "</table></div>";
-            return $this->return;
-        }*/
-        
+        /* public function giveProduct()
+          {
+          $db = UniversalConnect::doConnect();
+          date_default_timezone_set('Asia/Singapore');
+          $this->return .= <<<HTML
+          <div id="news" class="card">
+          <table style="width:100%" class="card-content center">
+          <tr class="blue lighten-2">
+          <th colspan="2" class="center">BBT News Headlines</th>
+          HTML;
+          if($this->newsCount !== -1)
+          $query = "SELECT newstext, time FROM news WHERE time <= ".time()." ORDER BY time DESC LIMIT $this->newsCount";
+          else
+          $query = "SELECT newstext, time FROM news WHERE time <= ".time()." ORDER BY time DESC";
+          $result = $db->query($query) or die($db->error);
+          if($result->num_rows <= 0)
+          $this->return .= "<tr><td colspan=\"2\" class=\"center\">There are no news reports at the moment.</td></tr>";
+          while($row = $result->fetch_assoc())
+          {
+          $this->return .= "<tr>";
+          $this->return .= "<td class=\"center\">".$row["newstext"]."</td>";
+          $this->return .= "<td class=\"center\" style=\"width:25%\">".FormatTimePassed::format((int) intval($row["time"]))."</td>";
+          $this->return .= "</tr>";
+          }
+          $this->return .= "</table></div>";
+          return $this->return;
+          } */
+
         public function giveProduct()
         {
             $db = UniversalConnect::doConnect();
@@ -87,7 +87,7 @@ HTML;
                     <ul class="collapsible" data-collapsible="accordion">
                     <!-- OR <ul class="collapsible popout" data-collapsible="accordion"> -->
 HTML;
-            if($this->newsCount !== -1)
+            if($this->newsCount !== 0)
                 $query = "SELECT newstext, time FROM news WHERE time <= ".time()." ORDER BY time DESC LIMIT $this->newsCount";
             else
                 $query = "SELECT newstext, time FROM news WHERE time <= ".time()." ORDER BY time DESC";
@@ -101,11 +101,11 @@ HTML;
             while($row = $result->fetch_assoc())
             {
                 $this->return .= "<li class=\"z-depth-1\">";
-                
+
                 $this->return .= "<div class=\"collapsible-header\">";
                 $this->return .= "<b>".FormatTimePassed::format((int) intval($row["time"]))."</b>";
                 $this->return .= $row["newstext"]."</div>";
-                
+
 //                $this->return .= "<div class=\"collapsible-body\"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu tortor sed nulla porta fringilla. In risus tellus, dictum quis purus id, euismod lacinia elit. Vivamus ac viverra magna, eget accumsan mauris. Nulla molestie vulputate lectus sit amet rutrum. Sed tempus efficitur sagittis. Aenean ultricies quis sapien ut tempus. Pellentesque euismod nisl a felis interdum pharetra. Nullam id nisi in ante volutpat posuere.</p></div>"; // Add article info before this
                 $this->return .= "</li>";
             }

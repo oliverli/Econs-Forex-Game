@@ -41,15 +41,13 @@
 
     class Dashboard
     {
+
         private $baseCurrency, $secCurr;
-        
+
         public function __construct()
         {
-            if(session_status() === PHP_SESSION_NONE)
-            {
-                session_start();
-            }
             $SessAuthWorker = new SessionAuthenticate();
+            DatabasePurger::purge();
             if(!$SessAuthWorker->authenticate())
             {
                 header("Location: ".GenerateRootPath::getRoot(2));
@@ -96,38 +94,48 @@
                     }
                 }
             }
-            DatabasePurger::purge();
             $this->baseCurrency = new BaseCurrency();
             $headerFactory = new HeaderFactory();
             echo $headerFactory->startFactory(new HeaderProduct("Dashboard - Forex Trading Simulator", 2));
             ?>
-            
+
             <body class="blue lighten-5">
-            <script>
-                function changeHeight(){ setTimeout(function(){
-                    if ( $("#news ul").height() >= $("#news").height() ){
-                        $("#news").addClass("active")
+                <script>
+                    function changeHeight()
+                    {
+                        setTimeout(function ()
+                        {
+                            if($("#news ul").height() >= $("#news").height())
+                            {
+                                $("#news").addClass("active")
+                            }
+                            else
+                            {
+                                $("#news").removeClass("active");
+                            }
+                        }, 100)
                     }
-                    else{
-                        $("#news").removeClass("active");
+                    window.onload = function ()
+                    {
+                        $(document).ready(function ()
+                        {
+                            // News card
+                            Materialize.showStaggeredList('#news ul.collapsible');
+                            changeHeight();
+                            $(".collapsible-header").click(function ()
+                            {
+                                changeHeight()
+                            });
+
+                            // Mobile Sidenav
+                            $('.button-collapse').sideNav({
+                                menuWidth: 240, // Default is 240
+                                edge: 'right', // Choose the horizontal origin
+                                closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+                            });
+                        })
                     }
-                },100)}
-                window.onload = function(){
-                    $(document).ready(function(){
-                        // News card
-                        Materialize.showStaggeredList('#news ul.collapsible');
-                        changeHeight();
-                        $(".collapsible-header").click(function(){changeHeight()});
-                        
-                        // Mobile Sidenav
-                        $('.button-collapse').sideNav({
-                            menuWidth: 240, // Default is 240
-                            edge: 'right', // Choose the horizontal origin
-                            closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
-                        });
-                    })
-                }
-            </script>
+                </script>
                 <?php
                 $navbarFactory = new NavbarFactory();
                 echo $navbarFactory->startFactory(new NavbarProduct(2, 0));
@@ -139,20 +147,22 @@
                             $profileCardFactory = new ProfileCardFactory();
                             echo $profileCardFactory->startFactory(new ProfileCardProduct(2));
                             $newsFactory = new NewsBoardFactory();
-                            echo $newsFactory->startFactory(new NewsBoardProduct(30));
+                            echo $newsFactory->startFactory(new NewsBoardProduct());
                             ?>
                         </div>
                         <div class="col s12 m7 l8">
-                            <div class="card center"><div class="card-content">
-                                <div class="card-title">
-                                    <p><?php echo $this->baseCurrency->getShortName() ?>-JPY Bid Rates</p>
+                            <div class="card center">
+                                <div class="card-content">
+                                    <div class="card-title">
+                                        <p><?php echo $this->baseCurrency->getShortName() ?>-JPY Bid Rates</p>
+                                    </div>
+                                    <?php
+                                    //USD-JPY above is sloppy coding to be improved on when we need multiple currencies
+                                    $currencyChartFactory = new CurrencyChartFactory();
+                                    echo $currencyChartFactory->startFactory(new CurrencyChartProduct(2));
+                                    ?>
                                 </div>
-                                <?php
-                                //USD-JPY above is sloppy coding to be improved on when we need multiple currencies
-                                $currencyChartFactory = new CurrencyChartFactory();
-                                echo $currencyChartFactory->startFactory(new CurrencyChartProduct(2));
-                                ?>
-                            </div></div>
+                            </div>
                             <?php
                             $currencyBoardFactory = new CurrencyBoardFactory();
                             echo $currencyBoardFactory->startFactory(new CurrencyBoardProduct());

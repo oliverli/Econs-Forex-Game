@@ -60,7 +60,7 @@
             $result = $db->query($query) or die();
             if($row = $result->fetch_assoc())
             {
-                $this->netPosition = ($row["amount"]-10000000);
+                $this->netPosition = ($row["amount"] - 10000000);
             }
             $query = "SELECT transid FROM transactions WHERE userkey=$userkey AND (transtype=0 OR transtype=1)";
             $result = $db->query($query) or die();
@@ -97,12 +97,12 @@
 HTML;
             //if(!GameEndedChecker::gameEnded())
             //{
-                if($this->netPosition > 0)
-                    $this->return .= "<i class=\"material-icons tiny left green-text\">trending_up</i> Long ".$this->basecurr->getShortName().number_format($this->netPosition/1000000, 2). " million";
-                else if($this->netPosition === 0.00)
-                    $this->return .= "<i class=\"material-icons tiny left green-text\">trending_flat</i> Neutral";
-                else
-                    $this->return .= "<i class=\"material-icons tiny left red-text\">trending_down</i>Short ".$this->basecurr->getShortName().number_format(($this->netPosition*-1)/1000000, 2)." million";
+            if($this->netPosition > 0)
+                $this->return .= "<i class=\"material-icons tiny left green-text\">trending_up</i> Long ".$this->basecurr->getShortName().number_format($this->netPosition / 1000000, 2)." million";
+            else if($this->netPosition === 0.00)
+                $this->return .= "<i class=\"material-icons tiny left green-text\">trending_flat</i> Neutral";
+            else
+                $this->return .= "<i class=\"material-icons tiny left red-text\">trending_down</i>Short ".$this->basecurr->getShortName().number_format(($this->netPosition * -1) / 1000000, 2)." million";
             //}
             $this->return .= <<<HTML
                         </span>
@@ -111,26 +111,26 @@ HTML;
 	                <div class="card-reveal">
 	                    <span class="card-title grey-text text-darken-4">Trading Statistics<i class="material-icons right">close</i></span>
 HTML;
-            /*if($this->networth === 10000000)
-            {
-                $this->return .= "<p>You did not make or lose any money.</p>";
-            }
-            else if($this->networth > 10000000)
-            {
-                $this->return .= "<p>You made a profit of ".$this->basecurr->getShortName().number_format($this->networth - 10000000, 2)."! Congratulations!</p>";
-            }
-            else
-            {
-                $this->return .= "<p>You lost ".$this->basecurr->getShortName().number_format(0 - ($this->networth - 10000000), 2).".</p>";
-                if(GameEndedChecker::gameEnded())
-                {
-                    $this->return .= "<p>Better luck next time!</p>";
-                }
-                else
-                {
-                    $this->return .= "<p>There's still time, try harder!</p>";
-                }
-            }*/
+            /* if($this->networth === 10000000)
+              {
+              $this->return .= "<p>You did not make or lose any money.</p>";
+              }
+              else if($this->networth > 10000000)
+              {
+              $this->return .= "<p>You made a profit of ".$this->basecurr->getShortName().number_format($this->networth - 10000000, 2)."! Congratulations!</p>";
+              }
+              else
+              {
+              $this->return .= "<p>You lost ".$this->basecurr->getShortName().number_format(0 - ($this->networth - 10000000), 2).".</p>";
+              if(GameEndedChecker::gameEnded())
+              {
+              $this->return .= "<p>Better luck next time!</p>";
+              }
+              else
+              {
+              $this->return .= "<p>There's still time, try harder!</p>";
+              }
+              } */
             $this->return .= "<p>Mark-to-market value: ".$this->basecurr->getShortName().number_format($this->marketValue, 2)."</p>";
             $this->return .= "<p>Number of trades: ".$this->transactionCount."</p>";
             $this->return .= "</div></div>";
