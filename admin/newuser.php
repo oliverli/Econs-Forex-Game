@@ -42,7 +42,7 @@
                         //    continue;
                         //else
                         //{
-                            $query = "INSERT INTO wallet (userkey, currencyid, amount) VALUES ($userkey, '".$row["currencyid"]."', 1300000000)";
+                            $query = "INSERT INTO wallet (userkey, currencyid, amount) VALUES ($userkey, '".$row["currencyid"]."', 130000000)";
                             if($db->query($query) === TRUE)
                                 continue;
                             else
