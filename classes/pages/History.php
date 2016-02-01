@@ -32,7 +32,9 @@
     require_once("pageElements/header/HeaderFactory.php");
     require_once("pageElements/navbar/NavbarFactory.php");
     require_once("pageElements/currencyBoard/CurrencyBoardFactory.php");
+    require_once("pageElements/currencyHistoryBoard/CurrencyHistoryBoardFactory.php");
     require_once("pageElements/newsBoard/NewsBoardFactory.php");
+    require_once("pageElements/transactionHistoryBoard/TransactionHistoryBoardFactory.php");
     require_once("pageElements/currencyChart/CurrencyChartFactory.php");
     require_once("pageElements/profileCard/ProfileCardFactory.php");
     require_once("gameElements/trading/BaseCurrency.php");
@@ -54,7 +56,7 @@
                 exit();
             }
             $headerFactory = new HeaderFactory();
-            echo $headerFactory->startFactory(new HeaderProduct("Dashboard - Forex Trading Simulator", 3));
+            echo $headerFactory->startFactory(new HeaderProduct("History - Forex Trading Simulator", 3));
             ?>
             <body class="blue lighten-5">
                 <script>
@@ -120,8 +122,26 @@
                                     ?>
                                 </div>
                             </div>
-                            <?php
-                            ?>
+                            <ul class="collapsible" data-collapsible="expandable">
+                                <li>
+                                    <div class="collapsible-header"><i class="material-icons">trending_up</i>Historical Market Rates</div>
+                                    <div class="collapsible-body">
+                                        <?php
+                                            $currencyHistoryBoardFactory = new CurrencyHistoryBoardFactory();
+                                            echo $currencyHistoryBoardFactory->startFactory(new CurrencyHistoryBoardProduct());
+                                        ?>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="collapsible-header"><i class="material-icons">shopping_basket</i>Past Transactions</div>
+                                    <div class="collapsible-body">
+                                        <?php
+                                            $transactionHistoryBoardFactory = new TransactionHistoryBoardFactory();
+                            echo $transactionHistoryBoardFactory->startFactory(new TransactionHistoryBoardProduct());
+                                        ?>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
