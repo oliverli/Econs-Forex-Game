@@ -1,3 +1,238 @@
+* {
+    text-overflow: ellipsis; /* DANGEROUS! Will change when error */
+    margin: 0; padding: 0;
+}
+html, body, .container .row, .container .row .col.s4 { height: 100%; }
+.container { height: 90%; }
+
+/* Scroll */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track, ::-webkit-scrollbar-thumb { border-radius: 12px; }
+/* Track */
+::-webkit-scrollbar-track { border-radius: 12px; }
+/* Handle */
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.4); -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1); }
+::-webkit-scrollbar-thumb:hover { -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.9); }
+
+/* LOGIN PAGE */
+
+/* failed entry */
+@-webkit-keyframes failed {
+    0% { background-color: rgb(255,148,148); }
+    100% { background-color: rgba(255,255,255,.9); }
+}
+@keyframes failed {
+    0% { background-color: rgb(255,148,148); }
+    100% { background-color: rgba(255,255,255,.9); }
+}
+
+h3, h4 { font-family: 'Open Sans', arial; }
+h3 { opacity: 0.8; filter: alpha(opacity=80); font-weight: 300; }
+h5  { opacity: 0.78; filter: alpha(opacity=78); margin-bottom: 20px; font-weight: 300; }
+
+.top-margin { margin-top: 5%; }
+.bottom-margin { margin-bottom: 20px; }
+.title { text-align: center; }
+
+/* indent for specific items */
+
+/* label focus color */
+.input-field input[type=text]:focus + label {
+    color:  #2196f3;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid  #2196f3;
+}
+/* label focus color */
+.input-field input[type=password]:focus + label {
+    color:  #2196f3;
+}
+/* label underline focus color */
+.input-field input[type=password]:focus {
+    border-bottom: 1px solid  #2196f3;
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+    color:  #2196f3;
+}
+
+#login-card {
+    width: 42%;
+    min-width:392px;
+    padding: 30px 40px;
+    margin: auto;
+    background-color: rgba(255, 255, 255, .9);
+}
+
+.failed {
+    -webkit-animation: failed 1s ease-in;
+    animation: failed 1s ease-in;
+}
+
+.pageCenter {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    max-height: 490px;
+    max-width: 620px
+}
+
+#login-card #logo { margin-bottom: 20px; }
+#login-card img {
+    height: 50px;
+    opacity: 0.87;
+    filter: alpha(opacity=87);
+}
+
+#login-card i.material-icons { line-height: 1.5; } /* <i> was line-height:1 in material, not for us. */
+
+#login-card form .row .input-field.col { padding: 0px; }
+
+#login-card #Submit { margin: 40px -12px 0; margin:40px -0.75rem 0; }
+#login-card #Submit button {
+    width: 90%;
+    height: 50px;
+}
+
+
+/* Nav bar */
+
+#nav-wrapper {
+/*    position: fixed;*/
+}
+
+
+/* Profile */
+
+.activator {
+    cursor: pointer;
+    -webkit-transition: opacity .3s ease;
+    transition: opacity .3s ease;
+}
+img.activator:hover, i.activator:hover { opacity: 0.6; filter: alpha(opacity=60); }
+
+.card.small { height: auto; }
+.card.small .card-image { max-height: 190px; }
+
+.card-image { position: relative; }
+.card-image:after { 
+    content: ''; position: absolute;
+    bottom: 0; left: 0; right: 0; height: 35%;
+    background: transparent -webkit-linear-gradient(rgba(255, 255, 255, 0), rgba(0,0,0,0.4)) repeat scroll 0% 0%;
+    background: transparent linear-gradient(rgba(255, 255, 255, 0), rgba(0,0,0,0.4)) repeat scroll 0% 0%;
+}
+.card-image .card-title { z-index: 1 }
+.card-image img.activator:hover { opacity: 0.6; filter: alpha(opacity=60); } /* More natural card-reveal */
+.card-reveal { background-color: rgba(255,255,255,0.9); }
+
+#profile .card-content p span {
+    font-size: 0.9rem; color: rgba(0,0,0,0.76);
+}
+#profile .card-content p span i.material-icons {
+    line-height: 1.5; /* Change default settings */
+}
+
+/* News */
+.container .row { margin-bottom: 0; } /* Change default settings */
+#news {
+    height: 45%;
+    position: relative;
+    margin: 0 -10px;
+    overflow: hidden; 
+}
+
+#news::-webkit-scrollbar { display: none; } /* Optional */
+
+#news .relative { /* To fix absolute + overflow problem */
+    position: relative;
+    height: 100%; width: 100%;
+    overflow: auto; 
+    padding: 0 10px;
+}
+
+#news:before { /* Bottom box shadow when overflow */
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0; left: 10px; right: 10px;
+    z-index: 1; pointer-events: none; /* Appear in front but still clickable */
+}
+#news.active:before {
+    -webkit-transition: box-shadow .5s ease;
+    transition: box-shadow .5s ease;
+    border-radius: 3px;
+    box-shadow: inset  0 -20px 20px -20px rgba(0,0,0,0.5);
+}
+
+#news .card-panel {
+    position: absolute;
+    top: 0; left: 10px; right: 10px;
+    padding: 15px; margin-top: 0; /* Change default settings */
+    z-index: 1;
+    -webkit-transition: .3s opacity ease;
+    transition: .3s opacity ease;
+}
+#news.active:hover .card-panel { opacity: 0.9; filter: alpha(opacity=90); } /* When overflow */
+
+#news ul.collapsible {
+    padding: 47px 7px 0; /* Looks pretty on my screen */
+    border: 0; box-shadow: none; /* Change default settings */
+}
+#news ul.collapsible li { opacity: 0; filter: alpha(opacity=0); /* margin-bottom: 2px; */ } /* Transition on start */
+
+#news .collapsible-header { overflow: hidden; white-space: nowrap; -webkit-transition: background-color .3s ease; transition: background-color .3s ease; } /* To make text-overflow work */
+#news .collapsible-header b {
+    display: inline-block;
+    text-align: center; vertical-align: middle;
+    font-size: .7rem; color: rgba(0,0,0,0.6);
+/*    max-width: 50px; line-height: 1rem; /* For 2 lines */
+    line-height: 2.7rem;
+    white-space: normal; padding: 5px 0; margin: 0 5px 0 -5px;
+}
+#news .collapsible-header.active b { display: none; }
+#news .collapsible-header.active {
+    overflow: initial; white-space: initial;
+    position:relative; /* .collapsible-body was sticking out */
+    background-color: #BBDEFB; /* .active did not include .blue */
+    padding: 10px 15px; line-height: 24px; line-height: 1.5rem; /* Change default settings */
+}
+
+#news .collapsible-header.active:before { /* Segregate header from body */
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16);
+}
+#news .collapsible-body {
+    background-color: #fff;
+    z-index: -1;
+}
+
+/* Legend for currency chart. Ensures the coloured boxes don't go haywire */
+.line-legend li span{
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+}
+
+/* Left Border
+#nav-mobile li {
+    position: relative;
+}
+#nav-mobile li:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 14%;
+    height: 72%; /* 100 - 14*2 
+    width: 1px;
+    background-color: rgba(255,255,255,0.6);
+}*/
+
+/* MUCH COPIED
 table, th, td {
     border: 0px solid black;
     border-collapse: collapse;
@@ -27,7 +262,7 @@ html {
 }
 
 a:visited, a:link
-{ 
+{
     color: #0000EE;
 }
 
@@ -75,25 +310,14 @@ hr{
     background-image:    -moz-linear-gradient(left, rgba(204,0,0,1), rgba(204,0,0,1), rgba(204,0,0,1));
     background-image:     -ms-linear-gradient(left, rgba(204,0,0,1), rgba(204,0,0,1), rgba(204,0,0,1));
     background-image:      -o-linear-gradient(left, rgba(204,0,0,1), rgba(204,0,0,1), rgba(204,0,0,1));
-}
+}*/
 
-/* LOGIN PAGE */
-
-#login-card {
-    width: 42%;
-    padding: 40px;
-    margin: 10% auto 0;
-}
-
-#login-card #Logo { margin-bottom: 20px; }
-
-#login-card i.material-icons { line-height: 1.5; } /* <i> was line-height:1 in material, not for us. */
-
-#login-card form .row .input-field.col {
-    padding: 0px;
-}
-#login-card #Submit { margin:40px -0.75rem 0; }
-#login-card #Submit button {
-    width: 100%;
-    height: 50px;
+@media (max-width: 620px) {
+    #login-card {
+        margin: auto;
+        width: 100%;
+    }
+    #login-card {
+        padding: 15%;
+    }
 }

@@ -1,119 +1,50 @@
 <?php
-    session_start();
-    require_once("include.php");
-    if(isIn())
-    {
-        header("Location: ./dashboard/");
-        exit();
-    }
-    $loginFailed = false;
-    $gameNotStarted = false;
-    $startTime = 0;
-    if(isset($_POST["username"]) && isset($_POST["password"]))
-    {
-        if(passCheck($_POST["password"], $_POST["username"]))
-        {
-            date_default_timezone_set('Asia/Singapore');
-            $startTime = gameStartTime();
-            if(isTeacher())
-            {
-                header("Location: ./admin/");
-            }
-            else if($startTime <= time())
-            {
-                header("Location: ./dashboard/");
-            }
-            else
-            {
-                $gameNotStarted = true;
-            }
+
+    /*
+     * The MIT License
+     *
+     * Copyright 2016 Li Yicheng, Walter Kong, and Sun Yudong.
+     *
+     * Permission is hereby granted, free of charge, to any person obtaining a copy
+     * of this software and associated documentation files (the "Software"), to deal
+     * in the Software without restriction, including without limitation the rights
+     * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+     * copies of the Software, and to permit persons to whom the Software is
+     * furnished to do so, subject to the following conditions:
+     *
+     * The above copyright notice and this permission notice shall be included in
+     * all copies or substantial portions of the Software.
+     *
+     * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+     * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+     * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+     * THE SOFTWARE.
+     */
+
+    //adds ./classes/ to include directory so that all the require_once statements will work
+    set_include_path(get_include_path().PATH_SEPARATOR.dirname(__FILE__)."/classes/");
+    require_once("pages/LoginHome.php");
+
+    //all HTML is generated in the LoginHome constructor - edit ./classes/pages/LoginHome.php to update the page
+    $worker = new LoginHome();
+<<<HTML
+    <script>
+        function failed(){
+            $("#login-card").removeClass("failed")
+                            .addClass("failed")
+                            .delay(1000)
+                            .queue(function() {
+                                $(this).removeClass("failed");
+                                $(this).dequeue();
+                            });
         }
-        else
-        {
-            $loginFailed = true;
-            echo "<script>window.onload = function(){document.getElementById(\"password\").focus();};</script>";
-        }
-    }
+
+        $(window).load(function() {
+            $('#username').focus();
+        });
+    </script>
+HTML;
 ?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Forex Trading Simulator - Login</title>
-        <?php if($gameNotStarted) echo "<script>alert('The game has not started yet. It starts in ".nicetime($startTime).".');window.onload = function(){document.getElementById(\"password\").focus();};</script>"; ?>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css" media="screen,projection" />
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-        <style>
-   /* label focus color */
-    .input-field input[type=text]:focus + label {
-     color:  #3f51b5;
-   }
-   /* label underline focus color */
-   .input-field input[type=text]:focus {
-     border-bottom: 1px solid  #3f51b5;
-   }
-   /* icon prefix focus color */
-   .input-field .prefix.active {
-     color:  #3f51b5;
-   }
-   #login-card {
-    width: 42%;
-    padding: 40px;
-    margin: 10% auto 0;
-}
-
-#login-card #Logo { margin-bottom: 20px; }
-
-#login-card i.material-icons { line-height: 1.5; }
-
-#login-card form .row .input-field.col {
-    padding: 0px;
-}
-#login-card #Submit { margin:40px -0.75rem 0; }
-#login-card #Submit button {
-    width: 100%;
-    height: 50px;
-}     
-   </style>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    </head>
-
-    <body class="indigo lighten-5">
-        <nav>
-            <div class="nav-wrapper indigo row">
-                <div class="col s12">Forex Trading Simulator</div>
-            </div>
-        </nav>
-        <div class="container">
-            <div id="login-card" class="card">
-                <div class="center" id="Logo"><img src="./img/hci.png" height="50px" style="opacity:0.87;"/></div>
-                <form id="loginform" name="loginform" method="post">
-                    <div class="row">
-                        <div class="input-field col s12 m10 l10 push-m1 push-l1">
-                            <i class="material-icons prefix">account_circle</i>
-                            <input type="text" required="" name="username" id="username"<?php if($loginFailed || $gameNotStarted) echo " value=\"".$_POST["username"]."\""; ?>/>
-                            <label for="username">Username: </label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12 m10 l10 push-m1 push-l1">
-                            <i class="material-icons prefix">vpn_key</i>
-                            <label for="password">Password: </label>
-                            <input type="password" name="password" id="password" />
-                        </div>
-                    </div>
-                    <div class="row input-field center" id="Submit">
-                        <button class="btn waves-effect waves-light indigo accent-4" type="submit" name="action">Login
-                        </button>
-                    </div>
-                </form>
-                <?php
-                    if($loginFailed)
-                        echo "<script>alert('Login failed - username or password incorrect.');</script>";
-                ?>
-            </div>
-        </div>
-    </body>
-</html>

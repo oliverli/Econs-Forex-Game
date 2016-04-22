@@ -1,7 +1,7 @@
 <?php
 
     $mysqllocation = "localhost";
-    $mysqlusername = "redacted";
+    $mysqlusername = "root";
     $mysqlpassword = "redacted";
     $mysqldatabase = "forex";
 

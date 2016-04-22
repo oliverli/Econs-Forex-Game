@@ -1,4 +1,35 @@
 <?php
+
+    /*
+     * The MIT License
+     *
+     * Copyright 2016 Li Yicheng, Walter Kong, and Sun Yudong.
+     *
+     * Permission is hereby granted, free of charge, to any person obtaining a copy
+     * of this software and associated documentation files (the "Software"), to deal
+     * in the Software without restriction, including without limitation the rights
+     * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+     * copies of the Software, and to permit persons to whom the Software is
+     * furnished to do so, subject to the following conditions:
+     *
+     * The above copyright notice and this permission notice shall be included in
+     * all copies or substantial portions of the Software.
+     *
+     * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+     * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+     * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+     * THE SOFTWARE.
+     */
+
+    set_include_path(get_include_path().PATH_SEPARATOR.dirname(__FILE__)."/../../classes/");
+    require_once("pages/Leaderboard.php");
+
+    $worker = new Leaderboard();
+    
+    /*
     session_start();
     require_once("../../include.php");
     if(!isIn())
@@ -26,7 +57,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Forex Trading Simulator - Leaderboards</title>
         <link rel="stylesheet" type="text/css" href="../../css/main.css" />
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css" media="screen,projection" />
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <script>
             $(document).ready(function ()
             {
@@ -89,10 +123,10 @@
             <h1<?php if(isset($_GET["teachermode"])) echo " style='position:relative; top:10px;'"; ?>>Leaderboards</h1>
             <div id="leaderboard">
                 <table style="width:100%">
-                    <tr class="red">
-                        <th class="red">No.</th>
-                        <th class="red">Name</th>
-                        <th class="red"><?php
+                    <tr class="indigo lighten-2">
+                        <th class="center">No.</th>
+                        <th class="center">Name</th>
+                        <th class="center"><?php
                                 if($gameEnded)
                                     echo "Net Profit";
                                 else
@@ -149,3 +183,4 @@
         </div>
     </body>
 </html>
+*/

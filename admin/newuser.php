@@ -21,32 +21,33 @@
                 $userid = $db->real_escape_string($_POST["userid"]);
                 $password = $db->real_escape_string($_POST["password"]);
                 $usertype = $db->real_escape_string($_POST["usertype"]);
-                $salt = generateSalt();
-                $password = passHash($password, $userid, $salt);
+                $password = password_hash($password, PASSWORD_DEFAULT);
                 $salt = $db->escape_string($salt);
-                $query = "INSERT INTO users (name, userid, password, salt, usertype) VALUES ('$name', '$userid', '$password', '$salt', $usertype);";
+                $query = "INSERT INTO users (name, userid, password, usertype) VALUES ('$name', '$userid', '$password', $usertype);";
                 if($db->query($query) === TRUE)
                 {
                     $query = "SELECT userkey FROM users WHERE userid='$userid'";
                     $result = $db->query($query);
                     $row = $result->fetch_assoc();
                     $userkey = $row["userkey"];
-                    $query = "INSERT INTO wallet (userkey, currencyid, amount) VALUES ($userkey, '".$row["shortname"]."', 10000000)";
+                    $query = "INSERT INTO wallet (userkey, currencyid, amount) VALUES ($userkey, 1, 10000000)";
                     $db->query($query);
-                    $query = "SELECT currencyid FROM currency";
+                    //$query = "INSERT INTO wallet (userkey, currencyid, amount) VALUES ($userkey, 2, 1300000000)";
+                    //$db->query($query);
+                    $query = "SELECT currencyid FROM currency WHERE currencyid != 1";
                     $result = $db->query($query);
                     while($row = $result->fetch_assoc())
                     {
-                        if($row["currencyid"] == 1)
-                            continue;
-                        else
-                        {
-                            $query = "INSERT INTO wallet (userkey, currencyid, amount) VALUES ($userkey, ".$row["currencyid"].", 0)";
+                        //if($row["currencyid"] == 1)
+                        //    continue;
+                        //else
+                        //{
+                            $query = "INSERT INTO wallet (userkey, currencyid, amount) VALUES ($userkey, '".$row["currencyid"]."', 1300000000)";
                             if($db->query($query) === TRUE)
                                 continue;
                             else
                                 die("<script>alert(\"Addition of user wallet failed. Take a screenshot and email Yicheng.\");</script>".$db->error);
-                        }
+                        //}
                     }
                     echo "<script>alert(\"User has been added successfully.\");</script>";
                 }

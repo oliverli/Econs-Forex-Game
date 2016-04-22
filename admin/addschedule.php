@@ -135,7 +135,7 @@
 
                 foreach($finaltable as $row)
                 {
-                    $dt->setTimestamp($row[0]);
+                    $dt->setTimestamp($row[0]+$starttime);
                     echo "<tr><td>".$dt->format("d/m/Y H:i:s")."</td>";
                     echo "<td>".($row[1] == 2 ? "Currency Value Change" : "News")."</td>";
                     echo "<td>".$row[2]."</td>";
