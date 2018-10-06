@@ -1,6 +1,8 @@
 # Forex Challenge
 A Forex trading game crafted to suit the needs of the Hwa Chong Junior College Economics Department.
 
+[![forthebadge](made-with-php.svg)](https://forthebadge.com)
+
 ## Features
 1. Complete control - teachers schedule the exact timing of each value changes and news articles in advance, and the game performs the changes at the exact time.
 2. Net worth - students can view their net worth (their value if all their foreign currencies were sold at current rates) at any time.
